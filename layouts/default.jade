@@ -1,0 +1,112 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    block head
+      title #{title}
+    meta(name='description', content='app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='#{hostUrl}css/bootstrap.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/animate.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font-awesome.min.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/icon.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/app.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}js/datatables/datatables.css?#{cacheBreaker}', type='text/css')
+    //if lt IE 9
+      script(src='#{hostUrl}js/ie/html5shiv.js?#{cacheBreaker}')
+      script(src='#{hostUrl}js/ie/respond.min.js?#{cacheBreaker}')
+      script(src='#{hostUrl}js/ie/excanvas.js?#{cacheBreaker}')
+    block neck
+  body.container
+    section.vbox
+      header.bg-danger.header.header-md.navbar.navbar-fixed-top-xs.box-shadow
+        .navbar-header.aside-md.dk
+          a.btn.btn-link.visible-xs(data-toggle='class:nav-off-screen', data-target='#nav')
+            i.fa.fa-bars
+          a.navbar-brand(href='index.html')
+            img.m-r-sm(src='#{hostUrl}images/logo_white.png', alt='scale')
+            span.hidden-nav-xs #{projectName}
+          a.btn.btn-link.visible-xs(data-toggle='dropdown', data-target='.user')
+            i.fa.fa-cog
+        form.navbar-form.navbar-left.input-s-lg.m-t.m-l-n-xs.hidden-xs(role='search')
+          .form-group
+            .input-group
+              span.input-group-btn
+                button.btn.btn-sm.bg-white.b-white.btn-icon(type='submit')
+                  i.fa.fa-search
+              input.form-control.input-sm.no-border(type='text', placeholder='Search apps, projects...')
+        ul.nav.navbar-nav.navbar-right.m-n.hidden-xs.nav-user.user
+          if user && user.username
+            li.dropdown
+              a.dropdown-toggle(href='#{user.defaultReturnUrl}', data-toggle='dropdown')
+                span.thumb-sm.avatar.pull-left
+                  img(src='#{hostUrl}images/a0.png', alt='...')
+                |             #{user.username}
+                b.caret
+              ul.dropdown-menu.animated.fadeInRight
+                li
+                  span.arrow.top
+                  a(href='#') Settings
+                li
+                  a(href='#{user.defaultReturnUrl}') Profile
+                li
+                  a(href='docs.html') Help
+                li.divider
+                li
+                  a(href='#{hostUrl}logout/') Logout
+          else
+            li: a(href='#{hostUrl}login/')
+              i.fa.fa-user
+              |  Sign In
+
+      section
+        section.hbox.stretch
+          // .aside
+          aside#nav.bg-dark.aside-md.hidden-print
+            section.vbox
+              section.w-f.scrollable(data-height='auto', data-disable-fade-out='true', data-distance='0', data-size='10px', data-railopacity='0.2')
+                  // nav
+                  nav.nav-primary.hidden-xs
+                    ul.nav.nav-main(data-ride='collapse')
+                      li
+                        a.auto(href='index.html')
+                          i.i.i-statistics.icon
+                          span.font-bold Overview
+
+                  // / nav
+              footer.footer.hidden-xs.no-padder.text-center-nav-xs
+                a.btn.btn-icon.icon-muted.btn-inactive.m-l-xs.m-r-xs(href='#nav', data-toggle='class:nav-xs')
+                  i.i.i-circleleft.text
+                  i.i.i-circleright.text-active
+          // /.aside
+          section#content
+            block body
+              section.wrapper
+                .m-b
+                  span.h3.font-thin
+                    i.i.i-arrow-left3
+                    |  Boxed Layout
+                section.panel.panel-default
+                  header.panel-heading
+                    | GDP per capita average annual growth rate
+                  #growthrate.table-responsive
+              a.hide.nav-off-screen-block(href='#', data-toggle='class:nav-off-screen', data-target='#nav')
+
+    script(src='#{hostUrl}js/jquery.min.js?#{cacheBreaker}')
+    // Bootstrap
+    script(src='#{hostUrl}js/bootstrap.js?#{cacheBreaker}')
+    // App
+    script(src='#{hostUrl}js/app.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/slimscroll/jquery.slimscroll.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/datatables/jquery.dataTables.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/datatables/jquery.csv-0.71.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/datatables/demo.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/app.plugin.js?#{cacheBreaker}')
+
+    script(src='/vendor/jquery.cookie/jquery.cookie.js?#{cacheBreaker}')
+    script(src='/vendor/underscore/underscore.js?#{cacheBreaker}')
+    script(src='/vendor/backbone/backbone.js?#{cacheBreaker}')
+    script(src='/layouts/core.js?#{cacheBreaker}')
+
+    block feet

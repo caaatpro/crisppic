@@ -1,0 +1,95 @@
+doctype html
+html.app(lang='en')
+  head
+    meta(charset='utf-8')
+    title Scale | Web Application
+    meta(name='description', content='app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='#{hostUrl}css/bootstrap.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/animate.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font-awesome.min.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/icon.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/app.css', type='text/css')
+    //if lt IE 9
+      script(src='#{hostUrl}js/ie/html5shiv.js')
+      script(src='#{hostUrl}js/ie/respond.min.js')
+      script(src='#{hostUrl}js/ie/excanvas.js')
+  body
+    section#content.m-t-lg.wrapper-md.animated.fadeInUp
+      .container.aside-xl
+        a.navbar-brand.block(href='index.html') Scale
+        section.m-b-lg#login
+          header.wrapper.text-center
+            strong Sign in to get in touch
+          if oauthTwitter || oauthGitHub || oauthFacebook || oauthGoogle || oauthTumblr
+            hr
+            p Or sign in using...
+            if oauthMessage
+              div.alerts
+                div.alert.alert-info.alert-dismissable
+                  button.close(type='button', data-dismiss='alert') &times;
+                  |#{oauthMessage}&nbsp;
+                  b
+                    a(href='/signup/') Sign Up Here
+            div.form-actions
+              div.btn-group.btn-group-justified
+                if oauthTwitter
+                  a.btn.btn-info(href='/login/twitter/')
+                    i.fa.fa-twitter.fa-lg
+                    |  Twitter
+                if oauthGitHub
+                  a.btn.btn-info(href='/login/github/')
+                    i.fa.fa-github.fa-lg
+                    |  GitHub
+                if oauthFacebook
+                  a.btn.btn-info(href='/login/facebook/')
+                    i.fa.fa-facebook-square.fa-lg
+                    |  Facebook
+                if oauthGoogle
+                  a.btn.btn-info(href='/login/google/')
+                    i.fa.fa-google-plus-square.fa-lg
+                    |  Google
+                if oauthTumblr
+                  a.btn.btn-info(href='/login/tumblr/')
+                    i.fa.fa-tumblr-square.fa-lg
+                    |  Tumblr
+          script(type='text/template', id='tmpl-login')
+            form
+              div.alerts
+                |<% _.each(errors, function(err) { %>
+                div.alert.alert-danger.alert-dismissable
+                  button.close(type='button', data-dismiss='alert') &times;
+                  |<%- err %>
+                |<% }); %>
+              div.form-group(class!='<%- errfor.username ? "has-error" : "" %>')
+                label Username or Email:
+                input.form-control(type='text', name='username', value!='<%= username %>')
+                span.help-block <%- errfor.username %>
+              div.form-group(class!='<%- errfor.password ? "has-error" : "" %>')
+                label Password:
+                input.form-control(type='password', name='password', value!='<%= password %>')
+                span.help-block <%- errfor.password %>
+              div.form-actions
+                button.btn.btn-primary.btn-login(type='button') Sign In
+                |&nbsp;
+                a.btn.btn-link(href='/login/forgot/') Forgot your password?
+    // footer
+    footer#footer
+      .text-center.padder
+        p
+          small © #{copyrightYear} #{copyrightName}
+    // / footer
+    script(src='#{hostUrl}js/jquery.min.js')
+    // Bootstrap
+    script(src='#{hostUrl}js/bootstrap.js')
+    // App
+    script(src='#{hostUrl}js/app.js')
+    script(src='#{hostUrl}js/slimscroll/jquery.slimscroll.min.js')
+    script(src='#{hostUrl}js/app.plugin.js')
+
+    script(src='/vendor/jquery.cookie/jquery.cookie.js?#{cacheBreaker}')
+    script(src='/vendor/underscore/underscore.js?#{cacheBreaker}')
+    script(src='/vendor/backbone/backbone.js?#{cacheBreaker}')
+    script(src='/layouts/core.js?#{cacheBreaker}')
+    script(src='/views/login/index.js?#{cacheBreaker}')
