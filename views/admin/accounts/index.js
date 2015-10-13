@@ -3,20 +3,8 @@
 exports.find = function(req, res, next){
   var outcome = {};
 
-  var getStatusOptions = function(callback) {
-    req.app.db.models.Status.find({ pivot: 'Account' }, 'name').sort('name').exec(function(err, movies) {
-      if (err) {
-        return callback(err, null);
-      }
-
-      outcome.movies = movies;
-      return callback(null, 'done');
-    });
-  };
-
   var getResults = function(callback) {
     req.query.search = req.query.search ? req.query.search : '';
-    req.query.status = req.query.status ? req.query.status : '';
     req.query.limit = req.query.limit ? parseInt(req.query.limit, null) : 20;
     req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
     req.query.sort = req.query.sort ? req.query.sort : '_id';
@@ -26,13 +14,9 @@ exports.find = function(req, res, next){
       filters.search = new RegExp('^.*?'+ req.query.search +'.*$', 'i');
     }
 
-    if (req.query.status) {
-      filters['status.id'] = req.query.status;
-    }
-
     req.app.db.models.Account.pagedFind({
       filters: filters,
-      keys: 'name company phone zip userCreated status',
+      keys: 'name userCreated',
       limit: req.query.limit,
       page: req.query.page,
       sort: req.query.sort
@@ -61,29 +45,17 @@ exports.find = function(req, res, next){
       res.render('admin/accounts/index', {
         data: {
           results: escape(JSON.stringify(outcome.results)),
-          movies: outcome.movies
+          status: outcome.status
         }
       });
     }
   };
 
-  require('async').parallel([getStatusOptions, getResults], asyncFinally);
+  require('async').parallel([getResults], asyncFinally);
 };
 
 exports.read = function(req, res, next){
   var outcome = {};
-
-  var getStatusOptions = function(callback) {
-    req.app.db.models.Status.find({ pivot: 'Account' }, 'name').sort('name').exec(function(err, movies) {
-      if (err) {
-        return callback(err, null);
-      }
-
-      outcome.movies = movies;
-      return callback(null, 'done');
-    });
-  };
-
   var getRecord = function(callback) {
     req.app.db.models.Account.findById(req.params.id).exec(function(err, record) {
       if (err) {
@@ -107,13 +79,13 @@ exports.read = function(req, res, next){
       res.render('admin/accounts/details', {
         data: {
           record: escape(JSON.stringify(outcome.record)),
-          movies: outcome.movies
+          status: outcome.status
         }
       });
     }
   };
 
-  require('async').parallel([getStatusOptions, getRecord], asyncFinally);
+  require('async').parallel([getRecord], asyncFinally);
 };
 
 exports.create = function(req, res, next){
@@ -133,7 +105,6 @@ exports.create = function(req, res, next){
     var fieldsToSet = {
       name: {
         first: nameParts.shift(),
-        middle: (nameParts.length > 1 ? nameParts.shift() : ''),
         last: (nameParts.length === 0 ? '' : nameParts.join(' ')),
       },
       userCreated: {
@@ -145,7 +116,6 @@ exports.create = function(req, res, next){
     fieldsToSet.name.full = fieldsToSet.name.first + (fieldsToSet.name.last ? ' '+ fieldsToSet.name.last : '');
     fieldsToSet.search = [
       fieldsToSet.name.first,
-      fieldsToSet.name.middle,
       fieldsToSet.name.last
     ];
 
@@ -185,20 +155,12 @@ exports.update = function(req, res, next){
     var fieldsToSet = {
       name: {
         first: req.body.first,
-        middle: req.body.middle,
         last: req.body.last,
         full: req.body.first +' '+ req.body.last
       },
-      company: req.body.company,
-      phone: req.body.phone,
-      zip: req.body.zip,
       search: [
         req.body.first,
-        req.body.middle,
-        req.body.last,
-        req.body.company,
-        req.body.phone,
-        req.body.zip
+        req.body.last
       ]
     };
 
@@ -346,80 +308,6 @@ exports.unlinkUser = function(req, res, next){
 
         workflow.emit('response');
       });
-    });
-  });
-
-  workflow.emit('validate');
-};
-
-exports.newNote = function(req, res, next){
-  var workflow = req.app.utility.workflow(req, res);
-
-  workflow.on('validate', function() {
-    if (!req.body.data) {
-      workflow.outcome.errors.push('Data is required.');
-      return workflow.emit('response');
-    }
-
-    workflow.emit('addNote');
-  });
-
-  workflow.on('addNote', function() {
-    var noteToAdd = {
-      data: req.body.data,
-      userCreated: {
-        id: req.user._id,
-        name: req.user.username,
-        time: new Date().toISOString()
-      }
-    };
-
-    req.app.db.models.Account.findByIdAndUpdate(req.params.id, { $push: { notes: noteToAdd } }, function(err, account) {
-      if (err) {
-        return workflow.emit('exception', err);
-      }
-
-      workflow.outcome.account = account;
-      return workflow.emit('response');
-    });
-  });
-
-  workflow.emit('validate');
-};
-
-exports.newStatus = function(req, res, next){
-  var workflow = req.app.utility.workflow(req, res);
-
-  workflow.on('validate', function() {
-    if (!req.body.id) {
-      workflow.outcome.errors.push('Please choose a status.');
-    }
-
-    if (workflow.hasErrors()) {
-      return workflow.emit('response');
-    }
-
-    workflow.emit('addStatus');
-  });
-
-  workflow.on('addStatus', function() {
-    var statusToAdd = {
-      id: req.body.id,
-      name: req.body.name,
-      userCreated: {
-        id: req.user._id,
-        name: req.user.username,
-        time: new Date().toISOString()
-      }
-    };
-
-    req.app.db.models.Account.findByIdAndUpdate(req.params.id, { status: statusToAdd, $push: { statusLog: statusToAdd } }, function(err, account) {
-      if (err) {
-        return workflow.emit('exception', err);
-      }
-
-      workflow.outcome.account = account;
-      return workflow.emit('response');
     });
   });
 

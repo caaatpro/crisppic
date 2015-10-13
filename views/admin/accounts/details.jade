@@ -3,11 +3,8 @@ extends ../../../layouts/admin
 block head
   title Accounts / Details
 
-block neck
-  link(rel='stylesheet', href='/views/admin/accounts/details.min.css?#{cacheBreaker}')
-
 block feet
-  script(src='/views/admin/accounts/details.min.js?#{cacheBreaker}')
+  script(src='/views/admin/accounts/details.js?#{cacheBreaker}')
 
 block body
   div.row
@@ -18,13 +15,6 @@ block body
       div#details
       div#login
       div#delete
-    div.col-sm-4
-      fieldset
-        div#status-new.status-new
-        div#status-collection
-      fieldset
-        div#notes-new.notes-new
-        div#notes-collection
 
   script(type='text/template', id='tmpl-header')
     div.page-header
@@ -49,26 +39,10 @@ block body
         label First Name:
         input.form-control(type='text', name='first', value!='<%- first %>')
         span.help-block <%- errfor.first %>
-      div.form-group(class!='<%- errfor.middle ? "has-error" : "" %>')
-        label Middle Name:
-        input.form-control(type='text', name='middle', value!='<%- middle %>')
-        span.help-block <%- errfor.middle %>
       div.form-group(class!='<%- errfor.last ? "has-error" : "" %>')
         label Last Name:
         input.form-control(type='text', name='last', value!='<%- last %>')
         span.help-block <%- errfor['last'] %>
-      div.form-group(class!='<%- errfor.company ? "has-error" : "" %>')
-        label Company Name:
-        input.form-control(type='text', name='company', value!='<%- company %>')
-        span.help-block <%- errfor.company %>
-      div.form-group(class!='<%- errfor.phone ? "has-error" : "" %>')
-        label Phone:
-        input.form-control(type='text', name='phone', value!='<%- phone %>')
-        span.help-block <%- errfor.phone %>
-      div.form-group(class!='<%- errfor.zip ? "has-error" : "" %>')
-        label Zip:
-        input.form-control(type='text', name='zip', value!='<%- zip %>')
-        span.help-block <%- errfor.zip %>
       div.form-group
         button.btn.btn-primary.btn-update(type='button') Update
 
@@ -96,57 +70,6 @@ block body
           |<% } %>
         span.help-block <%- errfor.newUsername %>
 
-  script(type='text/template', id='tmpl-status-new')
-    legend Status
-    div.alerts
-      |<% _.each(errors, function(err) { %>
-      div.alert.alert-danger.alert-dismissable
-        button.close(type='button', data-dismiss='alert') &times;
-        |<%- err %>
-      |<% }); %>
-    div.input-group
-      select.form-control(name='status')
-        option(value='') -- choose --
-        for status in data.movies
-          option(value='#{status._id}') #{status.name}
-      div.input-group-btn
-        button.btn.btn-default.btn-add Change
-
-  script(type='text/template', id='tmpl-status-collection')
-    div#status-items.status-items
-
-  script(type='text/template', id='tmpl-status-item')
-    div.pull-right.badge.author
-      |<%= userCreated.name %>
-      | -&nbsp;
-      span.timeago <%= userCreated.time %>
-    div <%- name %>
-    div.clearfix
-
-  script(type='text/template', id='tmpl-notes-new')
-    legend Notes
-    div.alerts
-      |<% _.each(errors, function(err) { %>
-      div.alert.alert-danger.alert-dismissable
-        button.close(type='button', data-dismiss='alert') &times;
-        |<%- err %>
-      |<% }); %>
-    textarea.form-control(rows='3', name='data', placeholder='enter notes')
-    button.btn.btn-default.btn-block.btn-add Add New Note
-
-  script(type='text/template', id='tmpl-notes-collection')
-    div#notes-items.notes-items
-
-  script(type='text/template', id='tmpl-notes-item')
-    div.force-wrap <%- data %>
-    div.pull-right.badge.author
-      |<%= userCreated.name %>
-      | -&nbsp;
-      span.timeago <%= userCreated.time %>
-    div.clearfix
-
-  script(type='text/template', id='tmpl-notes-none')
-    div.note.text-muted no notes found
 
   script(type='text/template', id='tmpl-delete')
     fieldset

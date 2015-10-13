@@ -4,10 +4,11 @@ block head
   title Manage Accounts
 
 block neck
-  link(rel='stylesheet', href='/views/admin/accounts/index.min.css?#{cacheBreaker}')
+  link(rel='stylesheet', href='/views/admin/accounts/index.css?#{cacheBreaker}')
 
 block feet
-  script(src='/views/admin/accounts/index.min.js?#{cacheBreaker}')
+  script(src='/js/moment.js?#{cacheBreaker}')
+  script(src='/views/admin/accounts/index.js?#{cacheBreaker}')
 
 block body
   div.row
@@ -31,12 +32,6 @@ block body
         div.col-sm-3
           label Search
           input.form-control(name='search', type='text')
-        div.col-sm-3
-          label Status
-          select.form-control(name='status')
-            option(value='') -- any --
-            for status in data.movies
-              option(value='#{status._id}') #{status.name}
         div.col-sm-3
           label Sort By
           select.form-control(name='sort')
@@ -63,7 +58,6 @@ block body
             | name
             span.pull-right.timeago.muted age
           th phone
-          th status
       tbody#results-rows
 
   script(type='text/template', id='tmpl-results-row')
@@ -73,9 +67,6 @@ block body
       span.badge.badge-clear.timeago.pull-right(data-age='y') <%= userCreated.time %>
       |<%- name.full %>
     td.nowrap <%- phone %>
-    td.nowrap
-      div <%- status.name %>
-      div.timeago.muted <%= status.userCreated.time %>
 
   script(type='text/template', id='tmpl-results-empty-row')
     tr

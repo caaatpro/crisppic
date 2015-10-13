@@ -22,11 +22,7 @@
       errors: [],
       errfor: {},
       first: '',
-      middle: '',
-      last: '',
-      company: '',
-      phone: '',
-      zip: ''
+      last: ''
     },
     url: '/account/settings/',
     parse: function(response) {
@@ -96,11 +92,7 @@
       this.model.set({
         _id: app.mainView.account.id,
         first: app.mainView.account.get('name').first,
-        middle: app.mainView.account.get('name').middle,
-        last: app.mainView.account.get('name').last,
-        company: app.mainView.account.get('company'),
-        phone: app.mainView.account.get('phone'),
-        zip: app.mainView.account.get('zip')
+        last: app.mainView.account.get('name').last
       });
     },
     render: function() {
@@ -115,11 +107,7 @@
     update: function() {
       this.model.save({
         first: this.$el.find('[name="first"]').val(),
-        middle: this.$el.find('[name="middle"]').val(),
-        last: this.$el.find('[name="last"]').val(),
-        company: this.$el.find('[name="company"]').val(),
-        phone: this.$el.find('[name="phone"]').val(),
-        zip: this.$el.find('[name="zip"]').val()
+        last: this.$el.find('[name="last"]').val()
       });
     }
   });

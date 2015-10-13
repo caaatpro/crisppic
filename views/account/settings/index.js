@@ -4,7 +4,7 @@ var renderSettings = function(req, res, next, oauthMessage) {
   var outcome = {};
 
   var getAccountData = function(callback) {
-    req.app.db.models.Account.findById(req.user.roles.account.id, 'name company phone zip').exec(function(err, account) {
+    req.app.db.models.Account.findById(req.user.roles.account.id, 'name').exec(function(err, account) {
       if (err) {
         return callback(err, null);
       }
@@ -15,7 +15,7 @@ var renderSettings = function(req, res, next, oauthMessage) {
   };
 
   var getUserData = function(callback) {
-    req.app.db.models.User.findById(req.user.id, 'username email twitter.id github.id facebook.id google.id tumblr.id').exec(function(err, user) {
+    req.app.db.models.User.findById(req.user.id, 'username email twitter.id facebook.id google.id').exec(function(err, user) {
       if (err) {
         callback(err, null);
       }
@@ -38,14 +38,10 @@ var renderSettings = function(req, res, next, oauthMessage) {
       oauthMessage: oauthMessage,
       oauthTwitter: !!req.app.config.oauth.twitter.key,
       oauthTwitterActive: outcome.user.twitter ? !!outcome.user.twitter.id : false,
-      oauthGitHub: !!req.app.config.oauth.github.key,
-      oauthGitHubActive: outcome.user.github ? !!outcome.user.github.id : false,
       oauthFacebook: !!req.app.config.oauth.facebook.key,
       oauthFacebookActive: outcome.user.facebook ? !!outcome.user.facebook.id : false,
       oauthGoogle: !!req.app.config.oauth.google.key,
-      oauthGoogleActive: outcome.user.google ? !!outcome.user.google.id : false,
-      oauthTumblr: !!req.app.config.oauth.tumblr.key,
-      oauthTumblrActive: outcome.user.tumblr ? !!outcome.user.tumblr.id : false
+      oauthGoogleActive: outcome.user.google ? !!outcome.user.google.id : false
     });
   };
 
@@ -72,33 +68,6 @@ exports.connectTwitter = function(req, res, next){
       }
       else {
         req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'twitter.id': info.profile.id }, function(err, user) {
-          if (err) {
-            return next(err);
-          }
-
-          res.redirect('/account/settings/');
-        });
-      }
-    });
-  })(req, res, next);
-};
-
-exports.connectGitHub = function(req, res, next){
-  req._passport.instance.authenticate('github', function(err, user, info) {
-    if (!info || !info.profile) {
-      return res.redirect('/account/settings/');
-    }
-
-    req.app.db.models.User.findOne({ 'github.id': info.profile.id, _id: { $ne: req.user.id } }, function(err, user) {
-      if (err) {
-        return next(err);
-      }
-
-      if (user) {
-        renderSettings(req, res, next, 'Another user has already connected with that GitHub account.');
-      }
-      else {
-        req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'github.id': info.profile.id }, function(err, user) {
           if (err) {
             return next(err);
           }
@@ -164,49 +133,8 @@ exports.connectGoogle = function(req, res, next){
   })(req, res, next);
 };
 
-exports.connectTumblr = function(req, res, next){
-  req._passport.instance.authenticate('tumblr', { callbackURL: '/account/settings/tumblr/callback/' }, function(err, user, info) {
-    if (!info || !info.profile) {
-      return res.redirect('/account/settings/');
-    }
-
-    if (!info.profile.hasOwnProperty('id')) {
-      info.profile.id = info.profile.username;
-    }
-
-    req.app.db.models.User.findOne({ 'tumblr.id': info.profile.id, _id: { $ne: req.user.id } }, function(err, user) {
-      if (err) {
-        return next(err);
-      }
-
-      if (user) {
-        renderSettings(req, res, next, 'Another user has already connected with that Tumblr account.');
-      }
-      else {
-        req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'tumblr.id': info.profile.id }, function(err, user) {
-          if (err) {
-            return next(err);
-          }
-
-          res.redirect('/account/settings/');
-        });
-      }
-    });
-  })(req, res, next);
-};
-
 exports.disconnectTwitter = function(req, res, next){
   req.app.db.models.User.findByIdAndUpdate(req.user.id, { twitter: { id: undefined } }, function(err, user) {
-    if (err) {
-      return next(err);
-    }
-
-    res.redirect('/account/settings/');
-  });
-};
-
-exports.disconnectGitHub = function(req, res, next){
-  req.app.db.models.User.findByIdAndUpdate(req.user.id, { github: { id: undefined } }, function(err, user) {
     if (err) {
       return next(err);
     }
@@ -227,16 +155,6 @@ exports.disconnectFacebook = function(req, res, next){
 
 exports.disconnectGoogle = function(req, res, next){
   req.app.db.models.User.findByIdAndUpdate(req.user.id, { google: { id: undefined } }, function(err, user) {
-    if (err) {
-      return next(err);
-    }
-
-    res.redirect('/account/settings/');
-  });
-};
-
-exports.disconnectTumblr = function(req, res, next){
-  req.app.db.models.User.findByIdAndUpdate(req.user.id, { tumblr: { id: undefined } }, function(err, user) {
     if (err) {
       return next(err);
     }
@@ -268,23 +186,15 @@ exports.update = function(req, res, next){
     var fieldsToSet = {
       name: {
         first: req.body.first,
-        middle: req.body.middle,
         last: req.body.last,
         full: req.body.first +' '+ req.body.last
       },
-      company: req.body.company,
-      phone: req.body.phone,
-      zip: req.body.zip,
       search: [
         req.body.first,
-        req.body.middle,
-        req.body.last,
-        req.body.company,
-        req.body.phone,
-        req.body.zip
+        req.body.last
       ]
     };
-    var options = { select: 'name company phone zip' };
+    var options = { select: 'name' };
 
     req.app.db.models.Account.findByIdAndUpdate(req.user.roles.account.id, fieldsToSet, options, function(err, account) {
       if (err) {
@@ -363,7 +273,7 @@ exports.identity = function(req, res, next){
         req.body.email
       ]
     };
-    var options = { select: 'username email twitter.id github.id facebook.id google.id' };
+    var options = { select: 'username email twitter.id facebook.id google.id' };
 
     req.app.db.models.User.findByIdAndUpdate(req.user.id, fieldsToSet, options, function(err, user) {
       if (err) {

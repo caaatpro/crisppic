@@ -14,10 +14,8 @@ exports = module.exports = function(app, mongoose) {
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     twitter: {},
-    github: {},
     facebook: {},
     google: {},
-    tumblr: {},
     search: [String]
   });
   userSchema.methods.canPlayRoleOf = function(role) {

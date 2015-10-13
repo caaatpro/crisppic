@@ -4,14 +4,15 @@ html
     block head
       title #{title}
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/layouts/core.min.css?#{cacheBreaker}')
+    link(rel='stylesheet', href='#{hostUrl}css/bootstrap.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='/css/core.css?#{cacheBreaker}')
     block neck
   body
     div.navbar.navbar-default.navbar-fixed-top
       div.container
         div.navbar-header
           a.navbar-brand(href='/account/')
-            img.navbar-logo(src='/media/logo-symbol-64x64.png', alt='Logo')
+            img.navbar-logo(src='/images/logo-symbol-64x64.png', alt='Logo')
             span.navbar-brand-label #{projectName}
           button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
             span.icon-bar
@@ -41,10 +42,23 @@ html
           div.clearfix
 
     div.ajax-spinner
-      img(src='/media/ajax-pulse.gif', alt='Loading')
+      img(src='/images/ajax-pulse.gif', alt='Loading')
 
-    //if lte IE 9
-      script(src='/layouts/ie-sucks.min.js?#{cacheBreaker}')
-    script(src='/layouts/core.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/jquery.min.js?#{cacheBreaker}')
+    // Bootstrap
+    script(src='#{hostUrl}js/bootstrap.js?#{cacheBreaker}')
+    // App
+    script(src='#{hostUrl}js/app.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/slimscroll/jquery.slimscroll.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/datatables/jquery.dataTables.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/datatables/jquery.csv-0.71.min.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/datatables/demo.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/app.plugin.js?#{cacheBreaker}')
+
+    script(src='#{hostUrl}js/jquery.cookie.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/underscore.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/backbone.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/moment.js?#{cacheBreaker}')
+    script(src='#{hostUrl}js/core.js?#{cacheBreaker}')
 
     block feet

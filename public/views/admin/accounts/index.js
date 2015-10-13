@@ -10,14 +10,6 @@
     defaults: {
       _id: undefined,
       'name.full': '',
-      company: '',
-      phone: '',
-      zip: '',
-      status: {
-        id: undefined,
-        name: '',
-        userCreated: {}
-      },
       userCreated: {}
     },
     url: function() {
@@ -41,7 +33,6 @@
   app.Filter = Backbone.Model.extend({
     defaults: {
       search: '',
-      status: '',
       sort: '',
       limit: ''
     }
