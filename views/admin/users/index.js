@@ -1,5 +1,8 @@
 'use strict';
+<<<<<<< HEAD
 /* global exports, require */
+=======
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 
 exports.find = function(req, res, next){
   req.query.username = req.query.username ? req.query.username : '';
@@ -62,7 +65,11 @@ exports.read = function(req, res, next){
   });
 };
 
+<<<<<<< HEAD
 exports.create = function(req, res){
+=======
+exports.create = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -114,7 +121,11 @@ exports.create = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.update = function(req, res){
+=======
+exports.update = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -201,7 +212,11 @@ exports.update = function(req, res){
           name: user.username
         }
       };
+<<<<<<< HEAD
       req.app.db.models.Admin.findByIdAndUpdate(user.roles.admin, fieldsToSet, function(err) {
+=======
+      req.app.db.models.Admin.findByIdAndUpdate(user.roles.admin, fieldsToSet, function(err, admin) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -222,7 +237,11 @@ exports.update = function(req, res){
           name: user.username
         }
       };
+<<<<<<< HEAD
       req.app.db.models.Account.findByIdAndUpdate(user.roles.account, fieldsToSet, function(err) {
+=======
+      req.app.db.models.Account.findByIdAndUpdate(user.roles.account, fieldsToSet, function(err, account) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -249,7 +268,11 @@ exports.update = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.password = function(req, res){
+=======
+exports.password = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -301,7 +324,11 @@ exports.password = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.linkAdmin = function(req, res){
+=======
+exports.linkAdmin = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -318,7 +345,11 @@ exports.linkAdmin = function(req, res){
     workflow.emit('verifyAdmin');
   });
 
+<<<<<<< HEAD
   workflow.on('verifyAdmin', function() {
+=======
+  workflow.on('verifyAdmin', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.Admin.findById(req.body.newAdminId).exec(function(err, admin) {
       if (err) {
         return workflow.emit('exception', err);
@@ -339,7 +370,11 @@ exports.linkAdmin = function(req, res){
     });
   });
 
+<<<<<<< HEAD
   workflow.on('duplicateLinkCheck', function() {
+=======
+  workflow.on('duplicateLinkCheck', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.User.findOne({ 'roles.admin': req.body.newAdminId, _id: {$ne: req.params.id} }).exec(function(err, user) {
       if (err) {
         return workflow.emit('exception', err);
@@ -354,7 +389,11 @@ exports.linkAdmin = function(req, res){
     });
   });
 
+<<<<<<< HEAD
   workflow.on('patchUser', function() {
+=======
+  workflow.on('patchUser', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.User.findById(req.params.id).exec(function(err, user) {
       if (err) {
         return workflow.emit('exception', err);
@@ -380,7 +419,11 @@ exports.linkAdmin = function(req, res){
 
   workflow.on('patchAdmin', function() {
     workflow.admin.user = { id: req.params.id, name: workflow.outcome.user.username };
+<<<<<<< HEAD
     workflow.admin.save(function(err) {
+=======
+    workflow.admin.save(function(err, admin) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }
@@ -392,7 +435,11 @@ exports.linkAdmin = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.unlinkAdmin = function(req, res){
+=======
+exports.unlinkAdmin = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -451,7 +498,11 @@ exports.unlinkAdmin = function(req, res){
       }
 
       admin.user = undefined;
+<<<<<<< HEAD
       admin.save(function(err) {
+=======
+      admin.save(function(err, admin) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -464,7 +515,11 @@ exports.unlinkAdmin = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.linkAccount = function(req, res){
+=======
+exports.linkAccount = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -481,7 +536,11 @@ exports.linkAccount = function(req, res){
     workflow.emit('verifyAccount');
   });
 
+<<<<<<< HEAD
   workflow.on('verifyAccount', function() {
+=======
+  workflow.on('verifyAccount', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.Account.findById(req.body.newAccountId).exec(function(err, account) {
       if (err) {
         return workflow.emit('exception', err);
@@ -502,7 +561,11 @@ exports.linkAccount = function(req, res){
     });
   });
 
+<<<<<<< HEAD
   workflow.on('duplicateLinkCheck', function() {
+=======
+  workflow.on('duplicateLinkCheck', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.User.findOne({ 'roles.account': req.body.newAccountId, _id: {$ne: req.params.id} }).exec(function(err, user) {
       if (err) {
         return workflow.emit('exception', err);
@@ -517,7 +580,11 @@ exports.linkAccount = function(req, res){
     });
   });
 
+<<<<<<< HEAD
   workflow.on('patchUser', function() {
+=======
+  workflow.on('patchUser', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.User.findById(req.params.id).exec(function(err, user) {
       if (err) {
         return workflow.emit('exception', err);
@@ -543,7 +610,11 @@ exports.linkAccount = function(req, res){
 
   workflow.on('patchAccount', function() {
     workflow.account.user = { id: req.params.id, name: workflow.outcome.user.username };
+<<<<<<< HEAD
     workflow.account.save(function(err) {
+=======
+    workflow.account.save(function(err, account) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }
@@ -555,7 +626,11 @@ exports.linkAccount = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.unlinkAccount = function(req, res){
+=======
+exports.unlinkAccount = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -609,7 +684,11 @@ exports.unlinkAccount = function(req, res){
       }
 
       account.user = undefined;
+<<<<<<< HEAD
       account.save(function(err) {
+=======
+      account.save(function(err, account) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -622,7 +701,11 @@ exports.unlinkAccount = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.delete = function(req, res){
+=======
+exports.delete = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -639,8 +722,13 @@ exports.delete = function(req, res){
     workflow.emit('deleteUser');
   });
 
+<<<<<<< HEAD
   workflow.on('deleteUser', function() {
     req.app.db.models.User.findByIdAndRemove(req.params.id, function(err) {
+=======
+  workflow.on('deleteUser', function(err) {
+    req.app.db.models.User.findByIdAndRemove(req.params.id, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }

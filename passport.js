@@ -92,7 +92,11 @@ exports = module.exports = function(app, passport) {
   passport.deserializeUser(function(id, done) {
     app.db.models.User.findOne({ _id: id }).populate('roles.admin').populate('roles.account').exec(function(err, user) {
       if (user && user.roles && user.roles.admin) {
+<<<<<<< HEAD
         user.roles.admin.populate("groups", function(err) {
+=======
+        user.roles.admin.populate("groups", function(err, admin) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
           done(err, user);
         });
       }

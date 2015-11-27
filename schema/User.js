@@ -23,14 +23,26 @@ exports = module.exports = function(app, mongoose) {
       return true;
     }
 
+<<<<<<< HEAD
     return !!(role === "account" && this.roles.account);
 
 
+=======
+    if (role === "account" && this.roles.account) {
+      return true;
+    }
+
+    return false;
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   };
   userSchema.methods.defaultReturnUrl = function() {
     var returnUrl = '/';
     if (this.canPlayRoleOf('account')) {
+<<<<<<< HEAD
       returnUrl = '/account/' + this.username;
+=======
+      returnUrl = '/account/';
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     }
 
     if (this.canPlayRoleOf('admin')) {
@@ -40,7 +52,11 @@ exports = module.exports = function(app, mongoose) {
     return returnUrl;
   };
   userSchema.statics.encryptPassword = function(password, done) {
+<<<<<<< HEAD
     var bcrypt = require('bcryptjs');
+=======
+    var bcrypt = require('bcrypt');
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     bcrypt.genSalt(10, function(err, salt) {
       if (err) {
         return done(err);
@@ -52,7 +68,11 @@ exports = module.exports = function(app, mongoose) {
     });
   };
   userSchema.statics.validatePassword = function(password, hash, done) {
+<<<<<<< HEAD
     var bcrypt = require('bcryptjs');
+=======
+    var bcrypt = require('bcrypt');
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     bcrypt.compare(password, hash, function(err, res) {
       done(err, res);
     });
@@ -62,6 +82,10 @@ exports = module.exports = function(app, mongoose) {
   userSchema.index({ email: 1 }, { unique: true });
   userSchema.index({ timeCreated: 1 });
   userSchema.index({ 'twitter.id': 1 });
+<<<<<<< HEAD
+=======
+  userSchema.index({ 'github.id': 1 });
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   userSchema.index({ 'facebook.id': 1 });
   userSchema.index({ 'google.id': 1 });
   userSchema.index({ search: 1 });

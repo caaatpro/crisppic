@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 node_modules/*
 .nodemonignore
 .jshintrc-client
 .jshintrc-server
 .idea
 public/posters/*
+=======
+public/vendor/*
+node_modules/*
+*.min.js
+*.min.js.map
+*.min.css
+.nodemonignore
+.jshintrc-client
+.jshintrc-server
+sftp-config.json
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446

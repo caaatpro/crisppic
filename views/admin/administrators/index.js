@@ -59,7 +59,11 @@ exports.read = function(req, res, next){
     });
   };
 
+<<<<<<< HEAD
   var asyncFinally = function(err) {
+=======
+  var asyncFinally = function(err, results) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err);
     }
@@ -80,7 +84,11 @@ exports.read = function(req, res, next){
   require('async').parallel([getAdminGroups, getRecord], asyncFinally);
 };
 
+<<<<<<< HEAD
 exports.create = function(req, res){
+=======
+exports.create = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -98,7 +106,11 @@ exports.create = function(req, res){
       name: {
         first: nameParts.shift(),
         middle: (nameParts.length > 1 ? nameParts.shift() : ''),
+<<<<<<< HEAD
         last: (nameParts.length === 0 ? '' : nameParts.join(' '))
+=======
+        last: (nameParts.length === 0 ? '' : nameParts.join(' ')),
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       }
     };
     fieldsToSet.name.full = fieldsToSet.name.first + (fieldsToSet.name.last ? ' '+ fieldsToSet.name.last : '');
@@ -121,7 +133,11 @@ exports.create = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.update = function(req, res){
+=======
+exports.update = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -174,7 +190,11 @@ exports.update = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.groups = function(req, res){
+=======
+exports.groups = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -215,7 +235,11 @@ exports.groups = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.permissions = function(req, res){
+=======
+exports.permissions = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -256,7 +280,11 @@ exports.permissions = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.linkUser = function(req, res){
+=======
+exports.linkUser = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -273,7 +301,11 @@ exports.linkUser = function(req, res){
     workflow.emit('verifyUser');
   });
 
+<<<<<<< HEAD
   workflow.on('verifyUser', function() {
+=======
+  workflow.on('verifyUser', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.User.findOne({ username: req.body.newUsername }, 'username').exec(function(err, user) {
       if (err) {
         return workflow.emit('exception', err);
@@ -293,7 +325,11 @@ exports.linkUser = function(req, res){
     });
   });
 
+<<<<<<< HEAD
   workflow.on('duplicateLinkCheck', function() {
+=======
+  workflow.on('duplicateLinkCheck', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.Admin.findOne({ 'user.id': workflow.user._id, _id: { $ne: req.params.id } }).exec(function(err, admin) {
       if (err) {
         return workflow.emit('exception', err);
@@ -309,7 +345,11 @@ exports.linkUser = function(req, res){
   });
 
   workflow.on('patchUser', function() {
+<<<<<<< HEAD
     req.app.db.models.User.findByIdAndUpdate(workflow.user._id, { 'roles.admin': req.params.id }).exec(function(err) {
+=======
+    req.app.db.models.User.findByIdAndUpdate(workflow.user._id, { 'roles.admin': req.params.id }).exec(function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }
@@ -317,7 +357,11 @@ exports.linkUser = function(req, res){
     });
   });
 
+<<<<<<< HEAD
   workflow.on('patchAdministrator', function() {
+=======
+  workflow.on('patchAdministrator', function(callback) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     req.app.db.models.Admin.findByIdAndUpdate(req.params.id, { user: { id: workflow.user._id, name: workflow.user.username } }).exec(function(err, admin) {
       if (err) {
         return workflow.emit('exception', err);
@@ -337,7 +381,11 @@ exports.linkUser = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.unlinkUser = function(req, res){
+=======
+exports.unlinkUser = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -396,7 +444,11 @@ exports.unlinkUser = function(req, res){
       }
 
       user.roles.admin = undefined;
+<<<<<<< HEAD
       user.save(function(err) {
+=======
+      user.save(function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -409,7 +461,11 @@ exports.unlinkUser = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.delete = function(req, res){
+=======
+exports.delete = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -426,8 +482,13 @@ exports.delete = function(req, res){
     workflow.emit('deleteAdministrator');
   });
 
+<<<<<<< HEAD
   workflow.on('deleteAdministrator', function() {
     req.app.db.models.Admin.findByIdAndRemove(req.params.id, function(err) {
+=======
+  workflow.on('deleteAdministrator', function(err) {
+    req.app.db.models.Admin.findByIdAndRemove(req.params.id, function(err, admin) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }

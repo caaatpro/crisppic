@@ -1,10 +1,19 @@
 'use strict';
 
+<<<<<<< HEAD
 exports.port = process.env.PORT || 3030;
 exports.mongodb = {
   uri: 'mongodb://94.103.80.182:27000/movies'
 };
 exports.projectName = 'Crisppic';
+=======
+exports.port = process.env.PORT || 3000;
+exports.mongodb = {
+  uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://94.103.80.182:27000/drywall'
+};
+exports.companyName = 'Acme, Inc.';
+exports.projectName = 'Drywall';
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 exports.systemEmail = 'cyber.paw@ya.ru';
 exports.cryptoKey = 'k3yb0ardc4t';
 exports.loginAttempts = {
@@ -31,6 +40,7 @@ exports.oauth = {
     secret: process.env.TWITTER_OAUTH_SECRET || ''
   },
   facebook: {
+<<<<<<< HEAD
     key: process.env.FACEBOOK_OAUTH_KEY || '1515012572125322',
     secret: process.env.FACEBOOK_OAUTH_SECRET || '97487b28cee723f7a04dee219bca2d55'
   },
@@ -39,3 +49,21 @@ exports.oauth = {
     secret: process.env.GOOGLE_OAUTH_SECRET || '8UQCXrRRSNH7mCItDea5YXtP'
   }
 };
+=======
+    key: process.env.FACEBOOK_OAUTH_KEY || '',
+    secret: process.env.FACEBOOK_OAUTH_SECRET || ''
+  },
+  github: {
+    key: process.env.GITHUB_OAUTH_KEY || '',
+    secret: process.env.GITHUB_OAUTH_SECRET || ''
+  },
+  google: {
+    key: process.env.GOOGLE_OAUTH_KEY || '',
+    secret: process.env.GOOGLE_OAUTH_SECRET || ''
+  },
+  tumblr: {
+    key: process.env.TUMBLR_OAUTH_KEY || '',
+    secret: process.env.TUMBLR_OAUTH_SECRET || ''
+  }
+};
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446

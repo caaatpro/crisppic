@@ -25,7 +25,11 @@ var renderSettings = function(req, res, next, oauthMessage) {
     });
   };
 
+<<<<<<< HEAD
   var asyncFinally = function(err) {
+=======
+  var asyncFinally = function(err, results) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err);
     }
@@ -67,7 +71,11 @@ exports.connectTwitter = function(req, res, next){
         renderSettings(req, res, next, 'Another user has already connected with that Twitter account.');
       }
       else {
+<<<<<<< HEAD
         req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'twitter.id': info.profile.id }, function(err) {
+=======
+        req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'twitter.id': info.profile.id }, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
           if (err) {
             return next(err);
           }
@@ -94,7 +102,11 @@ exports.connectFacebook = function(req, res, next){
         renderSettings(req, res, next, 'Another user has already connected with that Facebook account.');
       }
       else {
+<<<<<<< HEAD
         req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'facebook.id': info.profile.id }, function(err) {
+=======
+        req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'facebook.id': info.profile.id }, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
           if (err) {
             return next(err);
           }
@@ -121,7 +133,11 @@ exports.connectGoogle = function(req, res, next){
         renderSettings(req, res, next, 'Another user has already connected with that Google account.');
       }
       else {
+<<<<<<< HEAD
         req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'google.id': info.profile.id }, function(err) {
+=======
+        req.app.db.models.User.findByIdAndUpdate(req.user.id, { 'google.id': info.profile.id }, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
           if (err) {
             return next(err);
           }
@@ -134,7 +150,11 @@ exports.connectGoogle = function(req, res, next){
 };
 
 exports.disconnectTwitter = function(req, res, next){
+<<<<<<< HEAD
   req.app.db.models.User.findByIdAndUpdate(req.user.id, { twitter: { id: undefined } }, function(err) {
+=======
+  req.app.db.models.User.findByIdAndUpdate(req.user.id, { twitter: { id: undefined } }, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err);
     }
@@ -144,7 +164,11 @@ exports.disconnectTwitter = function(req, res, next){
 };
 
 exports.disconnectFacebook = function(req, res, next){
+<<<<<<< HEAD
   req.app.db.models.User.findByIdAndUpdate(req.user.id, { facebook: { id: undefined } }, function(err) {
+=======
+  req.app.db.models.User.findByIdAndUpdate(req.user.id, { facebook: { id: undefined } }, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err);
     }
@@ -154,7 +178,11 @@ exports.disconnectFacebook = function(req, res, next){
 };
 
 exports.disconnectGoogle = function(req, res, next){
+<<<<<<< HEAD
   req.app.db.models.User.findByIdAndUpdate(req.user.id, { google: { id: undefined } }, function(err) {
+=======
+  req.app.db.models.User.findByIdAndUpdate(req.user.id, { google: { id: undefined } }, function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err);
     }
@@ -163,7 +191,11 @@ exports.disconnectGoogle = function(req, res, next){
   });
 };
 
+<<<<<<< HEAD
 exports.update = function(req, res){
+=======
+exports.update = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -209,7 +241,11 @@ exports.update = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.identity = function(req, res){
+=======
+exports.identity = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -292,7 +328,11 @@ exports.identity = function(req, res){
           name: user.username
         }
       };
+<<<<<<< HEAD
       req.app.db.models.Admin.findByIdAndUpdate(user.roles.admin, fieldsToSet, function(err) {
+=======
+      req.app.db.models.Admin.findByIdAndUpdate(user.roles.admin, fieldsToSet, function(err, admin) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -313,7 +353,11 @@ exports.identity = function(req, res){
           name: user.username
         }
       };
+<<<<<<< HEAD
       req.app.db.models.Account.findByIdAndUpdate(user.roles.account, fieldsToSet, function(err) {
+=======
+      req.app.db.models.Account.findByIdAndUpdate(user.roles.account, fieldsToSet, function(err, account) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -340,7 +384,11 @@ exports.identity = function(req, res){
   workflow.emit('validate');
 };
 
+<<<<<<< HEAD
 exports.password = function(req, res){
+=======
+exports.password = function(req, res, next){
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -375,7 +423,11 @@ exports.password = function(req, res){
           return workflow.emit('exception', err);
         }
 
+<<<<<<< HEAD
         user.populate('roles.admin roles.account', 'name.full', function(err) {
+=======
+        user.populate('roles.admin roles.account', 'name.full', function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
           if (err) {
             return workflow.emit('exception', err);
           }

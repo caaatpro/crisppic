@@ -120,7 +120,11 @@ exports.signup = function(req, res){
 
       //update user with account
       workflow.user.roles.account = account._id;
+<<<<<<< HEAD
       workflow.user.save(function(err) {
+=======
+      workflow.user.save(function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -143,7 +147,11 @@ exports.signup = function(req, res){
         loginURL: req.protocol +'://'+ req.headers.host +'/login/',
         projectName: req.app.config.projectName
       },
+<<<<<<< HEAD
       success: function() {
+=======
+      success: function(message) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         workflow.emit('logUserIn');
       },
       error: function(err) {
@@ -154,7 +162,11 @@ exports.signup = function(req, res){
   });
 
   workflow.on('logUserIn', function() {
+<<<<<<< HEAD
     req._passport.instance.authenticate('local', function(err, user) {
+=======
+    req._passport.instance.authenticate('local', function(err, user, info) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }
@@ -258,7 +270,10 @@ exports.signupGoogle = function(req, res, next) {
   })(req, res, next);
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 exports.signupSocial = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
 
@@ -291,9 +306,15 @@ exports.signupSocial = function(req, res){
       if (user) {
         workflow.username = workflow.username + req.session.socialProfile.id;
       }
+<<<<<<< HEAD
       //else {
       //  workflow.username = workflow.username;
       //}
+=======
+      else {
+        workflow.username = workflow.username;
+      }
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 
       workflow.emit('duplicateEmailCheck');
     });
@@ -360,7 +381,11 @@ exports.signupSocial = function(req, res){
 
       //update user with account
       workflow.user.roles.account = account._id;
+<<<<<<< HEAD
       workflow.user.save(function(err) {
+=======
+      workflow.user.save(function(err, user) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         if (err) {
           return workflow.emit('exception', err);
         }
@@ -383,7 +408,11 @@ exports.signupSocial = function(req, res){
         loginURL: req.protocol +'://'+ req.headers.host +'/login/',
         projectName: req.app.config.projectName
       },
+<<<<<<< HEAD
       success: function() {
+=======
+      success: function(message) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         workflow.emit('logUserIn');
       },
       error: function(err) {

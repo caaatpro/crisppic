@@ -22,11 +22,15 @@
       errors: [],
       errfor: {},
       first: '',
+<<<<<<< HEAD
       middle: '',
       last: '',
       company: '',
       phone: '',
       zip: ''
+=======
+      last: ''
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     },
     url: '/account/settings/',
     parse: function(response) {
@@ -96,11 +100,15 @@
       this.model.set({
         _id: app.mainView.account.id,
         first: app.mainView.account.get('name').first,
+<<<<<<< HEAD
         middle: app.mainView.account.get('name').middle,
         last: app.mainView.account.get('name').last,
         company: app.mainView.account.get('company'),
         phone: app.mainView.account.get('phone'),
         zip: app.mainView.account.get('zip')
+=======
+        last: app.mainView.account.get('name').last
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       });
     },
     render: function() {
@@ -115,11 +123,15 @@
     update: function() {
       this.model.save({
         first: this.$el.find('[name="first"]').val(),
+<<<<<<< HEAD
         middle: this.$el.find('[name="middle"]').val(),
         last: this.$el.find('[name="last"]').val(),
         company: this.$el.find('[name="company"]').val(),
         phone: this.$el.find('[name="phone"]').val(),
         zip: this.$el.find('[name="zip"]').val()
+=======
+        last: this.$el.find('[name="last"]').val()
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       });
     }
   });

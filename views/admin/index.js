@@ -5,7 +5,11 @@ exports.init = function(req, res, next){
   var collections = ['User', 'Account', 'Admin', 'AdminGroup'];
   var queries = [];
 
+<<<<<<< HEAD
   collections.forEach(function(el) {
+=======
+  collections.forEach(function(el, i, arr) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     queries.push(function(done) {
       req.app.db.models[el].count({}, function(err, count) {
         if (err) {
@@ -18,7 +22,11 @@ exports.init = function(req, res, next){
     });
   });
 
+<<<<<<< HEAD
   var asyncFinally = function(err) {
+=======
+  var asyncFinally = function(err, results) {
+>>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err);
     }
