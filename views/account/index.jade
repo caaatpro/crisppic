@@ -1,0 +1,69 @@
+extends ../../layouts/default
+
+block head
+  title Title
+
+block body
+  section.vbox
+    section.scrollable.padder
+      div.page-header
+        h3=account['roles']['account']['name']['full']
+
+      div.row
+        div.col-xs-3
+          img(src='/images/default-user-avatar-big.png', alt='', width='100%')
+          button(type="button" class="btn btn-primary btn-block") Следить
+        div.col-xs-9
+          table.table.table-striped
+            tbody
+              tr
+                td(width=150) Здесь с:
+                td 15 сентября 2015
+              tr
+                td(width=150) Оценок:
+                td 150
+              tr
+                td(width=150) Просмотров:
+                td 200
+              tr
+                td(width=150) Отзывов:
+                td 1
+              tr
+                td(width=150) Хочет посмотреть:
+                td 15
+
+        div.col-xs-12
+          h3 Последние фильмы
+
+          table.table.table-striped
+            tbody
+              for accountMovie in accountList
+                tr
+                  if (accountMovie['movieId']['title'] != null)
+                    td=accountMovie['movieId']['title']['russian']+' / '+accountMovie['movieId']['title']['original'] + ' (' + accountMovie['movieId']['year'] + ')'
+                    td(width='100')=accountMovie['date_format']
+
+
+        div.col-xs-12
+          h3 Чарт режиссеров
+
+          table.table.table-striped
+            tbody
+              tr
+                td Лана Вачовски
+                td(width='100') 3
+              tr
+                td Энди Вачовски
+                td(width='100') 3
+
+        div.col-xs-12
+          h3 Чарт актеров
+
+          table.table.table-striped
+            tbody
+              tr
+                td Эмма Уотсон
+                td(width='100') 10
+              tr
+                td Хью Джекман
+                td(width='100') 8

@@ -1,0 +1,11 @@
+extends ../layouts/default
+
+block head
+  title Crisppic is Running
+
+block neck
+  link(rel='stylesheet', href='/views/index.css?#{cacheBreaker}')
+
+block body
+  div.jumbotron
+    h1 Не авторизован

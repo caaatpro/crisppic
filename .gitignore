@@ -1,0 +1,6 @@
+node_modules/*
+.nodemonignore
+.jshintrc-client
+.jshintrc-server
+.idea
+public/posters/*

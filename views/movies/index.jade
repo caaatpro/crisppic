@@ -1,0 +1,56 @@
+extends ../../layouts/default
+
+block head
+  title Title
+
+block body
+  section.vbox
+    section.scrollable.padder
+      div.page-header
+        h3
+          if query == ''
+            ='Все фильмы'
+          else
+            ='Фильмы по запросы: ' + query
+
+
+      section.panel.panel-default
+        .table-responsive
+          table.table.table-striped.m-b-none
+            thead
+              tr
+                th Русское название/Название
+                th Год
+                th Просмотры
+            tbody
+              for item in items
+                tr
+                  td
+                    a(href='/movie/'+item['sid']+'/')=item['title']['russian']
+                    br
+                    =item['title']['original']
+                  td= item['year']
+                  td Просмотр
+
+      nav.text-center
+        ul.pagination
+          for p in pages
+            if p == 'n' || p == 'p'
+              if p == 'p'
+                li
+                  a(href='/movies/?page=' + (page - 1), aria-label='Previous')
+                    span(aria-hidden="true") &laquo;
+              if p == 'n'
+                li
+                  a(href='/movies/?page=' + (page + 1), aria-label='Next')
+                    span(aria-hidden="true") &raquo;
+            else
+              if p == page
+                li.active
+                  a(href='/movies/?page=' + p)=p
+              else
+                li
+                  a(href='/movies/?page=' + p)=p
+
+
+  a.hide.nav-off-screen-block(href='#', data-toggle='class:nav-off-screen', data-target='#nav')

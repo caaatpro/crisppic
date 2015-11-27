@@ -1,0 +1,37 @@
+doctype html
+html.bg-dark
+  head
+    meta(charset='utf-8')
+    title #{title}
+    meta(name='description', content='app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='#{hostUrl}css/bootstrap.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/animate.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font-awesome.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/icon.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font.css', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/app.css', type='text/css')
+    //if lt IE 9
+      script(src='#{hostUrl}js/ie/html5shiv.js')
+      script(src='#{hostUrl}js/ie/respond.min.js')
+      script(src='#{hostUrl}js/ie/excanvas.js')
+  body
+    section#content
+      .row.m-n
+        .col-sm-4.col-sm-offset-4
+          .text-center.m-b-lg
+            h1.h.text-white.animated.fadeInDownBig 500
+          .list-group.bg-info.auto.m-b-sm.m-b-lg
+            a.list-group-item(href='#{hostUrl}')
+              i.fa.fa-chevron-right.icon-muted
+              i.fa.fa-fw.fa-home.icon-muted
+              |  Goto homepage
+            a.list-group-item(href='#')
+              i.fa.fa-chevron-right.icon-muted
+              i.fa.fa-fw.fa-question.icon-muted
+              |  Send us a tip
+    // footer
+    footer#footer
+      .text-center.padder.clearfix
+        p
+          small © #{copyrightYear} #{copyrightName}
