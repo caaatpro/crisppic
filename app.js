@@ -70,15 +70,9 @@ app.use(function(req, res, next) {
 //global locals
 app.locals.projectName = app.config.projectName;
 app.locals.copyrightYear = new Date().getFullYear();
-<<<<<<< HEAD
 app.locals.copyrightName = 'Crisppic';
 app.locals.cacheBreaker = 'br34k-01';
 app.locals.hostUrl = 'http://crisppic.com/';
-=======
-app.locals.copyrightName = app.config.companyName;
-app.locals.cacheBreaker = 'br34k-01';
-app.locals.hostUrl = 'http://94.103.80.182:3000/';
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 
 //setup passport
 require('./passport')(app, passport);

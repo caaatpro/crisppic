@@ -1,7 +1,6 @@
 'use strict';
 
 exports.init = function(req, res){
-<<<<<<< HEAD
   var workflow = req.app.utility.workflow(req, res);
   var sigma = {};
 
@@ -51,7 +50,4 @@ exports.init = function(req, res){
   });
 
   workflow.emit('accountInfo');
-=======
-  res.render('account/index');
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 };

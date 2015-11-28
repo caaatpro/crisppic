@@ -70,11 +70,7 @@ exports.send = function(req, res, next){
         resetLink: req.protocol +'://'+ req.headers.host +'/login/reset/'+ user.email +'/'+ token +'/',
         projectName: req.app.config.projectName
       },
-<<<<<<< HEAD
       success: function() {
-=======
-      success: function(message) {
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
         workflow.emit('response');
       },
       error: function(err) {

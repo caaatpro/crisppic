@@ -32,7 +32,6 @@ exports = module.exports = function(app, passport) {
   //front end
   app.get('/', require('./views/index').init);
   app.get('/about/', require('./views/about/index').init);
-<<<<<<< HEAD
 
   // movies
   app.all('/movie*', ensureAuthenticated);
@@ -40,8 +39,6 @@ exports = module.exports = function(app, passport) {
   app.post('/movie/*', require('./views/movie/index').AddView);
   app.get('/movies/', require('./views/movies/index').init);
 
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   app.get('/contact/', require('./views/contact/index').init);
   app.post('/contact/', require('./views/contact/index').sendMessage);
 
@@ -76,7 +73,6 @@ exports = module.exports = function(app, passport) {
   app.get('/login/google/', passport.authenticate('google', { callbackURL: '/login/google/callback/', scope: ['profile email'] }));
   app.get('/login/google/callback/', require('./views/login/index').loginGoogle);
 
-<<<<<<< HEAD
   //account
   app.all('/account*', ensureAuthenticated);
   app.all('/account*', ensureAccount);
@@ -104,8 +100,6 @@ exports = module.exports = function(app, passport) {
   app.get('/account/settings/google/callback/', require('./views/account/settings/index').connectGoogle);
   app.get('/account/settings/google/disconnect/', require('./views/account/settings/index').disconnectGoogle);
 
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   //admin
   app.all('/admin*', ensureAuthenticated);
   app.all('/admin*', ensureAdmin);
@@ -154,36 +148,6 @@ exports = module.exports = function(app, passport) {
   //admin > search
   app.get('/admin/search/', require('./views/admin/search/index').find);
 
-<<<<<<< HEAD
-=======
-  //account
-  app.all('/account*', ensureAuthenticated);
-  app.all('/account*', ensureAccount);
-  app.get('/account/', require('./views/account/index').init);
-
-  //account > verification
-  app.get('/account/verification/', require('./views/account/verification/index').init);
-  app.post('/account/verification/', require('./views/account/verification/index').resendVerification);
-  app.get('/account/verification/:token/', require('./views/account/verification/index').verify);
-
-  //account > settings
-  app.get('/account/settings/', require('./views/account/settings/index').init);
-  app.put('/account/settings/', require('./views/account/settings/index').update);
-  app.put('/account/settings/identity/', require('./views/account/settings/index').identity);
-  app.put('/account/settings/password/', require('./views/account/settings/index').password);
-
-  //account > settings > social
-  app.get('/account/settings/twitter/', passport.authenticate('twitter', { callbackURL: '/account/settings/twitter/callback/' }));
-  app.get('/account/settings/twitter/callback/', require('./views/account/settings/index').connectTwitter);
-  app.get('/account/settings/twitter/disconnect/', require('./views/account/settings/index').disconnectTwitter);
-  app.get('/account/settings/facebook/', passport.authenticate('facebook', { callbackURL: '/account/settings/facebook/callback/' }));
-  app.get('/account/settings/facebook/callback/', require('./views/account/settings/index').connectFacebook);
-  app.get('/account/settings/facebook/disconnect/', require('./views/account/settings/index').disconnectFacebook);
-  app.get('/account/settings/google/', passport.authenticate('google', { callbackURL: '/account/settings/google/callback/', scope: ['profile email'] }));
-  app.get('/account/settings/google/callback/', require('./views/account/settings/index').connectGoogle);
-  app.get('/account/settings/google/disconnect/', require('./views/account/settings/index').disconnectGoogle);
-
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   //route not found
   app.all('*', require('./views/http/index').http404);
 };

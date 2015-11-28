@@ -38,11 +38,7 @@ exports.find = function(req, res, next){
     });
   };
 
-<<<<<<< HEAD
   var asyncFinally = function(err) {
-=======
-  var asyncFinally = function(err, results) {
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     if (err) {
       return next(err, null);
     }

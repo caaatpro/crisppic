@@ -10,11 +10,7 @@ exports.http404 = function(req, res){
   }
 };
 
-<<<<<<< HEAD
 exports.http500 = function(err, req, res){
-=======
-exports.http500 = function(err, req, res, next){
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   res.status(500);
 
   var data = { err: {} };

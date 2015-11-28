@@ -49,11 +49,7 @@ exports.read = function(req, res, next){
   });
 };
 
-<<<<<<< HEAD
 exports.create = function(req, res){
-=======
-exports.create = function(req, res, next){
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -104,11 +100,7 @@ exports.create = function(req, res, next){
   workflow.emit('validate');
 };
 
-<<<<<<< HEAD
 exports.update = function(req, res){
-=======
-exports.update = function(req, res, next){
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -143,11 +135,7 @@ exports.update = function(req, res, next){
   workflow.emit('validate');
 };
 
-<<<<<<< HEAD
 exports.permissions = function(req, res){
-=======
-exports.permissions = function(req, res, next){
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -182,11 +170,7 @@ exports.permissions = function(req, res, next){
   workflow.emit('validate');
 };
 
-<<<<<<< HEAD
 exports.delete = function(req, res){
-=======
-exports.delete = function(req, res, next){
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
@@ -198,13 +182,8 @@ exports.delete = function(req, res, next){
     workflow.emit('deleteAdminGroup');
   });
 
-<<<<<<< HEAD
   workflow.on('deleteAdminGroup', function() {
     req.app.db.models.AdminGroup.findByIdAndRemove(req.params.id, function(err) {
-=======
-  workflow.on('deleteAdminGroup', function(err) {
-    req.app.db.models.AdminGroup.findByIdAndRemove(req.params.id, function(err, adminGroup) {
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       if (err) {
         return workflow.emit('exception', err);
       }

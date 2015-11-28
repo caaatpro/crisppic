@@ -10,7 +10,6 @@
     defaults: {
       _id: undefined,
       'name.full': '',
-<<<<<<< HEAD
       company: '',
       phone: '',
       zip: '',
@@ -19,8 +18,6 @@
         name: '',
         userCreated: {}
       },
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       userCreated: {}
     },
     url: function() {
@@ -44,10 +41,7 @@
   app.Filter = Backbone.Model.extend({
     defaults: {
       search: '',
-<<<<<<< HEAD
       status: '',
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       sort: '',
       limit: ''
     }

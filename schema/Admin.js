@@ -10,11 +10,7 @@ exports = module.exports = function(app, mongoose) {
       full: { type: String, default: '' },
       first: { type: String, default: '' },
       middle: { type: String, default: '' },
-<<<<<<< HEAD
       last: { type: String, default: '' }
-=======
-      last: { type: String, default: '' },
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     },
     groups: [{ type: String, ref: 'AdminGroup' }],
     permissions: [{
@@ -40,15 +36,7 @@ exports = module.exports = function(app, mongoose) {
     //check admin permissions
     for (var k = 0 ; k < this.permissions.length ; k++) {
       if (this.permissions[k].name === something) {
-<<<<<<< HEAD
         return !!this.permissions[k].permit;
-=======
-        if (this.permissions[k].permit) {
-          return true;
-        }
-
-        return false;
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       }
     }
 

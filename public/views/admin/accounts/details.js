@@ -31,15 +31,11 @@
       errors: [],
       errfor: {},
       first: '',
-<<<<<<< HEAD
       middle: '',
       last: '',
       company: '',
       phone: '',
       zip: ''
-=======
-      last: ''
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     },
     url: function() {
       return '/admin/accounts/'+ app.mainView.model.id +'/';
@@ -77,7 +73,6 @@
     }
   });
 
-<<<<<<< HEAD
   app.Note = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
@@ -127,8 +122,6 @@
   app.StatusCollection = Backbone.Collection.extend({
     model: app.Status
   });
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 
   app.HeaderView = Backbone.View.extend({
     el: '#header',
@@ -160,15 +153,11 @@
       this.model.set({
         _id: app.mainView.model.id,
         first: app.mainView.model.get('name').first,
-<<<<<<< HEAD
         middle: app.mainView.model.get('name').middle,
         last: app.mainView.model.get('name').last,
         company: app.mainView.model.get('company'),
         phone: app.mainView.model.get('phone'),
         zip: app.mainView.model.get('zip')
-=======
-        last: app.mainView.model.get('name').last
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       });
     },
     render: function() {
@@ -183,15 +172,11 @@
     update: function() {
       this.model.save({
         first: this.$el.find('[name="first"]').val(),
-<<<<<<< HEAD
         middle: this.$el.find('[name="middle"]').val(),
         last: this.$el.find('[name="last"]').val(),
         company: this.$el.find('[name="company"]').val(),
         phone: this.$el.find('[name="phone"]').val(),
         zip: this.$el.find('[name="zip"]').val()
-=======
-        last: this.$el.find('[name="last"]').val()
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
       });
     }
   });
@@ -281,7 +266,6 @@
     }
   });
 
-<<<<<<< HEAD
   app.NewNoteView = Backbone.View.extend({
     el: '#notes-new',
     template: _.template( $('#tmpl-notes-new').html() ),
@@ -466,8 +450,6 @@
       return this;
     }
   });
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
 
   app.MainView = Backbone.View.extend({
     el: '.page .container',
@@ -479,13 +461,10 @@
       app.detailsView = new app.DetailsView();
       app.deleteView = new app.DeleteView();
       app.loginView = new app.LoginView();
-<<<<<<< HEAD
       app.newNoteView = new app.NewNoteView();
       app.notesCollectionView = new app.NoteCollectionView();
       app.newStatusView = new app.NewStatusView();
       app.statusCollectionView = new app.StatusCollectionView();
-=======
->>>>>>> d8e7b97b87c84f50f2d7db2acecf4bfb0a344446
     }
   });
 
