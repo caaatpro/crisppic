@@ -79,51 +79,6 @@
     }
   });
 
-  app.DetailsView = Backbone.View.extend({
-    el: '#details',
-    template: _.template( $('#tmpl-details').html() ),
-    events: {
-      'click .btn-update': 'update'
-    },
-    initialize: function() {
-      this.model = new app.Details();
-      this.syncUp();
-      this.listenTo(app.mainView.account, 'change', this.syncUp);
-      this.listenTo(this.model, 'sync', this.render);
-      this.render();
-    },
-    syncUp: function() {
-      this.model.set({
-        _id: app.mainView.account.id,
-        first: app.mainView.account.get('name').first,
-        middle: app.mainView.account.get('name').middle,
-        last: app.mainView.account.get('name').last,
-        company: app.mainView.account.get('company'),
-        phone: app.mainView.account.get('phone'),
-        zip: app.mainView.account.get('zip')
-      });
-    },
-    render: function() {
-      this.$el.html(this.template( this.model.attributes ));
-
-      for (var key in this.model.attributes) {
-        if (this.model.attributes.hasOwnProperty(key)) {
-          this.$el.find('[name="'+ key +'"]').val(this.model.attributes[key]);
-        }
-      }
-    },
-    update: function() {
-      this.model.save({
-        first: this.$el.find('[name="first"]').val(),
-        middle: this.$el.find('[name="middle"]').val(),
-        last: this.$el.find('[name="last"]').val(),
-        company: this.$el.find('[name="company"]').val(),
-        phone: this.$el.find('[name="phone"]').val(),
-        zip: this.$el.find('[name="zip"]').val()
-      });
-    }
-  });
-
   app.IdentityView = Backbone.View.extend({
     el: '#identity',
     template: _.template( $('#tmpl-identity').html() ),
@@ -196,7 +151,6 @@
       this.account = new app.Account( JSON.parse( unescape($('#data-account').html()) ) );
       this.user = new app.User( JSON.parse( unescape($('#data-user').html()) ) );
 
-      app.detailsView = new app.DetailsView();
       app.identityView = new app.IdentityView();
       app.passwordView = new app.PasswordView();
     }

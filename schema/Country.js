@@ -1,9 +1,9 @@
 'use strict';
 
 exports = module.exports = function(app, mongoose) {
-    var accountSchema = new mongoose.Schema({
+    var countrySchema = new mongoose.Schema({
         name: { type: String, default: '' }
     });
-    accountSchema.index({ name: 1 });
-    app.db.model('Country', accountSchema);
+    countrySchema.index({ name: 1 });
+    app.db.model('Country', countrySchema);
 };

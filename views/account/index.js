@@ -13,10 +13,9 @@ exports.init = function(req, res){
       var date;
       for (var i = 0; i < accountList.length; i++) {
         if (accountList[i]['date']) {
-          date = new Date(accountList[i]['date']);
-          accountList[i]['date_format'] = date.getDate() + '.' + date.getMonth() + '.' + date.getYear();
+          accountList[i]['dateFormat'] = req.app.utility.dateFormat(accountList[i]['date'], "d mmmm yyyy");
         } else {
-          accountList[i]['date_format'] = "-";
+          accountList[i]['dateFormat'] = "-";
         }
       }
 
@@ -27,8 +26,7 @@ exports.init = function(req, res){
   });
 
   workflow.on('accountInfo', function() {
-    console.log(username);
-    req.app.db.models.User.findOne({'username': username}).populate('roles.account', 'name.full').exec(function(err, account) {
+    req.app.db.models.User.findOne({'username': username}).populate('roles.account').exec(function(err, account) {
       if (err || account == null) {
         res.status(404);
         if (req.xhr) {
@@ -38,6 +36,9 @@ exports.init = function(req, res){
           return res.render('http/404');
         }
       }
+
+
+      account['dateFormat'] = req.app.utility.dateFormat(account['timeCreated'], "d mmmm yyyy");
 
       sigma['account'] = account;
 

@@ -1,130 +1,109 @@
 extends ../../../layouts/default
 
 block head
-  title Account Settings
-
-block feet
-  script(src='/views/account/settings/index.js?#{cacheBreaker}')
+  title Настройки профиля
 
 block body
-  div.row
-    div.col-xs-12
+  section.vbox
+    section.scrollable.padder
       div.page-header
-        h1 Account Settings
-  div.row
-    div.col-sm-9
-      div#details
-      div#identity
-      div#password
-    div.col-sm-3
+        h3.m-b-none Настройки профиля
+
+      div.row
+        div.col-sm-12
+          legend Фото
+
+          .row
+            div.col-sm-2
+              img.img-rounded(src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTE2MjAyYmY2MSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1MTYyMDJiZjYxIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=', alt='...')
+
+            div.col-sm-5
+              button.btn.btn-secondary Загрузить
+
       if oauthTwitter || oauthFacebook || oauthGoogle
-        legend Social Connections
-        if oauthMessage
-          div.alerts
-            div.alert.alert-info.alert-dismissable
-              button.close(type='button', data-dismiss='alert') &times;
-              |#{oauthMessage}
-        if oauthTwitter
-          if oauthTwitterActive
-            a.btn.btn-block.btn-danger(href='/account/settings/twitter/disconnect/')
-              i.fa.fa-twitter.fa-lg
-              |  Disconnect Twitter
-          else
-            a.btn.btn-block.btn-default(href='/account/settings/twitter/')
-              i.fa.fa-twitter.fa-lg
-              |  Connect Twitter
-        if oauthFacebook
-          if oauthFacebookActive
-            a.btn.btn-block.btn-danger(href='/account/settings/facebook/disconnect/')
-              i.fa.fa-facebook-square.fa-lg
-              |  Disconnect Facebook
-          else
-            a.btn.btn-block.btn-default(href='/account/settings/facebook/')
-              i.fa.fa-facebook-square.fa-lg
-              |  Connect Facebook
-        if oauthGoogle
-          if oauthGoogleActive
-            a.btn.btn-block.btn-danger(href='/account/settings/google/disconnect/')
-              i.fa.fa-google-plus-square.fa-lg
-              |  Disconnect Google
-          else
-            a.btn.btn-block.btn-default(href='/account/settings/google/')
-              i.fa.fa-google-plus-square.fa-lg
-              |  Connect Google
+        div.row.m-b-sm
+          div.col-sm-12
+              legend Привязка к соцсетям
+              if oauthMessage
+                div.alerts
+                  div.alert.alert-info.alert-dismissable
+                    button.close(type='button', data-dismiss='alert') &times;
+                    | #{oauthMessage}
+              div.row
+                if oauthTwitter
+                  div.col-sm-4
+                    if oauthTwitterActive
+                      a.btn.btn-block.btn-danger(href='/account/settings/twitter/disconnect/')
+                        i.fa.fa-twitter.fa-lg
+                        |  Отвязать Twitter
+                    else
+                      a.btn.btn-block.btn-default(href='/account/settings/twitter/')
+                        i.fa.fa-twitter.fa-lg
+                        |  Привезать Twitter
+                if oauthFacebook
+                  div.col-sm-4
+                    if oauthFacebookActive
+                      a.btn.btn-block.btn-danger(href='/account/settings/facebook/disconnect/')
+                        i.fa.fa-facebook-square.fa-lg
+                        |  Отвязать Facebook
+                    else
+                      a.btn.btn-block.btn-default(href='/account/settings/facebook/')
+                        i.fa.fa-facebook-square.fa-lg
+                        |  Привезать Facebook
+                if oauthGoogle
+                  div.col-sm-4
+                    if oauthGoogleActive
+                      a.btn.btn-block.btn-danger(href='/account/settings/google/disconnect/')
+                        i.fa.fa-google-plus-square.fa-lg
+                        |  Отвязать Google
+                    else
+                      a.btn.btn-block.btn-default(href='/account/settings/google/')
+                        i.fa.fa-google-plus-square.fa-lg
+                        |  Привезать Google
 
-  script(type='text/template', id='tmpl-details')
-    fieldset
-      legend Contact Info
-      div.alerts
-        |<% _.each(errors, function(err) { %>
-        div.alert.alert-danger.alert-dismissable
-          |<%- err %>
-        |<% }); %>
-        |<% if (success) { %>
-        div.alert.alert-info.alert-dismissable
-          button.close(type='button', data-dismiss='alert') &times;
-          | Changes have been saved.
-        |<% } %>
-      div.form-group(class!='<%- errfor.first ? "has-error" : "" %>')
-        label First Name:
-        input.form-control(type='text', name='first', value!='<%- first %>')
-        span.help-block <%- errfor.first %>
-      div.form-group(class!='<%- errfor.last ? "has-error" : "" %>')
-        label Last Name:
-        input.form-control(type='text', name='last', value!='<%- last %>')
-        span.help-block <%- errfor['last'] %>
-      div.form-group
-        button.btn.btn-primary.btn-update(type='button') Update
+      div.row
+        div.col-sm-12
+          legend Основные
 
-  script(type='text/template', id='tmpl-identity')
-    fieldset
-      legend Identity
-      div.alerts
-        |<% _.each(errors, function(err) { %>
-        div.alert.alert-danger.alert-dismissable
-          button.close(type='button', data-dismiss='alert') &times;
-          |<%- err %>
-        |<% }); %>
-        |<% if (success) { %>
-        div.alert.alert-info.alert-dismissable
-          button.close(type='button', data-dismiss='alert') &times;
-          | Changes have been saved.
-        |<% } %>
-      div.form-group(class!='<%- errfor.username ? "has-error" : "" %>')
-        label Username:
-        input.form-control(type='text', name='username', value!='<%= username %>')
-        span.help-block <%- errfor.username %>
-      div.form-group(class!='<%- errfor.email ? "has-error" : "" %>')
-        label Email:
-        input.form-control(type='text', name='email', value!='<%= email %>')
-        span.help-block <%- errfor.email %>
-      div.form-group
-        button.btn.btn-primary.btn-update(type='button') Update
+          .form-group.row
+            label.col-sm-2.form-control-label(for='inputEmail3') Имя пользователя
+            .col-sm-5
+              input#inputEmail3.form-control(type='text', placeholder='Имя пользователя')
 
-  script(type='text/template', id='tmpl-password')
-    fieldset
-      legend Set Password
-      div.alerts
-        |<% _.each(errors, function(err) { %>
-        div.alert.alert-danger.alert-dismissable
-          button.close(type='button', data-dismiss='alert') &times;
-          |<%- err %>
-        |<% }); %>
-      |<% if (success) { %>
-      div.alert.alert-info.alert-dismissable
-        button.close(type='button', data-dismiss='alert') &times;
-        | A new password has been set.
-      |<% } %>
-      div.form-group(class!='<%- errfor.newPassword ? "has-error" : "" %>')
-        label New Password:
-        input.form-control(type='password', name='newPassword', value!='<%= newPassword %>')
-        span.help-block <%- errfor.newPassword %>
-      div.form-group(class!='<%- errfor.confirm ? "has-error" : "" %>')
-        label Confirm Password:
-        input.form-control(type='password', name='confirm', value!='<%= confirm %>')
-        span.help-block <%- errfor.confirm %>
-      div.form-group
-        button.btn.btn-primary.btn-password(type='button') Set Password
+          .form-group.row
+            label.col-sm-2.form-control-label(for='inputEmail3') Email
+            .col-sm-5
+              input.form-control(type='email', placeholder='Email')
 
-  script(type='text/template', id='data-account') !{data.account}
-  script(type='text/template', id='data-user') !{data.user}
+          .form-group.row
+            label.col-sm-2 Пол
+            .col-sm-5
+              .radio
+                label
+                  input#gridRadios1(type='radio', name='gridRadios', value='option1', checked='')
+                  | Мужской
+              .radio
+                label
+                  input#gridRadios2(type='radio', name='gridRadios', value='option2')
+                  | Женский
+
+          .form-group.row
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-secondary Сохранить
+
+      div.row
+        div.col-sm-12
+          legend Пароль
+
+          .form-group.row
+            label.col-sm-2.form-control-label(for='inputEmail3') Старый пароль
+            .col-sm-5
+              input.form-control(type='email', placeholder='Пароль')
+          .form-group.row
+            label.col-sm-2.form-control-label(for='inputEmail3') Новый пароль
+            .col-sm-5
+              input.form-control(type='email', placeholder='Пароль')
+
+          .form-group.row
+            .col-sm-offset-2.col-sm-10
+              button.btn.btn-secondary Сохранить

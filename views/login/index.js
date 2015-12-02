@@ -15,10 +15,10 @@ exports.init = function(req, res){
   }
   else {
     res.render('login/index', {
-      oauthMessage: '',
       oauthTwitter: !!req.app.config.oauth.twitter.key,
       oauthFacebook: !!req.app.config.oauth.facebook.key,
-      oauthGoogle: !!req.app.config.oauth.google.key
+      oauthGoogle: !!req.app.config.oauth.google.key,
+      username: ''
     });
   }
 };
@@ -71,7 +71,7 @@ exports.login = function(req, res){
       }
 
       if (results.ip >= req.app.config.loginAttempts.forIp || results.ipUser >= req.app.config.loginAttempts.forIpAndUser) {
-        workflow.outcome.errors.push('You\'ve reached the maximum number of login attempts. Please try again later.');
+        workflow.outcome.errors.push('Вы достигли максимального количества попыток входа . Пожалуйста, повторите попытку позже.');
         return workflow.emit('response');
       }
       else {
@@ -95,7 +95,7 @@ exports.login = function(req, res){
             return workflow.emit('exception', err);
           }
 
-          workflow.outcome.errors.push('Username and password combination not found or your account is inactive.');
+          workflow.outcome.errors.push('Имя пользователя и пароль сочетание не найден или ваш аккаунт неактивен.');
           return workflow.emit('response');
         });
       }
@@ -114,6 +114,7 @@ exports.login = function(req, res){
   workflow.emit('validate');
 };
 
+// Авторизация через Twitter
 exports.loginTwitter = function(req, res, next){
   req._passport.instance.authenticate('twitter', function(err, user, info) {
     if (!info || !info.profile) {
@@ -126,11 +127,15 @@ exports.loginTwitter = function(req, res, next){
       }
 
       if (!user) {
-        res.render('login/index', {
-          oauthMessage: 'No users found linked to your Twitter account. You may need to create an account first.',
-          oauthTwitter: !!req.app.config.oauth.twitter.key,
-          oauthFacebook: !!req.app.config.oauth.facebook.key,
-          oauthGoogle: !!req.app.config.oauth.google.key
+        req.app.db.models.User.findOne({ 'twitter.id': info.profile.id }, function(err, user) {
+          if (err) {
+            return next(err);
+          }
+
+          if (!user) {
+            req.session.socialProfile = info.profile;
+            res.render('signup/social', { email: '' });
+          }
         });
       }
       else {
@@ -146,6 +151,7 @@ exports.loginTwitter = function(req, res, next){
   })(req, res, next);
 };
 
+// Авторизация через Facebook
 exports.loginFacebook = function(req, res, next){
   req._passport.instance.authenticate('facebook', { callbackURL: '/login/facebook/callback/' }, function(err, user, info) {
     if (!info || !info.profile) {
@@ -158,12 +164,13 @@ exports.loginFacebook = function(req, res, next){
       }
 
       if (!user) {
-        res.render('login/index', {
-          oauthMessage: 'No users found linked to your Facebook account. You may need to create an account first.',
-          oauthTwitter: !!req.app.config.oauth.twitter.key,
-          oauthFacebook: !!req.app.config.oauth.facebook.key,
-          oauthGoogle: !!req.app.config.oauth.google.key
-        });
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          req.session.socialProfile = info.profile;
+          res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
+        }
       }
       else {
         req.login(user, function(err) {
@@ -178,6 +185,7 @@ exports.loginFacebook = function(req, res, next){
   })(req, res, next);
 };
 
+// Авторизация через Google
 exports.loginGoogle = function(req, res, next){
   req._passport.instance.authenticate('google', { callbackURL: '/login/google/callback/' }, function(err, user, info) {
     if (!info || !info.profile) {
@@ -189,15 +197,16 @@ exports.loginGoogle = function(req, res, next){
         return next(err);
       }
 
+      // No users found linked to your Google account
       if (!user) {
-        res.render('login/index', {
-          oauthMessage: 'No users found linked to your Google account. You may need to create an account first.',
-          oauthTwitter: !!req.app.config.oauth.twitter.key,
-          oauthFacebook: !!req.app.config.oauth.facebook.key,
-          oauthGoogle: !!req.app.config.oauth.google.key
-        });
-      }
-      else {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          req.session.socialProfile = info.profile;
+          res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
+        }
+      } else {
         req.login(user, function(err) {
           if (err) {
             return next(err);

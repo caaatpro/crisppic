@@ -16,6 +16,10 @@ exports = module.exports = function(app, mongoose) {
     twitter: {},
     facebook: {},
     google: {},
+    total: {
+      views: { type: Number, default: 0 },
+      wishlist: { type: Number, default: 0 }
+    },
     search: [String]
   });
   userSchema.methods.canPlayRoleOf = function(role) {
@@ -24,8 +28,6 @@ exports = module.exports = function(app, mongoose) {
     }
 
     return !!(role === "account" && this.roles.account);
-
-
   };
   userSchema.methods.defaultReturnUrl = function() {
     var returnUrl = '/';
@@ -65,6 +67,5 @@ exports = module.exports = function(app, mongoose) {
   userSchema.index({ 'facebook.id': 1 });
   userSchema.index({ 'google.id': 1 });
   userSchema.index({ search: 1 });
-  userSchema.set('autoIndex', (app.get('env') === 'development'));
   app.db.model('User', userSchema);
 };

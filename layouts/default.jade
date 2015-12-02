@@ -62,33 +62,52 @@ html.app
                   nav.nav-primary.hidden-xs
                     ul.nav.nav-main(data-ride='collapse')
                       li
-                        a.auto(href='/movies/')
-                          i.i.i-statistics.icon
-                          span.font-bold Фильмы?
-                      li
                         a.auto(href='/account/'+user.username)
                           i.i.i-statistics.icon
                           span.font-bold Профиль
                       li
-                        a.auto(href='/account/')
+                        a.auto(href='/account/'+user.username+'/views/')
                           i.i.i-statistics.icon
                           span.font-bold Посмотренные
                       li
-                        a.auto(href='/account/')
+                        a.auto(href='/account/' + user.username + '/wishlist/')
                           i.i.i-statistics.icon
                           span.font-bold Буду смотреть
                       li
+                        a.auto(href='/account/'+user.username+'/charts/actors/')
+                          i.i.i-statistics.icon
+                          span.font-bold Чарт актёров
+                      li
+                        a.auto(href='/account/'+user.username+'/friends/')
+                          i.i.i-statistics.icon
+                          span.font-bold Друзья (те за кем наблюдаю)
+                      li
+                        a.auto(href='/account/'+user.username+'/rewards/')
+                          i.i.i-statistics.icon
+                          span.font-bold Нагрыды
+
+                      li
+                        span.font-bold В подвал
+                      li
+                        a.auto(href='/account/'+user.username+'/charts/directors/')
+                          i.i.i-statistics.icon
+                          span.font-bold Чарт режисёров
+                      li
                         a.auto(href='/about/')
                           i.i.i-statistics.icon
-                          span.font-bold About
+                          span.font-bold О сайте
                       li
-                        a.auto(href='/')
+                        a.auto(href='/about/contact/')
                           i.i.i-statistics.icon
-                          span.font-bold Home
+                          span.font-bold Контакты
                       li
-                        a.auto(href='/contact/')
+                        a.auto(href='/about/faq/')
                           i.i.i-statistics.icon
-                          span.font-bold Contact
+                          span.font-bold FAQ
+                      li
+                        a.auto(href='/pro/')
+                          i.i.i-statistics.icon
+                          span.font-bold PRO аккаунт
 
                   // / nav
               footer.footer.hidden-xs.no-padder.text-center-nav-xs
@@ -98,16 +117,6 @@ html.app
           // /.aside
           section#content
             block body
-              section.wrapper
-                .m-b
-                  span.h3.font-thin
-                    i.i.i-arrow-left3
-                    |  Boxed Layout
-                section.panel.panel-default
-                  header.panel-heading
-                    | GDP per capita average annual growth rate
-                  #growthrate.table-responsive
-              a.hide.nav-off-screen-block(href='#', data-toggle='class:nav-off-screen', data-target='#nav')
 
     script(src='#{hostUrl}js/jquery.js?#{cacheBreaker}')
     script(src='#{hostUrl}js/underscore.js?#{cacheBreaker}')

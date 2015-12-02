@@ -8,11 +8,6 @@ exports = module.exports = function(app, mongoose) {
     },
     isVerified: { type: String, default: '' },
     verificationToken: { type: String, default: '' },
-    name: {
-      first: { type: String, default: '' },
-      last: { type: String, default: '' },
-      full: { type: String, default: '' }
-    },
     userCreated: {
       id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       name: { type: String, default: '' },
@@ -23,6 +18,5 @@ exports = module.exports = function(app, mongoose) {
   accountSchema.plugin(require('./plugins/pagedFind'));
   accountSchema.index({ user: 1 });
   accountSchema.index({ search: 1 });
-  accountSchema.set('autoIndex', (app.get('env') === 'development'));
   app.db.model('Account', accountSchema);
 };

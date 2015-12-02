@@ -6,10 +6,11 @@ exports.init = function(req, res){
   }
   else {
     res.render('signup/index', {
-      oauthMessage: '',
       oauthTwitter: !!req.app.config.oauth.twitter.key,
       oauthFacebook: !!req.app.config.oauth.facebook.key,
-      oauthGoogle: !!req.app.config.oauth.google.key
+      oauthGoogle: !!req.app.config.oauth.google.key,
+      username: '',
+      email: ''
     });
   }
 };
@@ -17,6 +18,7 @@ exports.init = function(req, res){
 exports.signup = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
 
+  // валидация полей
   workflow.on('validate', function() {
     if (!req.body.username) {
       workflow.outcome.errfor.username = 'required';
@@ -43,6 +45,7 @@ exports.signup = function(req, res){
     workflow.emit('duplicateUsernameCheck');
   });
 
+  // проверка имени пользователя на совпадения
   workflow.on('duplicateUsernameCheck', function() {
     req.app.db.models.User.findOne({ username: req.body.username }, function(err, user) {
       if (err) {
@@ -58,6 +61,7 @@ exports.signup = function(req, res){
     });
   });
 
+  // проверка эмейла на совпадения
   workflow.on('duplicateEmailCheck', function() {
     req.app.db.models.User.findOne({ email: req.body.email.toLowerCase() }, function(err, user) {
       if (err) {
@@ -73,6 +77,7 @@ exports.signup = function(req, res){
     });
   });
 
+  // создание пользователя
   workflow.on('createUser', function() {
     req.app.db.models.User.encryptPassword(req.body.password, function(err, hash) {
       if (err) {
@@ -100,6 +105,7 @@ exports.signup = function(req, res){
     });
   });
 
+  // создание аккаунта
   workflow.on('createAccount', function() {
     var fieldsToSet = {
       isVerified: req.app.config.requireAccountVerification ? 'no' : 'yes',
@@ -130,6 +136,7 @@ exports.signup = function(req, res){
     });
   });
 
+  // отправка приветсвенного эмейла
   workflow.on('sendWelcomeEmail', function() {
     req.app.utility.sendmail(req, res, {
       from: req.app.config.smtp.from.name +' <'+ req.app.config.smtp.from.address +'>',
@@ -153,6 +160,7 @@ exports.signup = function(req, res){
     });
   });
 
+  // авторизация пользователя
   workflow.on('logUserIn', function() {
     req._passport.instance.authenticate('local', function(err, user) {
       if (err) {
@@ -179,86 +187,7 @@ exports.signup = function(req, res){
   workflow.emit('validate');
 };
 
-exports.signupTwitter = function(req, res, next) {
-  req._passport.instance.authenticate('twitter', function(err, user, info) {
-    if (!info || !info.profile) {
-      return res.redirect('/signup/');
-    }
-
-    req.app.db.models.User.findOne({ 'twitter.id': info.profile.id }, function(err, user) {
-      if (err) {
-        return next(err);
-      }
-
-      if (!user) {
-        req.session.socialProfile = info.profile;
-        res.render('signup/social', { email: '' });
-      }
-      else {
-        res.render('signup/index', {
-          oauthMessage: 'We found a user linked to your Twitter account.',
-          oauthTwitter: !!req.app.config.oauth.twitter.key,
-          oauthFacebook: !!req.app.config.oauth.facebook.key,
-          oauthGoogle: !!req.app.config.oauth.google.key
-        });
-      }
-    });
-  })(req, res, next);
-};
-
-exports.signupFacebook = function(req, res, next) {
-  req._passport.instance.authenticate('facebook', { callbackURL: '/signup/facebook/callback/' }, function(err, user, info) {
-    if (!info || !info.profile) {
-      return res.redirect('/signup/');
-    }
-
-    req.app.db.models.User.findOne({ 'facebook.id': info.profile.id }, function(err, user) {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        req.session.socialProfile = info.profile;
-        res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
-      }
-      else {
-        res.render('signup/index', {
-          oauthMessage: 'We found a user linked to your Facebook account.',
-          oauthTwitter: !!req.app.config.oauth.twitter.key,
-          oauthFacebook: !!req.app.config.oauth.facebook.key,
-          oauthGoogle: !!req.app.config.oauth.google.key
-        });
-      }
-    });
-  })(req, res, next);
-};
-
-exports.signupGoogle = function(req, res, next) {
-  req._passport.instance.authenticate('google', { callbackURL: '/signup/google/callback/' }, function(err, user, info) {
-    if (!info || !info.profile) {
-      return res.redirect('/signup/');
-    }
-
-    req.app.db.models.User.findOne({ 'google.id': info.profile.id }, function(err, user) {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        req.session.socialProfile = info.profile;
-        res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
-      }
-      else {
-        res.render('signup/index', {
-          oauthMessage: 'We found a user linked to your Google account.',
-          oauthTwitter: !!req.app.config.oauth.twitter.key,
-          oauthFacebook: !!req.app.config.oauth.facebook.key,
-          oauthGoogle: !!req.app.config.oauth.google.key
-        });
-      }
-    });
-  })(req, res, next);
-};
-
-
+// ввод почты при регистрации через социальные сети
 exports.signupSocial = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
 
@@ -291,9 +220,6 @@ exports.signupSocial = function(req, res){
       if (user) {
         workflow.username = workflow.username + req.session.socialProfile.id;
       }
-      //else {
-      //  workflow.username = workflow.username;
-      //}
 
       workflow.emit('duplicateEmailCheck');
     });
@@ -341,9 +267,6 @@ exports.signupSocial = function(req, res){
     var nameParts = displayName.split(' ');
     var fieldsToSet = {
       isVerified: 'yes',
-      'name.first': nameParts[0],
-      'name.last': nameParts[1] || '',
-      'name.full': displayName,
       user: {
         id: workflow.user._id,
         name: workflow.user.username

@@ -12,7 +12,8 @@ var config = require('./config'),
     passport = require('passport'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
-    csrf = require('csurf');
+    csrf = require('csurf'),
+    dateFormat = require('dateformat');
 
 //create express app
 var app = express();
@@ -73,6 +74,7 @@ app.locals.copyrightYear = new Date().getFullYear();
 app.locals.copyrightName = 'Crisppic';
 app.locals.cacheBreaker = 'br34k-01';
 app.locals.hostUrl = 'http://crisppic.com/';
+app.locals.rootPath = '/home/puh/www/crisppic.com/';
 
 //setup passport
 require('./passport')(app, passport);
@@ -88,6 +90,7 @@ app.utility = {};
 app.utility.sendmail = require('./util/sendmail');
 app.utility.slugify = require('./util/slugify');
 app.utility.workflow = require('./util/workflow');
+app.utility.dateFormat = dateFormat;
 
 //listen up
 app.server.listen(app.config.port, function(){

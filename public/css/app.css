@@ -2592,31 +2592,8 @@ fieldset[disabled] .btn-dark.active {
   background-color: #ffc017 !important;
 }
 .bg-danger {
-  background-color: #e33244;
+  background-color: #E86947;
   color: #fce5e8;
-}
-.bg-danger.lt,
-.bg-danger .lt {
-  background-color: #e34b5b;
-}
-.bg-danger.lter,
-.bg-danger .lter {
-  background-color: #e56371;
-}
-.bg-danger.dk,
-.bg-danger .dk {
-  background-color: #e01b2f;
-}
-.bg-danger.dker,
-.bg-danger .dker {
-  background-color: #cc1628;
-}
-.bg-danger.bg,
-.bg-danger .bg {
-  background-color: #e33244;
-}
-.bg-danger-ltest {
-  background-color: #fbedec;
 }
 .bg-danger a {
   color: #ffffff;

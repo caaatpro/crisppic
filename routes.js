@@ -45,15 +45,7 @@ exports = module.exports = function(app, passport) {
   //sign up
   app.get('/signup/', require('./views/signup/index').init);
   app.post('/signup/', require('./views/signup/index').signup);
-
-  //social sign up
   app.post('/signup/social/', require('./views/signup/index').signupSocial);
-  app.get('/signup/twitter/', passport.authenticate('twitter', { callbackURL: '/signup/twitter/callback/' }));
-  app.get('/signup/twitter/callback/', require('./views/signup/index').signupTwitter);
-  app.get('/signup/facebook/', passport.authenticate('facebook', { callbackURL: '/signup/facebook/callback/', scope: ['email'] }));
-  app.get('/signup/facebook/callback/', require('./views/signup/index').signupFacebook);
-  app.get('/signup/google/', passport.authenticate('google', { callbackURL: '/signup/google/callback/', scope: ['profile email'] }));
-  app.get('/signup/google/callback/', require('./views/signup/index').signupGoogle);
 
   //login/out
   app.get('/login/', require('./views/login/index').init);
@@ -76,7 +68,6 @@ exports = module.exports = function(app, passport) {
   //account
   app.all('/account*', ensureAuthenticated);
   app.all('/account*', ensureAccount);
-  app.get('/account/*', require('./views/account/index').init);
 
   //account > verification
   app.get('/account/verification/', require('./views/account/verification/index').init);
@@ -85,7 +76,6 @@ exports = module.exports = function(app, passport) {
 
   //account > settings
   app.get('/account/settings/', require('./views/account/settings/index').init);
-  app.put('/account/settings/', require('./views/account/settings/index').update);
   app.put('/account/settings/identity/', require('./views/account/settings/index').identity);
   app.put('/account/settings/password/', require('./views/account/settings/index').password);
 
@@ -99,6 +89,8 @@ exports = module.exports = function(app, passport) {
   app.get('/account/settings/google/', passport.authenticate('google', { callbackURL: '/account/settings/google/callback/', scope: ['profile email'] }));
   app.get('/account/settings/google/callback/', require('./views/account/settings/index').connectGoogle);
   app.get('/account/settings/google/disconnect/', require('./views/account/settings/index').disconnectGoogle);
+
+  app.get('/account/*', require('./views/account/index').init);
 
   //admin
   app.all('/admin*', ensureAuthenticated);

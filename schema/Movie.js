@@ -13,7 +13,7 @@ exports = module.exports = function(app, mongoose) {
         year: Number,
         date: Date,
         desc: String,
-        kinomania_id: Number,
+        imdbId: Number,
         sid: Number,
         search: String
     });
