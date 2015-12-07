@@ -5,7 +5,7 @@ exports.init = function(req, res, next){
   var sigma = {};
 
   var url = req.url.split('/');
-  var sid = parseInt(url[2]);
+  var sID = parseInt(url[2]);
   var movieId;
 
   workflow.on('movieUserList', function() {
@@ -14,9 +14,9 @@ exports.init = function(req, res, next){
       for (var i = 0; i < userList.length; i++) {
         if (userList[i]['date']) {
           date = new Date(userList[i]['date']);
-          userList[i]['date_format'] = date.getDate() + '.' + date.getMonth() + '.' + date.getYear();
+          userList[i]['dateF'] = req.app.utility.dateFormat(movie['date'], "d mmmm yyyy");
         } else {
-          userList[i]['date_format'] = "-";
+          userList[i]['dateF'] = "Не указана";
         }
       }
 
@@ -28,7 +28,7 @@ exports.init = function(req, res, next){
 
   // Получение информации о фильме
   workflow.on('movieGetMovieInfo', function() {
-    req.app.db.models.Movie.findOne({ 'sid': sid }).populate('genre').exec(function(err, movie) {
+    req.app.db.models.Movie.findOne({ 'sID': sID }).populate('genre').populate('country').populate('actors').populate('director').exec(function(err, movie) {
       if (err || movie == null) {
         res.status(404);
         if (req.xhr) {
@@ -39,8 +39,25 @@ exports.init = function(req, res, next){
         }
       }
 
-      var date = new Date(movie['date']);
-      movie['date_format'] = date.getDate() + '.' + date.getMonth() + '.' + date.getYear();
+      if (movie['title']['russian'] == '') {
+        movie['title']['russian'] = movie['title']['original'];
+        movie['title']['original'] = '';
+      }
+
+      if (movie['poster'] == null) {
+        movie['poster'] = '/images/no-poster.jpg';
+      }
+
+      if (movie['released'] != null) {
+        movie['dateF'] = req.app.utility.dateFormat(movie['released'], "d mmmm yyyy");
+      } else {
+        movie['dateF'] = '-';
+      }
+
+      if (movie['year'] == null) {
+        movie['year'] = '-';
+      }
+
       sigma['item'] = movie;
 
       movieId = movie['_id'];
@@ -48,7 +65,7 @@ exports.init = function(req, res, next){
     });
   });
 
-  if (isNaN(sid)) {
+  if (isNaN(sID)) {
     res.status(404);
     if (req.xhr) {
       res.send({ error: 'Resource not found.' });
@@ -66,13 +83,13 @@ exports.AddView = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
 
   var url = req.url.split('/');
-  var sid = parseInt(url[2]);
+  var sID = parseInt(url[2]);
 
   var movieId;
 
   // Получение информации о фильме
   workflow.on('movieGetMovieInfo', function() {
-    req.app.db.models.Movie.findOne({ 'sid': sid }).populate('genre').exec(function(err, movie) {
+    req.app.db.models.Movie.findOne({ 'sID': sID }).populate('genre').exec(function(err, movie) {
       if (err || movie == null) {
         workflow.outcome.errors.push('Resource not found.');
         return workflow.emit('response');
@@ -108,7 +125,7 @@ exports.AddView = function(req, res){
     });
   });
 
-  if (isNaN(sid)) {
+  if (isNaN(sID)) {
     workflow.outcome.errors.push('Resource not found.');
     return workflow.emit('response');
   } else {

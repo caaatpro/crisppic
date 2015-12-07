@@ -21,16 +21,19 @@ block body
               tr
                 th Русское название/Название
                 th Год
-                th Просмотры
+                th sID
             tbody
               for item in items
                 tr
                   td
-                    a(href='/movie/'+item['sid']+'/')=item['title']['russian']
-                    br
-                    =item['title']['original']
+                    if item['title']['russian'] == ''
+                      a(href='/movie/'+item['sID']+'/')=item['title']['original']
+                    else
+                      a(href='/movie/' + item['sID'] + '/')=item['title']['russian']
+                      br
+                      =item['title']['original']
                   td= item['year']
-                  td Просмотр
+                  td= item['sID']
 
       nav.text-center
         ul.pagination

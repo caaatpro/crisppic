@@ -7,9 +7,8 @@ exports.init = function(req, res){
   var url = req.url.split('/');
   var username = url[2];
 
-
   workflow.on('movieUserList', function() {
-    req.app.db.models.UserMovie.find({ 'userId': sigma['account']['_id'] }).limit(10).populate('movieId').exec(function(err, accountList) {
+    req.app.db.models.UserMovie.find({ 'userId': sigma['account']['_id'] }).limit(1000).populate('movieId').exec(function(err, accountList) {
       var date;
       for (var i = 0; i < accountList.length; i++) {
         if (accountList[i]['date']) {

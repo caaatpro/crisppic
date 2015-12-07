@@ -7,10 +7,6 @@ html.app
     meta(name='description', content='app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav')
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
     link(rel='stylesheet', href='#{hostUrl}css/bootstrap.css?#{cacheBreaker}', type='text/css')
-    link(rel='stylesheet', href='#{hostUrl}css/animate.css?#{cacheBreaker}', type='text/css')
-    link(rel='stylesheet', href='#{hostUrl}css/font-awesome.css?#{cacheBreaker}', type='text/css')
-    link(rel='stylesheet', href='#{hostUrl}css/icon.css?#{cacheBreaker}', type='text/css')
-    link(rel='stylesheet', href='#{hostUrl}css/font.css?#{cacheBreaker}', type='text/css')
     link(rel='stylesheet', href='#{hostUrl}css/app.css?#{cacheBreaker}', type='text/css')
     block neck
   body.container
@@ -44,6 +40,23 @@ html.app
                   a(href='/account/settings/') Настройки
                 li
                   a(href='/account/'+user.username) Профиль
+                li.divider
+                li
+                  a.auto(href='/about/')
+                    i.i.i-statistics.icon
+                    span.font-bold О сайте
+                li
+                  a.auto(href='/about/contact/')
+                    i.i.i-statistics.icon
+                    span.font-bold Контакты
+                li
+                  a.auto(href='/about/faq/')
+                    i.i.i-statistics.icon
+                    span.font-bold FAQ
+                li
+                  a.auto(href='/pro/')
+                    i.i.i-statistics.icon
+                    span.font-bold PRO аккаунт
                 li.divider
                 li
                   a(href='/logout/') Выйти
@@ -87,27 +100,9 @@ html.app
                           span.font-bold Нагрыды
 
                       li
-                        span.font-bold В подвал
-                      li
                         a.auto(href='/account/'+user.username+'/charts/directors/')
                           i.i.i-statistics.icon
                           span.font-bold Чарт режисёров
-                      li
-                        a.auto(href='/about/')
-                          i.i.i-statistics.icon
-                          span.font-bold О сайте
-                      li
-                        a.auto(href='/about/contact/')
-                          i.i.i-statistics.icon
-                          span.font-bold Контакты
-                      li
-                        a.auto(href='/about/faq/')
-                          i.i.i-statistics.icon
-                          span.font-bold FAQ
-                      li
-                        a.auto(href='/pro/')
-                          i.i.i-statistics.icon
-                          span.font-bold PRO аккаунт
 
                   // / nav
               footer.footer.hidden-xs.no-padder.text-center-nav-xs
@@ -119,8 +114,6 @@ html.app
             block body
 
     script(src='#{hostUrl}js/jquery.js?#{cacheBreaker}')
-    script(src='#{hostUrl}js/underscore.js?#{cacheBreaker}')
-    script(src='#{hostUrl}js/backbone.js?#{cacheBreaker}')
     // Bootstrap
     script(src='#{hostUrl}js/bootstrap.js?#{cacheBreaker}')
     // App

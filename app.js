@@ -13,7 +13,7 @@ var config = require('./config'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
     csrf = require('csurf'),
-    dateFormat = require('dateformat');
+    autoIncrement = require('mongoose-auto-increment');
 
 //create express app
 var app = express();
@@ -30,6 +30,7 @@ app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
 app.db.once('open', function () {
   //and... we have a data store
 });
+autoIncrement.initialize(app.db);
 
 //config data models
 require('./models')(app, mongoose);
@@ -41,7 +42,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //middleware
-app.use(require('morgan')('dev'));
 app.use(require('compression')());
 app.use(require('serve-static')(path.join(__dirname, 'public')));
 app.use(require('method-override')());
@@ -75,6 +75,7 @@ app.locals.copyrightName = 'Crisppic';
 app.locals.cacheBreaker = 'br34k-01';
 app.locals.hostUrl = 'http://crisppic.com/';
 app.locals.rootPath = '/home/puh/www/crisppic.com/';
+app.locals.autoIncrement = autoIncrement;
 
 //setup passport
 require('./passport')(app, passport);
@@ -90,7 +91,9 @@ app.utility = {};
 app.utility.sendmail = require('./util/sendmail');
 app.utility.slugify = require('./util/slugify');
 app.utility.workflow = require('./util/workflow');
-app.utility.dateFormat = dateFormat;
+app.utility.dateFormat = require('dateformat');
+app.utility.imdbparser = require('./util/imdbparser');
+app.utility.parser = require('./util/parser');
 
 //listen up
 app.server.listen(app.config.port, function(){
