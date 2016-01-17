@@ -1,38 +1,80 @@
 'use strict';
 
-exports = module.exports = function(req, res) {
+exports.addViews = function(req, res, next){
   var workflow = req.app.utility.workflow(req, res);
 
+  var sID = parseInt(req.body.sID || ''),
+      date,
+      movie;
 
-  var validateDate = function() {
-    // TODO валидация даты
+  if (isNaN(sID)) {
+    workflow.outcome.errors.push('Resource not found.');
+    return workflow.emit('response');
+  }
+
+  try {
+    date = new Date(req.body.date || '');
+  }
+  catch(e) {
     workflow.outcome.errors.push('Invalid date.');
+    return workflow.emit('response');
+  }
+
+  req.app.db.models.Movie.findOne({ 'sID': sID }).populate('actors').populate('director').exec(function(err, r) {
+    if (err || r == null) {
+      workflow.outcome.errors.push('Resource not found.');
+      return workflow.emit('response');
+    } else {
+      movie = r;
+
+      addViews();
+      userViewsTime();
+      userViewsCount();
+      userActorsCount();
+      userDirectorsCount();
+      movieViewsCount();
+    }
+  });
+
+  var endReturn = function() {
     return workflow.emit('response');
   };
 
+  // добавить запись в просмотры
+  var addViews = function() {
+    var fieldsToSet = {
+      userId: req.user.id,
+      movieId: movie['_id'],
+      date: date,
+      view: true
+    };
 
-  var validateMovie = function() {
-    // TODO проверка существования фильма по sID
-    req.app.db.models.Movie.findOne({ 'sID': sID }).populate('actors').populate('director').exec(function(err, r) {
-      if (err || r == null) {
-        workflow.outcome.errors.push('Resource not found.');
-        return workflow.emit('response');
-      } else {
-
+    req.app.db.models.UserMovie.create(fieldsToSet, function(err) {
+      if (err) {
+        console.log(err);
       }
+      endReturn();
     });
   };
 
-  var addViews = function() {
-    // TODO добавить запись в просмотры
-  };
-
+  // увеличиваем время пользователя
   var userViewsTime = function() {
-    // TODO перечитать время пользователя
+    req.app.db.models.User.findByIdAndUpdate(req.user.id, { $inc: { 'total.time': movie['runtime'] }}, function(err) {
+      if (err) {
+        console.log(err);
+      }
+      endReturn();
+    });
   };
 
+  // увеличиваем просмотры пользователя
   var userViewsCount = function() {
-    // TODO перечитать просмотры пользователя
+    req.app.db.models.User.findByIdAndUpdate(req.user.id, { $inc: { 'total.views': 1 }}, function(err) {
+      if (err) {
+        console.log(err);
+      }
+      endReturn();
+    });
   };
 
   var userActorsCount = function() {
@@ -43,20 +85,22 @@ exports = module.exports = function(req, res) {
     // TODO перечитать режисёров пользователя
   };
 
-  var userWishlistCount = function() {
-    // TODO перечитать хочу пользователя
+  // увеличиваем просмотры фильма
+  var movieViewsCount = function() {
   };
 
-  var movieViewsCount = function() {
-    // TODO перечитать просмотры фильма
-  };
+};
+
+
+exports.addWishlist = function(req, res, next){
+  // TODO добавить запись в хочу посотреть
+
 
   var movieWishlistCount = function() {
     // TODO перечитать хочу фильма
   };
 
-  var addWishlist = function() {
-    // TODO добавить запись в хочу посотреть
+  var userWishlistCount = function() {
+    // TODO перечитать хочу пользователя
   };
-
 };

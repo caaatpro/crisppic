@@ -72,9 +72,9 @@ app.use(function(req, res, next) {
 app.locals.projectName = app.config.projectName;
 app.locals.copyrightYear = new Date().getFullYear();
 app.locals.copyrightName = 'Crisppic';
-app.locals.cacheBreaker = 'br34k-01';
-app.locals.hostUrl = 'http://crisppic.com/';
-app.locals.rootPath = '/home/puh/www/crisppic.com/';
+app.locals.cacheBreaker = '1';
+app.locals.hostUrl = 'http://127.0.0.1:5555/';
+app.locals.rootPath = '/home/app/';
 app.locals.autoIncrement = autoIncrement;
 
 //setup passport

@@ -5,7 +5,9 @@ exports.init = function(req, res){
   var sigma = {};
   var re_imdb = /https?:\/\/(www.)?imdb.com\/title\/(tt\d{7})(.*)/i;
 
-  //return req.app.utility.parser(req, res);
+  // console.log(1);
+  // return req.app.utility.parser(req, res);
+  // console.log(2);
 
   var page = parseInt(req.query.page) || 1;
   var query = req.query.query || '';

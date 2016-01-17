@@ -2,6 +2,10 @@ doctype html
 html.app
   head
     meta(charset='utf-8')
+    link(rel='mask-icon', href='#{hostUrl}icon.svg', color='#E86947')
+    link(rel='shortcut Icon', href='#{hostUrl}icon256.png', type='image/x-icon')
+    link(rel='apple-touch-icon', href='#{hostUrl}icon144.png', sizes='144x144')
+
     block head
       title #{title}
     meta(name='description', content='app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav')
@@ -75,17 +79,13 @@ html.app
                   nav.nav-primary.hidden-xs
                     ul.nav.nav-main(data-ride='collapse')
                       li
-                        a.auto(href='/account/'+user.username)
-                          i.i.i-statistics.icon
-                          span.font-bold Профиль
-                      li
-                        a.auto(href='/account/'+user.username+'/views/')
-                          i.i.i-statistics.icon
-                          span.font-bold Посмотренные
-                      li
                         a.auto(href='/account/' + user.username + '/wishlist/')
                           i.i.i-statistics.icon
                           span.font-bold Буду смотреть
+                      li
+                        a.auto(href='/account/'+user.username+'/charts/directors/')
+                          i.i.i-statistics.icon
+                          span.font-bold Чарт режисёров
                       li
                         a.auto(href='/account/'+user.username+'/charts/actors/')
                           i.i.i-statistics.icon
@@ -94,15 +94,6 @@ html.app
                         a.auto(href='/account/'+user.username+'/friends/')
                           i.i.i-statistics.icon
                           span.font-bold Друзья (те за кем наблюдаю)
-                      li
-                        a.auto(href='/account/'+user.username+'/rewards/')
-                          i.i.i-statistics.icon
-                          span.font-bold Нагрыды
-
-                      li
-                        a.auto(href='/account/'+user.username+'/charts/directors/')
-                          i.i.i-statistics.icon
-                          span.font-bold Чарт режисёров
 
                   // / nav
               footer.footer.hidden-xs.no-padder.text-center-nav-xs

@@ -18,7 +18,7 @@ exports = module.exports = function(req, res) {
       title_ru = "",
       imdbID = "",
 
-      filesPath = "/home/puh/www/crisppic.com/test",
+      filesPath = "/home/puh/www/crisppic.com/m",
 
       files = [],
 
@@ -30,18 +30,28 @@ exports = module.exports = function(req, res) {
     req.app.db.models.Movie.findOne({ 'imdbID': imdbID }).exec(function(err, r) {
       if (r == null) {
         getMovie();
-      } else {
-        //return res.redirect('/movie/'+r['sID']+'/');
       }
     });
   };
 
   var getMovie = function() {
+    console.log(filesPath);
     fs.readdir(filesPath, function(err, items) {
+      var t = 0;
       for (var i=0; i<items.length; i++) {
         if (items[i] == '404') continue;
+        if (items[i] == '0010219') continue;
+        if (items[i] == '1659304') {
+          t = 1;
+          continue;
+        }
 
-        files.push(items[i])
+        if (t == 0) {
+          fs.rename(filesPath+'/'+items[i], filesPath+'/3/'+items[i]);
+          continue;
+        }
+
+        files.push(items[i]);
       }
 
       read();
@@ -77,30 +87,30 @@ exports = module.exports = function(req, res) {
           return false;
         }
 
-        if (poster != null) {
-          if (r['year'] == null) {
-            year = 'NoneYear';
-          } else {
-            year = r['year'];
-          }
-          var dir = 'public/posters/'+year+'/';
-          var path = dir+r['_id']+'.jpg';
-
-          var rr = request(poster);
-          rr.on('response',  function (img) {
-            if (!fs.existsSync(dir)){
-              fs.mkdirSync(dir);
-            }
-            img.pipe(fs.createWriteStream(req.app.locals.rootPath+path));
-            req.app.db.models.Movie.findByIdAndUpdate(r['_id'], {'poster': '/posters/'+year+'/'+r['_id']+'.jpg'}, function (err, r) {
-              read();
-              //return res.redirect('/movie/'+r['sID']+'/');
-            });
-          });
-        } else {
+        //if (poster != null) {
+        //  if (r['year'] == null) {
+        //    year = 'NoneYear';
+        //  } else {
+        //    year = r['year'];
+        //  }
+        //  var dir = 'public/posters/'+year+'/';
+        //  var path = dir+r['_id']+'.jpg';
+        //
+        //  var rr = request(poster);
+        //  rr.on('response',  function (img) {
+        //    if (!fs.existsSync(dir)){
+        //      fs.mkdirSync(dir);
+        //    }
+        //    img.pipe(fs.createWriteStream(req.app.locals.rootPath+path));
+        //    req.app.db.models.Movie.findByIdAndUpdate(r['_id'], {'poster': '/posters/'+year+'/'+r['_id']+'.jpg'}, function (err, r) {
+        //      read();
+        //      //return res.redirect('/movie/'+r['sID']+'/');
+        //    });
+        //  });
+        //} else {
           read();
           console.log(1);
-        }
+        //}
       });
     }
   };
@@ -124,6 +134,8 @@ exports = module.exports = function(req, res) {
       if (err) {
         return console.log(err);
       }
+
+      console.log(files[filesI]);
 
       try {
         var dataJSON = JSON.parse(body);
@@ -151,7 +163,7 @@ exports = module.exports = function(req, res) {
                 return false;
               }
 
-              if (data['Response'] == 'False' || dataJ['imdb_id'] == 'tt1008002') {
+              if (data['Response'] == 'False' || dataJ['imdb_id'] == 'tt1008002' || dataJ['imdb_id'] == 'tt0010219') {
                 console.log(dataJ['imdb_id']);
                 console.log(data['Error']);
                 read();
@@ -166,6 +178,7 @@ exports = module.exports = function(req, res) {
 
                 imdbID = dataJ['imdb_id'];
 
+                console.log(1);
                 console.log(data);
 
                 title = data['Title'];
@@ -229,7 +242,7 @@ exports = module.exports = function(req, res) {
             }
           });
         } else {
-          console.log('Yes');
+          //console.log('Yes');
           read();
         }
       });

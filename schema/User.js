@@ -18,7 +18,8 @@ exports = module.exports = function(app, mongoose) {
     google: {},
     total: {
       views: { type: Number, default: 0 },
-      wishlist: { type: Number, default: 0 }
+      wishlist: { type: Number, default: 0 },
+      time: { type: Number, default: 0 }
     },
     search: [String]
   });

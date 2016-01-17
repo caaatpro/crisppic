@@ -27,13 +27,6 @@
       _.each(response.users, function(user) {
         outcome.push({name: user.username, url: '/admin/users/'+ user._id +'/'});
       });
-
-      if (response.accounts.length) {
-        outcome.push({name: 'Accounts', type: 'header'});
-      }
-
-      _.each(response.accounts, function(account) {
-        outcome.push({name: account.name.full, url: '/admin/accounts/'+ account._id +'/'});
       });
 
       if (response.administrators.length) {
