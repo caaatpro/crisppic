@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "async": "^1.x.x",
-    "backbone": "^1.x.x",
+    "mongoose-auto-increment": "^1.x.x",
+    "dateformat": "^1.x.x",
     "bcrypt": "^0.8.x",
     "body-parser": "^1.x.x",
     "compression": "^1.x.x",
@@ -18,19 +19,16 @@
     "express-session": "^1.x.x",
     "helmet": "^0.9.x",
     "jade": "^1.x.x",
-    "kerberos": "0.0.17",
     "method-override": "^2.x.x",
     "mongodb": "^2.1.0",
     "mongoose": "^4.x.x",
-    "morgan": "^1.x.x",
     "passport": "^0.2.x",
     "passport-facebook": "^2.x.x",
     "passport-google-oauth": "^0.2.x",
     "passport-local": "^1.x.x",
     "passport-oauth": "^1.x.x",
     "passport-twitter": "^1.x.x",
-    "serve-static": "^1.9.x",
-    "underscore": "^1.x.x"
+    "serve-static": "^1.9.x"
   },
   "devDependencies": {},
   "scripts": {
