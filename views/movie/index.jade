@@ -44,32 +44,30 @@ block body
               tr
                 td(width=150) Режиссер:
                 td
-                  for g in item['director']
-                    = g['name']['russian'] + ', '
+                  = item['director_str']
               tr
                 td(width=150) В ролях:
                 td
-                  for g in item['actors']
-                    = g['name']['russian'] + ', '
+                  = item['actors_str']
+
               tr
                 td(width=150) Длительность:
-                td=item['runtime'] + ' мин.'
+                td
+                  =item['runtime_str']
               tr
                 td(width=150) Страны:
                 td
-                  for g in item['country']
-                    = g['name']['russian'] + ', '
+                  = item['country_str']
               tr
                 td(width=150) Жанр:
                 td
-                  for g in item['genre']
-                    = g['name']['russian'] + ', '
+                  = item['genre_str']
 
         div.col-xs-12=item['plot']
 
         div.col-xs-12
 
-          if userList
+          if userList.length
             h3 Ваши просмотры
 
             table.table.table-striped
@@ -84,32 +82,5 @@ block body
           else
             h3 Вы не смотрели этот фильм
 
-        div.col-xs-4
-          h3
-            a(href='#') Оценки
-          p Средняя
-            strong  8,2
-            | /10
-            a(href="views")  (109 пользователей)
-          p Рейтинг IMDb:
-          p Рейтинг Кинопоиск:
-
-        div.col-xs-4
-          h3
-            a(href='#') Просмотры
-          p
-            a(href="views") (
-              strong 152
-              |  пользователя)
-          p
-            | Вы смотрели этот фильм 2 раза
-
-        div.col-xs-4
-          h3
-            a(href='#') Будут смотреть
-          p
-            strong 169
-            |  раз
-            a(href="views")  (15 пользователей)
 
   a.hide.nav-off-screen-block(href='#', data-toggle='class:nav-off-screen', data-target='#nav')

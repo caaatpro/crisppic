@@ -185,22 +185,7 @@ exports.identity = function(req, res){
       return workflow.emit('response');
     }
 
-    workflow.emit('duplicateUsernameCheck');
-  });
-
-  workflow.on('duplicateUsernameCheck', function() {
-    req.app.db.models.User.findOne({ username: req.body.username, _id: { $ne: req.user.id } }, function(err, user) {
-      if (err) {
-        return workflow.emit('exception', err);
-      }
-
-      if (user) {
-        workflow.outcome.errfor.username = 'username already taken';
-        return workflow.emit('response');
-      }
-
-      workflow.emit('duplicateEmailCheck');
-    });
+    workflow.emit('duplicateEmailCheck');
   });
 
   workflow.on('duplicateEmailCheck', function() {
@@ -234,29 +219,8 @@ exports.identity = function(req, res){
         return workflow.emit('exception', err);
       }
 
-      workflow.emit('patchAdmin', user);
-    });
-  });
-
-  workflow.on('patchAdmin', function(user) {
-    if (user.roles.admin) {
-      var fieldsToSet = {
-        user: {
-          id: req.user.id,
-          name: user.username
-        }
-      };
-      req.app.db.models.Admin.findByIdAndUpdate(user.roles.admin, fieldsToSet, function(err) {
-        if (err) {
-          return workflow.emit('exception', err);
-        }
-
-        workflow.emit('patchAccount', user);
-      });
-    }
-    else {
       workflow.emit('patchAccount', user);
-    }
+    });
   });
 
   workflow.on('patchAccount', function(user) {
@@ -281,7 +245,7 @@ exports.identity = function(req, res){
   });
 
   workflow.on('populateRoles', function(user) {
-    user.populate('roles.admin roles.account', 'name.full', function(err, populatedUser) {
+    user.populate('roles.account', 'name.full', function(err, populatedUser) {
       if (err) {
         return workflow.emit('exception', err);
       }
@@ -329,7 +293,7 @@ exports.password = function(req, res){
           return workflow.emit('exception', err);
         }
 
-        user.populate('roles.admin roles.account', 'name.full', function(err) {
+        user.populate('roles.account', 'name.full', function(err) {
           if (err) {
             return workflow.emit('exception', err);
           }

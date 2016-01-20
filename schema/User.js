@@ -6,7 +6,6 @@ exports = module.exports = function(app, mongoose) {
     password: String,
     email: { type: String, unique: true },
     roles: {
-      admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },
       account: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' }
     },
     isActive: String,
@@ -23,22 +22,9 @@ exports = module.exports = function(app, mongoose) {
     },
     search: [String]
   });
-  userSchema.methods.canPlayRoleOf = function(role) {
-    if (role === "admin" && this.roles.admin) {
-      return true;
-    }
 
-    return !!(role === "account" && this.roles.account);
-  };
   userSchema.methods.defaultReturnUrl = function() {
-    var returnUrl = '/';
-    if (this.canPlayRoleOf('account')) {
-      returnUrl = '/account/' + this.username;
-    }
-
-    if (this.canPlayRoleOf('admin')) {
-      returnUrl = '/admin/';
-    }
+    var returnUrl = '/account/' + this.username;
 
     return returnUrl;
   };

@@ -33,6 +33,6 @@ block body
             tbody
               for accountMovie in accountList
                 tr
-                  if (accountMovie['movieId']['title'] != null)
+                  if (accountMovie['movieId'] != null)
                     td=accountMovie['movieId']['title']['russian']+' / '+accountMovie['movieId']['title']['original'] + ' (' + accountMovie['movieId']['year'] + ')'
                     td(width='100')=accountMovie['dateFormat']

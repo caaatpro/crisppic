@@ -14,7 +14,7 @@ exports.init = function(req, res, next){
       for (var i = 0; i < userList.length; i++) {
         if (userList[i]['date']) {
           date = new Date(userList[i]['date']);
-          userList[i]['dateF'] = req.app.utility.dateFormat(movie['date'], "d mmmm yyyy");
+          userList[i]['dateF'] = req.app.utility.dateFormat(userList['date'], "d mmmm yyyy");
         } else {
           userList[i]['dateF'] = "Не указана";
         }
@@ -46,6 +46,45 @@ exports.init = function(req, res, next){
 
       if (movie['poster'] == null) {
         movie['poster'] = '/images/no-poster.jpg';
+      }
+
+      if (movie['runtime'] > 60) {
+        movie['runtime_str'] = (movie['runtime']/60 | 0).toString() + ' ч. ' + (movie['runtime']%60).toString() + ' мин. ('+movie['runtime']+ ' мин.)';
+      } else {
+        movie['runtime_str'] = (movie['runtime']).toString() + ' мин.'
+      }
+
+
+      movie['director_str'] = "";
+      for (var i = 0, t = movie['director'].length-1; i <= t; i++) {
+        movie['director_str'] += movie['director'][i]['name']['russian'];
+        if (i < t) {
+          movie['director_str'] += ', ';
+        }
+      }
+
+      movie['actors_str'] = "";
+      for (var i = 0, t = movie['actors'].length-1; i <= t; i++) {
+        movie['actors_str'] += movie['actors'][i]['name']['russian'];
+        if (i < t) {
+          movie['actors_str'] += ', ';
+        }
+      }
+
+      movie['country_str'] = "";
+      for (var i = 0, t = movie['country'].length-1; i <= t; i++) {
+        movie['country_str'] += movie['country'][i]['name']['russian'];
+        if (i < t) {
+          movie['country_str'] += ', ';
+        }
+      }
+
+      movie['genre_str'] = "";
+      for (var i = 0, t = movie['genre'].length-1; i <= t; i++) {
+        movie['genre_str'] += movie['genre'][i]['name']['russian'];
+        if (i < t) {
+          movie['genre_str'] += ', ';
+        }
       }
 
       if (movie['released'] != null) {

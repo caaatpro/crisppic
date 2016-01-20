@@ -66,25 +66,20 @@ block body
           legend Основные
 
           .form-group.row
-            label.col-sm-2.form-control-label(for='inputEmail3') Имя пользователя
+            label.col-sm-2.form-control-label(for='email') Email
             .col-sm-5
-              input#inputEmail3.form-control(type='text', placeholder='Имя пользователя')
-
-          .form-group.row
-            label.col-sm-2.form-control-label(for='inputEmail3') Email
-            .col-sm-5
-              input.form-control(type='email', placeholder='Email')
+              input.form-control(type='email', id='email' placeholder='Email')
 
           .form-group.row
             label.col-sm-2 Пол
             .col-sm-5
               .radio
                 label
-                  input#gridRadios1(type='radio', name='gridRadios', value='option1', checked='')
+                  input(type='radio', name='sex', value='0', checked='')
                   | Мужской
               .radio
                 label
-                  input#gridRadios2(type='radio', name='gridRadios', value='option2')
+                  input(type='radio', name='sex', value='1')
                   | Женский
 
           .form-group.row
@@ -96,13 +91,9 @@ block body
           legend Пароль
 
           .form-group.row
-            label.col-sm-2.form-control-label(for='inputEmail3') Старый пароль
+            label.col-sm-2.form-control-label(for='password') Новый пароль
             .col-sm-5
-              input.form-control(type='email', placeholder='Пароль')
-          .form-group.row
-            label.col-sm-2.form-control-label(for='inputEmail3') Новый пароль
-            .col-sm-5
-              input.form-control(type='email', placeholder='Пароль')
+              input.form-control(type='password', id='password' placeholder='Пароль')
 
           .form-group.row
             .col-sm-offset-2.col-sm-10

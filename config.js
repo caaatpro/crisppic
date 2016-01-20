@@ -28,8 +28,8 @@ exports.smtp = {
 };
 exports.oauth = {
   twitter: {
-    key: process.env.TWITTER_OAUTH_KEY || '',
-    secret: process.env.TWITTER_OAUTH_SECRET || ''
+    key: process.env.TWITTER_OAUTH_KEY || '1vY0K1bqX0iFFaLfffLasbc57',
+    secret: process.env.TWITTER_OAUTH_SECRET || 'd7nhZaZt6BewDWOmH2wqM4rlVK0y9coiXUcG5bXJCGD33LNk0H'
   },
   facebook: {
     key: process.env.FACEBOOK_OAUTH_KEY || '1515012572125322',
@@ -37,6 +37,6 @@ exports.oauth = {
   },
   google: {
     key: process.env.GOOGLE_OAUTH_KEY || '673575507802-h1p3s5gugi31g4s2mf5mjtsgmn2h12r1.apps.googleusercontent.com',
-    secret: process.env.GOOGLE_OAUTH_SECRET || '8UQCXrRRSNH7mCItDea5YXtP'
+    secret: process.env.GOOGLE_OAUTH_SECRET || 'pXQkWP6WHz9bPuwjQ0kD-BnA'
   }
 };
