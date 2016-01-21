@@ -5,6 +5,7 @@ exports = module.exports = function(app, mongoose) {
     username: { type: String, unique: true },
     password: String,
     email: { type: String, unique: true },
+    sex: { type: Number, default: 0 },
     roles: {
       account: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' }
     },

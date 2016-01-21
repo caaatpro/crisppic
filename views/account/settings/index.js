@@ -15,7 +15,7 @@ var renderSettings = function(req, res, next, oauthMessage) {
   };
 
   var getUserData = function(callback) {
-    req.app.db.models.User.findById(req.user.id, 'username email twitter.id facebook.id google.id').exec(function(err, user) {
+    req.app.db.models.User.findById(req.user.id, 'email sex twitter.id facebook.id google.id').exec(function(err, user) {
       if (err) {
         callback(err, null);
       }
@@ -32,8 +32,8 @@ var renderSettings = function(req, res, next, oauthMessage) {
 
     res.render('account/settings/index', {
       data: {
-        account: escape(JSON.stringify(outcome.account)),
-        user: escape(JSON.stringify(outcome.user))
+        account: outcome.account,
+        user: outcome.user
       },
       oauthMessage: oauthMessage,
       oauthTwitter: !!req.app.config.oauth.twitter.key,
@@ -163,22 +163,15 @@ exports.disconnectGoogle = function(req, res, next){
   });
 };
 
-exports.identity = function(req, res){
+exports.save = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
 
-  workflow.on('validate', function() {
-    if (!req.body.username) {
-      workflow.outcome.errfor.username = 'required';
-    }
-    else if (!/^[a-zA-Z0-9\-\_]+$/.test(req.body.username)) {
-      workflow.outcome.errfor.username = 'only use letters, numbers, \'-\', \'_\'';
-    }
-
+  workflow.on('validateEmail', function() {
     if (!req.body.email) {
-      workflow.outcome.errfor.email = 'required';
+      workflow.outcome.errfor.email = 'Email не указан';
     }
     else if (!/^[a-zA-Z0-9\-\_\.\+]+@[a-zA-Z0-9\-\_\.]+\.[a-zA-Z0-9\-\_]+$/.test(req.body.email)) {
-      workflow.outcome.errfor.email = 'invalid email format';
+      workflow.outcome.errfor.email = 'Неверный формат Email';
     }
 
     if (workflow.hasErrors()) {
@@ -195,83 +188,56 @@ exports.identity = function(req, res){
       }
 
       if (user) {
-        workflow.outcome.errfor.email = 'email already taken';
+        workflow.outcome.errfor.email = 'Email уже используется другим пользователем';
         return workflow.emit('response');
       }
 
-      workflow.emit('patchUser');
+      workflow.emit('sexCheck');
     });
+  });
+
+  workflow.on('sexCheck', function() {
+    console.log(1);
+    if (!req.body.sex) {
+      workflow.outcome.errfor.sex = 'Пол не выбран';
+    } else {
+      if (req.body.sex != "0" && req.body.sex != "1") {
+        workflow.outcome.errfor.sex = 'Пол не выбран';
+      }
+    }
+
+    if (workflow.hasErrors()) {
+      return workflow.emit('response');
+    }
+    workflow.emit('patchUser');
   });
 
   workflow.on('patchUser', function() {
     var fieldsToSet = {
-      username: req.body.username,
-      email: req.body.email.toLowerCase(),
-      search: [
-        req.body.username,
-        req.body.email
-      ]
+      sex: req.body.sex,
+      email: req.body.email.toLowerCase()
     };
+
     var options = { select: 'username email twitter.id facebook.id google.id' };
 
-    req.app.db.models.User.findByIdAndUpdate(req.user.id, fieldsToSet, options, function(err, user) {
+    req.app.db.models.User.findByIdAndUpdate(req.user.id, fieldsToSet, options, function(err) {
       if (err) {
         return workflow.emit('exception', err);
       }
 
-      workflow.emit('patchAccount', user);
+      return workflow.emit('response');
     });
   });
 
-  workflow.on('patchAccount', function(user) {
-    if (user.roles.account) {
-      var fieldsToSet = {
-        user: {
-          id: req.user.id,
-          name: user.username
-        }
-      };
-      req.app.db.models.Account.findByIdAndUpdate(user.roles.account, fieldsToSet, function(err) {
-        if (err) {
-          return workflow.emit('exception', err);
-        }
-
-        workflow.emit('populateRoles', user);
-      });
-    }
-    else {
-      workflow.emit('populateRoles', user);
-    }
-  });
-
-  workflow.on('populateRoles', function(user) {
-    user.populate('roles.account', 'name.full', function(err, populatedUser) {
-      if (err) {
-        return workflow.emit('exception', err);
-      }
-
-      workflow.outcome.user = populatedUser;
-      workflow.emit('response');
-    });
-  });
-
-  workflow.emit('validate');
+  workflow.emit('validateEmail');
 };
 
 exports.password = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validate', function() {
-    if (!req.body.newPassword) {
-      workflow.outcome.errfor.newPassword = 'required';
-    }
-
-    if (!req.body.confirm) {
-      workflow.outcome.errfor.confirm = 'required';
-    }
-
-    if (req.body.newPassword !== req.body.confirm) {
-      workflow.outcome.errors.push('Passwords do not match.');
+    if (!req.body.password) {
+      workflow.outcome.errfor.password = 'Пароль не указан';
     }
 
     if (workflow.hasErrors()) {
@@ -282,7 +248,7 @@ exports.password = function(req, res){
   });
 
   workflow.on('patchUser', function() {
-    req.app.db.models.User.encryptPassword(req.body.newPassword, function(err, hash) {
+    req.app.db.models.User.encryptPassword(req.body.password, function(err, hash) {
       if (err) {
         return workflow.emit('exception', err);
       }
@@ -293,15 +259,7 @@ exports.password = function(req, res){
           return workflow.emit('exception', err);
         }
 
-        user.populate('roles.account', 'name.full', function(err) {
-          if (err) {
-            return workflow.emit('exception', err);
-          }
-
-          workflow.outcome.newPassword = '';
-          workflow.outcome.confirm = '';
-          workflow.emit('response');
-        });
+        workflow.emit('response');
       });
     });
   });

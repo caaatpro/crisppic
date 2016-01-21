@@ -65,30 +65,34 @@ block body
         div.col-sm-12
           legend Основные
 
+          div#alertsSettings
+
           .form-group.row
             label.col-sm-2.form-control-label(for='email') Email
             .col-sm-5
-              input.form-control(type='email', id='email' placeholder='Email')
+              input.form-control(type='email', id='email' placeholder='Email', value='#{data.user.email}')
 
           .form-group.row
             label.col-sm-2 Пол
             .col-sm-5
               .radio
                 label
-                  input(type='radio', name='sex', value='0', checked='')
+                  input(type='radio', name='sex', class='sex', value='0', checked=(data.user.sex===0 ? "checked" : undefined))
                   | Мужской
               .radio
                 label
-                  input(type='radio', name='sex', value='1')
+                  input(type='radio', name='sex', class='sex', value='1', checked=(data.user.sex===1 ? "checked" : undefined))
                   | Женский
 
           .form-group.row
             .col-sm-offset-2.col-sm-10
-              button.btn.btn-secondary Сохранить
+              button#saveAccountSettings.btn.btn-secondary Сохранить
 
       div.row
         div.col-sm-12
           legend Пароль
+
+          div#alertsPassword
 
           .form-group.row
             label.col-sm-2.form-control-label(for='password') Новый пароль
@@ -97,4 +101,4 @@ block body
 
           .form-group.row
             .col-sm-offset-2.col-sm-10
-              button.btn.btn-secondary Сохранить
+              button#saveAccountPassword.btn.btn-secondary Сохранить

@@ -67,7 +67,7 @@ exports = module.exports = function(app, passport) {
 
   //account > settings
   app.get('/account/settings/', require('./views/account/settings/index').init);
-  app.put('/account/settings/identity/', require('./views/account/settings/index').identity);
+  app.put('/account/settings/save/', require('./views/account/settings/index').save);
   app.put('/account/settings/password/', require('./views/account/settings/index').password);
 
   //account > settings > social

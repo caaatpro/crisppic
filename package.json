@@ -6,8 +6,8 @@
   "dependencies": {
     "async": "^1.x.x",
     "mongoose-auto-increment": "^1.x.x",
-    "dateformat": "^1.x.x",
-    "bcrypt": "^0.8.x",
+    "dateformat": "^2.x.x",
+    "bcryptjs": "^0.8.x",
     "body-parser": "^1.x.x",
     "compression": "^1.x.x",
     "connect-mongo": "^0.8.x",
