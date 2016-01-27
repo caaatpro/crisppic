@@ -20,7 +20,7 @@ block body
             div.col-sm-5
               button.btn.btn-secondary Загрузить
 
-      if oauthTwitter || oauthFacebook || oauthGoogle
+      if oauthFacebook || oauthGoogle
         div.row.m-b-sm
           div.col-sm-12
               legend Привязка к соцсетям
@@ -30,16 +30,6 @@ block body
                     button.close(type='button', data-dismiss='alert') &times;
                     | #{oauthMessage}
               div.row
-                if oauthTwitter
-                  div.col-sm-4
-                    if oauthTwitterActive
-                      a.btn.btn-block.btn-danger(href='/account/settings/twitter/disconnect/')
-                        i.fa.fa-twitter.fa-lg
-                        |  Отвязать Twitter
-                    else
-                      a.btn.btn-block.btn-default(href='/account/settings/twitter/')
-                        i.fa.fa-twitter.fa-lg
-                        |  Привезать Twitter
                 if oauthFacebook
                   div.col-sm-4
                     if oauthFacebookActive

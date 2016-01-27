@@ -15,9 +15,9 @@ exports.init = function(req, res){
   }
   else {
     res.render('login/index', {
-      oauthTwitter: !!req.app.config.oauth.twitter.key,
       oauthFacebook: !!req.app.config.oauth.facebook.key,
       oauthGoogle: !!req.app.config.oauth.google.key,
+      oauthVkontakte: !!req.app.config.oauth.vkontakte.key,
       username: ''
     });
   }
@@ -114,43 +114,6 @@ exports.login = function(req, res){
   workflow.emit('validate');
 };
 
-// Авторизация через Twitter
-exports.loginTwitter = function(req, res, next){
-  req._passport.instance.authenticate('twitter', function(err, user, info) {
-    if (!info || !info.profile) {
-      return res.redirect('/login/');
-    }
-
-    req.app.db.models.User.findOne({ 'twitter.id': info.profile.id }, function(err, user) {
-      if (err) {
-        return next(err);
-      }
-
-      if (!user) {
-        req.app.db.models.User.findOne({ 'twitter.id': info.profile.id }, function(err, user) {
-          if (err) {
-            return next(err);
-          }
-
-          if (!user) {
-            req.session.socialProfile = info.profile;
-            res.render('signup/social', { email: '' });
-          }
-        });
-      }
-      else {
-        req.login(user, function(err) {
-          if (err) {
-            return next(err);
-          }
-
-          res.redirect(getReturnUrl(req));
-        });
-      }
-    });
-  })(req, res, next);
-};
-
 // Авторизация через Facebook
 exports.loginFacebook = function(req, res, next){
   req._passport.instance.authenticate('facebook', { callbackURL: '/login/facebook/callback/' }, function(err, user, info) {
@@ -169,7 +132,14 @@ exports.loginFacebook = function(req, res, next){
         }
         if (!user) {
           req.session.socialProfile = info.profile;
-          res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
+          req.session.socialEmail = info.profile.emails && info.profile.emails[0].value || '';
+
+          if (req.session.socialEmail === '') {
+            return res.redirect('/login/');
+          }
+
+          req.session.socialEmail = req.session.socialEmail.toLowerCase();
+          loginSignupSocial(req, res, next);
         }
       }
       else {
@@ -204,7 +174,14 @@ exports.loginGoogle = function(req, res, next){
         }
         if (!user) {
           req.session.socialProfile = info.profile;
-          res.render('signup/social', { email: info.profile.emails && info.profile.emails[0].value || '' });
+          req.session.socialEmail = info.profile.emails && info.profile.emails[0].value || '';
+
+          if (req.session.socialEmail === '') {
+            return res.redirect('/login/');
+          }
+
+          req.session.socialEmail = req.session.socialEmail.toLowerCase();
+          loginSignupSocial(req, res, next);
         }
       } else {
         req.login(user, function(err) {
@@ -217,4 +194,191 @@ exports.loginGoogle = function(req, res, next){
       }
     });
   })(req, res, next);
+};
+
+// Авторизация через VK
+exports.loginVkontakte = function(req, res, next){
+  req._passport.instance.authenticate('vkontakte', { callbackURL: '/login/vkontakte/callback/' }, function(err, user, info) {
+    if (!info || !info.profile) {
+      return res.redirect('/login/');
+    }
+
+    req.app.db.models.User.findOne({ 'vkontakte.id': info.profile.id }, function(err, user) {
+      if (err) {
+        return next(err);
+      }
+
+      // No users found linked to your VK account
+      if (!user) {
+
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          req.session.socialProfile = info.profile;
+          req.session.socialEmail = info.params.email || '';
+
+          if (req.session.socialEmail === '') {
+            return res.redirect('/login/');
+          }
+
+          req.session.socialEmail = req.session.socialEmail.toLowerCase();
+          loginSignupSocial(req, res, next);
+        }
+      } else {
+
+        req.login(user, function(err) {
+          if (err) {
+            return next(err);
+          }
+
+          res.redirect(getReturnUrl(req));
+        });
+      }
+    });
+  })(req, res, next);
+};
+
+// Авторизация/Регистрация через социальную сеть
+var loginSignupSocial = exports.loginSignupSocial = function(req, res, next){
+  var workflow = req.app.utility.workflow(req, res);
+
+  workflow.on('duplicateEmailCheck', function() {
+    req.app.db.models.User.findOne({ email: req.session.socialEmail }, function(err, user) {
+      if (err) {
+        return workflow.emit('exception', err);
+      }
+
+      if (user) {
+        workflow.emit('updateUser');
+      }
+
+      workflow.emit('duplicateUsernameCheck');
+    });
+  });
+
+  workflow.on('duplicateUsernameCheck', function() {
+    workflow.username = req.session.socialProfile.username || req.session.socialProfile.id;
+    if (!/^[a-zA-Z0-9\-\_]+$/.test(workflow.username)) {
+      workflow.username = workflow.username.replace(/[^a-zA-Z0-9\-\_]/g, '');
+    }
+
+    req.app.db.models.User.findOne({ username: workflow.username }, function(err, user) {
+      if (err) {
+        return workflow.emit('exception', err);
+      }
+
+      if (user) {
+        workflow.username = workflow.username + req.session.socialProfile.id;
+      }
+
+      workflow.emit('createUser');
+    });
+  });
+
+  workflow.on('updateUser', function() {
+    var fieldsToSet = {
+      isActive: 'yes'
+    };
+    fieldsToSet[req.session.socialProfile.provider] = { id: req.session.socialProfile.id };
+
+    req.app.db.models.User.update({email: req.session.socialEmail}, fieldsToSet, function(err, user) {
+      if (err) {
+        return workflow.emit('exception', err);
+      }
+
+      workflow.user = user;
+      workflow.emit('logUserIn');
+    });
+  });
+
+  workflow.on('createUser', function() {
+    var fieldsToSet = {
+      isActive: 'yes',
+      username: workflow.username,
+      email: req.session.socialEmail,
+      search: [
+        workflow.username,
+        req.session.socialEmail
+      ]
+    };
+    fieldsToSet[req.session.socialProfile.provider] = { id: req.session.socialProfile.id };
+
+    req.app.db.models.User.create(fieldsToSet, function(err, user) {
+      if (err) {
+        return workflow.emit('exception', err);
+      }
+
+      workflow.user = user;
+      workflow.emit('createAccount');
+    });
+  });
+
+  workflow.on('createAccount', function() {
+    var displayName = req.session.socialProfile.displayName || '';
+    var nameParts = displayName.split(' ');
+    var fieldsToSet = {
+      isVerified: 'yes',
+      user: {
+        id: workflow.user._id,
+        name: workflow.user.username
+      },
+      search: [
+        nameParts[0],
+        nameParts[1] || ''
+      ]
+    };
+    req.app.db.models.Account.create(fieldsToSet, function(err, account) {
+      if (err) {
+        return workflow.emit('exception', err);
+      }
+
+      //update user with account
+      workflow.user.roles.account = account._id;
+      workflow.user.save(function(err) {
+        if (err) {
+          return workflow.emit('exception', err);
+        }
+
+        workflow.emit('sendWelcomeEmail');
+      });
+    });
+  });
+
+  workflow.on('sendWelcomeEmail', function() {
+    req.app.utility.sendmail(req, res, {
+      from: req.app.config.smtp.from.name +' <'+ req.app.config.smtp.from.address +'>',
+      to: req.session.socialEmail,
+      subject: 'Your '+ req.app.config.projectName +' Account',
+      textPath: 'signup/email-text',
+      htmlPath: 'signup/email-html',
+      locals: {
+        username: workflow.user.username,
+        email: req.session.socialEmail,
+        loginURL: req.protocol +'://'+ req.headers.host +'/login/',
+        projectName: req.app.config.projectName
+      },
+      success: function() {
+        workflow.emit('logUserIn');
+      },
+      error: function(err) {
+        console.log('Error Sending Welcome Email: '+ err);
+        workflow.emit('logUserIn');
+      }
+    });
+  });
+
+  workflow.on('logUserIn', function() {
+    req.login(workflow.user, function(err) {
+      if (err) {
+        return workflow.emit('exception', err);
+      }
+
+      delete req.session.socialProfile;
+      delete req.session.socialEmail;
+      res.redirect(workflow.user.defaultReturnUrl());
+    });
+  });
+
+  workflow.emit('duplicateEmailCheck');
 };

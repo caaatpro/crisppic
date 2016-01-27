@@ -5,12 +5,12 @@ block head
 
 block body
   div#signup
-    if oauthTwitter || oauthFacebook || oauthGoogle
+    if oauthVkontakte || oauthFacebook || oauthGoogle
       div.btn-group.btn-group-justified
-        if oauthTwitter
-          a.btn.btn-info(href='/login/twitter/')
-            i.fa.fa-twitter.fa-lg
-            |  Twitter
+        if oauthVkontakte
+          a.btn.btn-info(href='/login/vkontakte/')
+            i.fa.fa-vk.fa-lg
+            |  VK
         if oauthFacebook
           a.btn.btn-info(href='/login/facebook/')
             i.fa.fa-facebook-square.fa-lg

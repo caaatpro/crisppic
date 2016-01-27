@@ -1,6 +1,6 @@
 'use strict';
 
-exports.port = process.env.PORT || 5555;
+exports.port = process.env.PORT || 80;
 exports.mongodb = {
   //uri: 'mongodb://crisppic_db:27017/movies'
   uri: 'mongodb://94.103.80.182:27018/movies'
@@ -27,10 +27,6 @@ exports.smtp = {
   }
 };
 exports.oauth = {
-  twitter: {
-    key: process.env.TWITTER_OAUTH_KEY || '1vY0K1bqX0iFFaLfffLasbc57',
-    secret: process.env.TWITTER_OAUTH_SECRET || 'd7nhZaZt6BewDWOmH2wqM4rlVK0y9coiXUcG5bXJCGD33LNk0H'
-  },
   facebook: {
     key: process.env.FACEBOOK_OAUTH_KEY || '1515012572125322',
     secret: process.env.FACEBOOK_OAUTH_SECRET || '97487b28cee723f7a04dee219bca2d55'
@@ -38,5 +34,9 @@ exports.oauth = {
   google: {
     key: process.env.GOOGLE_OAUTH_KEY || '673575507802-h1p3s5gugi31g4s2mf5mjtsgmn2h12r1.apps.googleusercontent.com',
     secret: process.env.GOOGLE_OAUTH_SECRET || 'pXQkWP6WHz9bPuwjQ0kD-BnA'
+  },
+  vkontakte: {
+    key: process.env.VKONTAKTE_OAUTH_KEY || '5245120',
+    secret: process.env.VKONTAKTE_OAUTH_SECRET || 'ApOJ1e9PH9REXHQeQRJM'
   }
 };

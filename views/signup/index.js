@@ -3,12 +3,11 @@
 exports.init = function(req, res){
   if (req.isAuthenticated()) {
     res.redirect(req.user.defaultReturnUrl());
-  }
-  else {
+  } else {
     res.render('signup/index', {
-      oauthTwitter: !!req.app.config.oauth.twitter.key,
       oauthFacebook: !!req.app.config.oauth.facebook.key,
       oauthGoogle: !!req.app.config.oauth.google.key,
+      oauthVkontakte: !!req.app.config.oauth.vkontakte.key,
       username: '',
       email: ''
     });

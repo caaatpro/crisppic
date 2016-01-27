@@ -2,8 +2,8 @@
 
 exports = module.exports = function(app, passport) {
   var LocalStrategy = require('passport-local').Strategy,
-      TwitterStrategy = require('passport-twitter').Strategy,
       FacebookStrategy = require('passport-facebook').Strategy,
+      VkontakteStrategy = require('passport-vkontakte').Strategy,
       GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
   passport.use(new LocalStrategy(
@@ -40,25 +40,11 @@ exports = module.exports = function(app, passport) {
     }
   ));
 
-  if (app.config.oauth.twitter.key) {
-    passport.use(new TwitterStrategy({
-        consumerKey: app.config.oauth.twitter.key,
-        consumerSecret: app.config.oauth.twitter.secret
-      },
-      function(token, tokenSecret, profile, done) {
-        done(null, false, {
-          token: token,
-          tokenSecret: tokenSecret,
-          profile: profile
-        });
-      }
-    ));
-  }
-
   if (app.config.oauth.facebook.key) {
     passport.use(new FacebookStrategy({
         clientID: app.config.oauth.facebook.key,
-        clientSecret: app.config.oauth.facebook.secret
+        clientSecret: app.config.oauth.facebook.secret,
+        profileFields: ['id', 'emails', 'name']
       },
       function(accessToken, refreshToken, profile, done) {
         done(null, false, {
@@ -73,7 +59,8 @@ exports = module.exports = function(app, passport) {
   if (app.config.oauth.google.key) {
     passport.use(new GoogleStrategy({
         clientID: app.config.oauth.google.key,
-        clientSecret: app.config.oauth.google.secret
+        clientSecret: app.config.oauth.google.secret,
+        profileFields: ['id', 'emails', 'name']
       },
       function(accessToken, refreshToken, profile, done) {
         done(null, false, {
@@ -82,6 +69,23 @@ exports = module.exports = function(app, passport) {
           profile: profile
         });
       }
+    ));
+  }
+
+  if (app.config.oauth.vkontakte.key) {
+    passport.use(new VkontakteStrategy({
+          clientID: app.config.oauth.vkontakte.key,
+          clientSecret: app.config.oauth.vkontakte.secret,
+          profileFields: ['id', 'emails', 'name']
+        },
+        function(accessToken, refreshToken, params, profile, done) {
+          done(null, false, {
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+            profile: profile,
+            params: params
+          });
+        }
     ));
   }
 

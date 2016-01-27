@@ -52,12 +52,12 @@ exports = module.exports = function(app, passport) {
 
   //social login
   //auth
-  app.get('/login/twitter/', passport.authenticate('twitter', { callbackURL: '/login/twitter/callback/' }));
-  app.get('/login/twitter/callback/', require('./views/login/index').loginTwitter);
-  app.get('/login/facebook/', passport.authenticate('facebook', { callbackURL: '/login/facebook/callback/' }));
+  app.get('/login/facebook/', passport.authenticate('facebook', { callbackURL: '/login/facebook/callback/', scope: ['public_profile email'], authType: 'rerequest' }));
   app.get('/login/facebook/callback/', require('./views/login/index').loginFacebook);
   app.get('/login/google/', passport.authenticate('google', { callbackURL: '/login/google/callback/', scope: ['profile email'] }));
   app.get('/login/google/callback/', require('./views/login/index').loginGoogle);
+  app.get('/login/vkontakte/', passport.authenticate('vkontakte', { callbackURL: '/login/vkontakte/callback/', scope: ['email']}));
+  app.get('/login/vkontakte/callback/', require('./views/login/index').loginVkontakte);
 
   //account
   app.all('/account*', ensureAuthenticated);
@@ -74,9 +74,6 @@ exports = module.exports = function(app, passport) {
   app.put('/account/settings/password/', require('./views/account/settings/index').password);
 
   //account > settings > social
-  app.get('/account/settings/twitter/', passport.authenticate('twitter', { callbackURL: '/account/settings/twitter/callback/' }));
-  app.get('/account/settings/twitter/callback/', require('./views/account/settings/index').connectTwitter);
-  app.get('/account/settings/twitter/disconnect/', require('./views/account/settings/index').disconnectTwitter);
   app.get('/account/settings/facebook/', passport.authenticate('facebook', { callbackURL: '/account/settings/facebook/callback/' }));
   app.get('/account/settings/facebook/callback/', require('./views/account/settings/index').connectFacebook);
   app.get('/account/settings/facebook/disconnect/', require('./views/account/settings/index').disconnectFacebook);
