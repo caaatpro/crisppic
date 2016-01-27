@@ -1,7 +1,6 @@
 'use strict';
 
 exports = module.exports = function(app, mongoose) {
-    var autoIncrement = require('mongoose-auto-increment');
     var countrySchema = new mongoose.Schema({
         name: {
             russian: { type: String, default: '' },
@@ -10,7 +9,17 @@ exports = module.exports = function(app, mongoose) {
         iso_3166_1: String,
         sID: Number
     });
-    countrySchema.plugin(autoIncrement.plugin, { model: 'Country', field: 'sID', startAt: 1 });
-    countrySchema.index({ name: 1 });
     app.db.model('Country', countrySchema);
+
+    app.db.models.Index.findOne({ 'name': 'Country' }).exec(function(err, r) {
+        if (r == null) {
+            var newI = new app.db.models.Index({
+                name: 'Country',
+                sID: 1
+            });
+            newI.save(function (err, r) {
+
+            });
+        }
+    });
 };

@@ -22,6 +22,9 @@ exports = module.exports = function(app, passport) {
   //front end
   app.get('/', require('./views/index').init);
   app.get('/about/', require('./views/about/index').init);
+  app.get('/about/faq/', require('./views/about/faq/index').init);
+  app.get('/about/contact/', require('./views/about/contact/index').init);
+  app.get('/pro/', require('./views/pro/index').init);
 
   // movies
   app.all('/movie*', ensureAuthenticated);
@@ -81,7 +84,18 @@ exports = module.exports = function(app, passport) {
   app.get('/account/settings/google/callback/', require('./views/account/settings/index').connectGoogle);
   app.get('/account/settings/google/disconnect/', require('./views/account/settings/index').disconnectGoogle);
 
-  app.get('/account/*', require('./views/account/index').init);
+  app.get('/account/[a-zA-Z0-9\-\_]+/wishlist/', require('./views/account/wishlist/index').init);
+  app.get('/account/[a-zA-Z0-9\-\_]+/directors/', require('./views/account/directors/index').init);
+  app.get('/account/[a-zA-Z0-9\-\_]+/directors/charts', require('./views/account/directors/index').charts);
+  app.get('/account/[a-zA-Z0-9\-\_]+/actors/', require('./views/account/actors/index').init);
+  app.get('/account/[a-zA-Z0-9\-\_]+/actors/charts', require('./views/account/actors/index').charts);
+  app.get('/account/[a-zA-Z0-9\-\_]+', require('./views/account/index').init);
+
+  //addMovie
+  app.get('/addMovie/', require('./views/addMovie/index').init);
+
+  //admin
+  app.get('/adminMovie/', require('./views/adminMovie/index').init);
 
   //route not found
   app.all('*', require('./views/http/index').http404);

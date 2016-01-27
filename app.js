@@ -12,8 +12,7 @@ var config = require('./config'),
     passport = require('passport'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
-    csrf = require('csurf'),
-    autoIncrement = require('mongoose-auto-increment');
+    csrf = require('csurf');
 
 //create express app
 var app = express();
@@ -30,7 +29,6 @@ app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
 app.db.once('open', function () {
   //and... we have a data store
 });
-autoIncrement.initialize(app.db);
 
 //config data models
 require('./models')(app, mongoose);
@@ -42,7 +40,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //middleware
-app.use(require('compression')());
 app.use(require('serve-static')(path.join(__dirname, 'public')));
 app.use(require('method-override')());
 app.use(bodyParser.json());
@@ -76,7 +73,6 @@ app.locals.cacheBreaker = '1';
 app.locals.hostUrl = 'http://127.0.0.1:5555/';
 //app.locals.hostUrl = 'https://crisppic.com/';
 app.locals.rootPath = '/home/app/';
-app.locals.autoIncrement = autoIncrement;
 
 //setup passport
 require('./passport')(app, passport);

@@ -1,15 +1,24 @@
 'use strict';
 
 exports = module.exports = function(app, mongoose) {
-    var autoIncrement = require('mongoose-auto-increment');
     var genreSchema = new mongoose.Schema({
         name: {
             russian: {type: String, default: ''},
             original: {type: String, default: ''}
         },
-        sID: Number
+        sID: { type: Number, default: 0 }
     });
-    genreSchema.plugin(autoIncrement.plugin, { model: 'Genre', field: 'sID', startAt: 1 });
-    genreSchema.index({ 'name.original': 'text', 'name.russian': 'text'});
     app.db.model('Genre', genreSchema);
+
+    app.db.models.Index.findOne({ 'name': 'Genre' }).exec(function(err, r) {
+        if (r == null) {
+            var newI = new app.db.models.Index({
+                name: 'Genre',
+                sID: 1
+            });
+            newI.save(function (err, r) {
+
+            });
+        }
+    });
 };

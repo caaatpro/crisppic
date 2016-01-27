@@ -164,6 +164,8 @@ exports.disconnectGoogle = function(req, res, next){
 };
 
 exports.save = function(req, res){
+  req.app.utility.movieReindex.reindex(req, res);
+
   var workflow = req.app.utility.workflow(req, res);
 
   workflow.on('validateEmail', function() {
@@ -197,7 +199,6 @@ exports.save = function(req, res){
   });
 
   workflow.on('sexCheck', function() {
-    console.log(1);
     if (!req.body.sex) {
       workflow.outcome.errfor.sex = 'Пол не выбран';
     } else {

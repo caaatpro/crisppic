@@ -4,83 +4,22 @@ block head
   title Title
 
 block body
-  #addViewModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addViewModalLabel')
-    .modal-dialog(role='document')
-      .modal-content
-        .modal-header
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') &times;
-          h4#addViewModalLabel.modal-title
-        .modal-body
-          div#alerts
-          form
-            .form-group
-              label.control-label(for='viewDate') Дата:
-              input#viewDate.form-control(type='date')
-        .modal-footer
-          button.btn.btn-default(type='button', data-dismiss='modal') Отмена
-          button.btn.btn-primary#addViewModalSave(type='button') Сохранить
-
   section.vbox
     section.scrollable.padder
       div.page-header
-        h3.m-b-none=item['title']['russian']
-        span=item['title']['original']
+        h3.m-b-none Добавление фильма
+        p.m-b-none Если вы не можете найти фильм на сайте, добавьте его используя ссылку с сайта iMDB.com, либо заполните форму.
 
       div.row
-        div.col-xs-4
-          img(src=item['poster'], width='100%')
-          button(type="button" class="btn btn-primary btn-block") Хочу посмотреть
-          button.btn.btn-success.btn-block(type='button', data-toggle='modal', data-target='#addViewModal', data-title=item['title']['russian'], data-movie-id=item['sID']) Посмотрел
-        div.col-xs-8
-          table.table.table-striped
-            tbody
-              tr
-                td(width=150) Год:
-                td=item['year']
-              tr
-                td(width=150) Премьера :
-                td=item['dateF']
-              tr
-                td(width=150) Режиссер:
-                td
-                  = item['director_str']
-              tr
-                td(width=150) В ролях:
-                td
-                  = item['actors_str']
+        div.col-sm-12
+          legend Добавить фильм с iMDB
 
-              tr
-                td(width=150) Длительность:
-                td
-                  =item['runtime_str']
-              tr
-                td(width=150) Страны:
-                td
-                  = item['country_str']
-              tr
-                td(width=150) Жанр:
-                td
-                  = item['genre_str']
+          div#alertsiMDB
 
-        div.col-xs-12=item['plot']
+          .form-group.row
+            .col-sm-5
+              input.form-control(type='url', id='iMDBurl', placeholder='Ссылка на фильм')
 
-        div.col-xs-12
-
-          if userList.length
-            h3 Ваши просмотры
-
-            table.table.table-striped
-              tbody
-                tr
-                  th(width='100') Дата
-                  th Комментарий
-                for userMovie in userList
-                  tr
-                    th=userMovie['dateF']
-                    th
-          else
-            h3 Вы не смотрели этот фильм
-
-
-  a.hide.nav-off-screen-block(href='#', data-toggle='class:nav-off-screen', data-target='#nav')
+          .form-group.row
+            .col-sm-10
+              button#saveiMDB.btn.btn-secondary Добавить

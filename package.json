@@ -6,8 +6,8 @@
   "dependencies": {
     "async": "^1.x.x",
     "mongoose-auto-increment": "^1.x.x",
-    "dateformat": "^2.x.x",
-    "bcryptjs": "^0.8.x",
+    "dateformat": "^1.0.12",
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.x.x",
     "compression": "^1.x.x",
     "connect-mongo": "^0.8.x",
@@ -28,7 +28,9 @@
     "passport-local": "^1.x.x",
     "passport-oauth": "^1.x.x",
     "passport-twitter": "^1.x.x",
-    "serve-static": "^1.9.x"
+    "serve-static": "^1.9.x",
+    "fs": "^0.0.2",
+    "request": "^2.67.0"
   },
   "devDependencies": {},
   "scripts": {
