@@ -27,12 +27,6 @@
 }
 
 @media (max-width: 767px) {
-	
-	.navbar.navbar-no-bg { background: #444; }
-	.navbar-brand { margin-left: 15px; }
-	.navbar-collapse { border: 0; }
-	.navbar-inverse ul.navbar-nav li a { padding-top: 10px; padding-bottom: 10px; }
-	
 	.inner-bg { padding: 140px 0; }
 	.top-content .top-big-link { margin-top: 25px; }
 	.top-content .top-big-link a.btn { margin-top: 10px; }
