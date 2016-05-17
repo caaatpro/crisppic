@@ -2,5 +2,5 @@
 .docker
 .document
 .idea
-node_modules
-public/posters
+app/node_modules
+public/posters/*

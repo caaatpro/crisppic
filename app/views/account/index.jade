@@ -1,0 +1,38 @@
+extends ../../layouts/default
+
+block head
+  title Title
+
+block body
+  section.vbox
+    section.scrollable.padder
+      div.page-header
+        h3
+
+      div.row
+        div.col-xs-3
+          img(src='/images/default-user-avatar-big.png', alt='', width='100%')
+          button(type="button" class="btn btn-primary btn-block") Следить
+        div.col-xs-9
+          table.table.table-striped
+            tbody
+              tr
+                td(width=150) Здесь с:
+                td=account['dateFormat']
+              tr
+                td(width=150) Просмотров:
+                td=account['total']['views']
+              tr
+                td(width=150) Хочет посмотреть:
+                td=account['total']['wishlist']
+
+        div.col-xs-12
+          h3 Последние фильмы
+
+          table.table.table-striped
+            tbody
+              for accountMovie in accountList
+                tr
+                  if (accountMovie['movieId'] != null)
+                    td=accountMovie['movieId']['title']['russian']+' / '+accountMovie['movieId']['title']['original'] + ' (' + accountMovie['movieId']['year'] + ')'
+                    td(width='100')=accountMovie['dateFormat']

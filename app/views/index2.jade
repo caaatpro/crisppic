@@ -1,0 +1,45 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title
+    // CSS
+    link(rel='stylesheet', href='#{hostUrl}css/bootstrap.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/animate.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font-awesome.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/icon.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/font.css?#{cacheBreaker}', type='text/css')
+    link(rel='stylesheet', href='#{hostUrl}css/app.css?#{cacheBreaker}', type='text/css')
+
+  body
+
+    .content(style='height: 420px;background-image: url(http://myshows.me/shared/img/fe/index/index_promo2.jpg);background-size: cover;')
+      .container
+        .indexPromoBody.alignCenter
+          h1 Новый MyShows
+          p Альфа, бета, гамма
+          p
+            a.button._gig._gigAlt._land.modal_login(href='#') Хочу!
+
+    div.container
+      div.row
+        div.col-sm-4
+          img.indexTextImage(src='http://myshows.me/shared/img/fe/promo1b.png', alt='')
+          h2 Смотри
+          p
+            | Любишь смотреть сериалы? Очень любишь, смотришь много? Молодец! Мы тебе поможем в этом. В нашей базе данных больше 10000 сериалов, разбитых по жанрам, годам, телеканалам, странам и еще куче параметров…
+        div.col-sm-4
+          img.indexTextImage(src='http://myshows.me/shared/img/fe/promo2b.png', alt='')
+          h2 Отмечай
+          p
+            | Хочешь узнать, сколько ты потратил на сериалы в прошлом месяце? А в год? А вообще? MyShows создан специально для того, чтобы ты посмотрел и пришел в ужас. Зато все под контролем.
+        div.col-sm-4
+          img.indexTextImage(src='http://myshows.me/shared/img/fe/promo3b.png', alt='')
+          h2 Веди учет
+          p
+            | Хочешь знать когда выходит следующая серия твоего любимого ситкома? Бабушка спрашивает, что нового на рынке мыльных опер? Папа любит смотреть криминал, но забывает, на какой серии остановился? Поможем тебе.
+
+
+
