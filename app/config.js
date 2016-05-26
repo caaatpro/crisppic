@@ -2,7 +2,6 @@
 
 exports.port = process.env.PORT || 80;
 exports.mongodb = {
-  //uri: 'mongodb://crisppic_db:27017/movies'
   uri: 'mongodb://db:27017/movies'
 };
 exports.projectName = 'Crisppic.com';

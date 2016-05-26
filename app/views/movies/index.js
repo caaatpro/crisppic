@@ -3,15 +3,9 @@
 exports.init = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
   var sigma = {};
-  var re_imdb = /https?:\/\/(www.)?imdb.com\/title\/(tt\d{7})(.*)/i;
 
   var page = parseInt(req.query.page) || 1;
   var query = req.query.query || '';
-
-  if (re_imdb.test(query)) {
-    var imdb_id = query.replace(re_imdb, "$2");
-    return req.app.utility.imdbparser(req, res, imdb_id);
-  }
 
   var regexQuery = new RegExp('^.*?'+ query +'.*$', 'i');
   var per_page = 20;

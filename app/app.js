@@ -88,8 +88,6 @@ app.utility.sendmail = require('./util/sendmail');
 app.utility.slugify = require('./util/slugify');
 app.utility.workflow = require('./util/workflow');
 app.utility.dateFormat = require('dateformat');
-app.utility.imdbparser = require('./util/imdbparser');
-app.utility.parser = require('./util/parser');
 
 //listen up
 app.server.listen(app.config.port, function(){
