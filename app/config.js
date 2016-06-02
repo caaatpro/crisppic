@@ -2,7 +2,7 @@
 
 exports.port = process.env.PORT || 80;
 exports.mongodb = {
-  uri: 'mongodb://db:27017/movies'
+  uri: 'mongodb://85.143.209.198:28345/movies'
 };
 exports.projectName = 'Crisppic.com';
 exports.systemEmail = 'noreply@crisppic.com';
