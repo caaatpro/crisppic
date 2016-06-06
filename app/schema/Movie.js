@@ -8,22 +8,21 @@ exports = module.exports = function(app, mongoose) {
         },
         genre: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
         country: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Country' }],
-        director: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Director' }],
-        actors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Actor' }],
+        people: [{ type: mongoose.Schema.Types.ObjectId, ref: 'People', role: '' }],
         runtime: Number,
         year: Number,
         released: { type: Date, default: null },
         plot: String,
         imdbID: String,
         sID: Number,
-        wishlist: Number,
+        wishList: Number,
         views: Number,
         viewsUser: Number,
         dateUpdate: { type: Date, default: Date.now },
         poster: { type: String, default: '' },
         search: String
     });
-    movieSchema.index({ 'title.original': 'text', 'title.russian': 'text', desc: 'text'});
+    movieSchema.index({ 'title.original': 'text', 'title.russian': 'text', 'plot': 'text'});
     app.db.model('Movie', movieSchema);
 
     app.db.models.Index.findOne({ 'name': 'Movie' }).exec(function(err, r) {
