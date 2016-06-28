@@ -1,15 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 8]>
-<html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en" class="no-js">
-<!--<![endif]-->
-
+<html lang="ru" class="no-js">
 <head>
   <meta charset="utf-8"/>
-  <title>Dashy Laravel 5 Theme | Blank </title>
+  <title>Заголовок</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta content="" name="description"/>
@@ -23,7 +16,7 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="sidenav-toggle" href="#"><span class="brandbar"><i class="fa fa-bars hidd"></i></a></span>
-        <a class="navbar-brand" href="http://dashy.strapui.com/laravel"><i class="fa fa-paper-plane"></i>&nbsp;Dashy</a>
+        <a class="navbar-brand" href="http://dashy.strapui.com/laravel"><i class="fa fa-paper-plane"></i>&nbsp;Crisppic</a>
 
       </div>
       <div class="right-admin">
@@ -33,9 +26,9 @@
               <img class="img-circle admin-img" src="img/profile1.jpg" alt="">
             </a>
             <ul class="dropdown-menu admin" role="menu">
-              <li role="presentation" class="dropdown-header">Admin name</li>
-              <li><a href="profile.html"><i class="fa fa-info"></i> Profile</a></li>
-              <li><a href="auth/login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+              <li role="presentation" class="dropdown-header">Андрей Рудых</li>
+              <li><a href="profile.html"><i class="fa fa-info"></i> Профиль</a></li>
+              <li><a href="auth/login.html"><i class="fa fa-power-off"></i> Выйти</a></li>
             </ul>
           </li>
         </ul>
@@ -49,13 +42,12 @@
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle admin-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              <img class="img-circle admin-img" src="img/profile1.jpg" alt="">&nbsp;&nbsp;&nbsp;<span class="add">Admin&nbsp;
-<i class="fa fa-angle-down"></i></span>
+              <img class="img-circle admin-img" src="img/profile1.jpg" alt="">&nbsp;&nbsp;&nbsp;<span class="add">Андрей&nbsp;<i class="fa fa-angle-down"></i></span>
             </a>
             <ul class="dropdown-menu admin" role="menu">
-              <li role="presentation" class="dropdown-header">Admin name</li>
-              <li><a href="profile.html"><i class="fa fa-info"></i> Profile</a></li>
-              <li><a href="auth/login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+              <li role="presentation" class="dropdown-header">Андрей Рудых</li>
+              <li><a href="profile.html"><i class="fa fa-info"></i> Профиль</a></li>
+              <li><a href="auth/login.html"><i class="fa fa-power-off"></i> Выйти</a></li>
             </ul>
           </li>
         </ul>
@@ -190,17 +182,15 @@
   <div id="body-container">
     <div class="page-title clearfix">
       <div class="pull-left">
-        <h1>Blank</h1>
-        <small class="subtitle"> Page subtitle
+        <h1>Заголовок</h1>
+        <small class="subtitle"> Под заголовок
         </small>
       </div>
-      <ol class="breadcrumb pull-right">
-        <li class="active">Blank</li>
-        <li><a href="http://dashy.strapui.com/laravel"><i class="fa fa-tachometer"></i></a></li>
-      </ol>
     </div>
 
     <div class="conter-wrapper">
+
+
     </div>
     <div id="footer-wrap" class="footer">
       Copyright © 2016 Crisppic
@@ -216,81 +206,6 @@
 <script type="text/javascript">
 
   $(function () {
-
-    // Sidebar Charts
-
-    // Pie Chart
-    var chart3 = c3.generate({
-      bindto: '#sidebar-piechart',
-      data: {
-
-        // iris data from R
-        columns: [
-          ['1', 36],
-          ['2', 54],
-          ['3', 12],
-        ],
-        type: 'pie',
-        onclick: function (d, i) {
-          console.log("onclick", d, i);
-        },
-        onmouseover: function (d, i) {
-          console.log("onmouseover", d, i);
-        },
-        onmouseout: function (d, i) {
-          console.log("onmouseout", d, i);
-        }
-      },
-      color: {
-        pattern: ['#06c5ac', '#3faae3', '#ee634c', '#6bbd95', '#f4cc0b', '#9b59b6', '#16a085', '#c0392b']
-      },
-      pie: {
-        expand: true
-      },
-      size: {
-        width: 140,
-        height: 140
-      },
-      tooltip: {
-        show: false
-      }
-
-    });
-
-
-    // Bar Chart
-    var chart6 = c3.generate({
-      bindto: '#sidebar-barchart',
-      data: {
-        columns: [
-          ['data1', 30, 200, 100, 400, 250, 310, 90, 125, 50]
-        ],
-        type: 'bar'
-      },
-      bar: {
-        width: {
-          ratio: 0.8
-        }
-      },
-      size: {
-        width: 200,
-        height: 120
-      },
-      tooltip: {
-        show: false
-      },
-      color: {
-        pattern: ['#06c5ac', '#3faae3', '#ee634c', '#6bbd95', '#f4cc0b', '#9b59b6', '#16a085', '#c0392b']
-      },
-      axis: {
-        y: {
-          show: false,
-          color: '#ffffff'
-        }
-      }
-    });
-
-
     // Sidebar Tabs
     $('#navTabs .sidebar-top-nav a').click(function (e) {
       e.preventDefault()
@@ -337,23 +252,9 @@
 
     $('.tab-content-scroller').perfectScrollbar();
 
-    $('.theme-picker').click(function () {
-      changeTheme($(this).attr('data-theme'));
-    });
 
 
   });
-
-  function changeTheme(theme) {
-
-    $('<link>')
-        .appendTo('head')
-        .attr({type: 'text/css', rel: 'stylesheet'})
-        .attr('href', '/css/app-' + theme + '.css');
-
-    $.get('api/change-theme?theme=' + theme);
-
-  }
 
 
 </script>

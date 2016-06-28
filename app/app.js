@@ -70,7 +70,7 @@ app.locals.projectName = app.config.projectName;
 app.locals.copyrightYear = new Date().getFullYear();
 app.locals.copyrightName = app.config.projectName;
 app.locals.cacheBreaker = '1';
-app.locals.hostUrl = 'http://crisppic.com/';
+app.locals.hostUrl = 'http://127.0.0.1/';
 app.locals.rootPath = '/home/app/';
 
 //setup passport
