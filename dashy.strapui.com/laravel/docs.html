@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+
+<!-- Mirrored from dashy.strapui.com/laravel/docs by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 May 2016 12:40:19 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8"/>
+  <title>Dashy Laravel 5 Theme | Docs </title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta content="" name="description"/>
+  <meta content="" name="author"/>
+  <link rel="stylesheet" href="css/vendor.css"/>
+  <link rel="stylesheet" href="css/app-green.css"/>
+</head>
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<div id="app-container">
+  <nav class="navbar navbar-inverse navbar-fixed-top striped-bg" id="top-navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="sidenav-toggle" href="#"><span class="brandbar"><i class="fa fa-bars hidd"></i></a></span>
+        <a class="navbar-brand" href="http://dashy.strapui.com/laravel"><i class="fa fa-paper-plane"></i>&nbsp;Dashy</a>
+
+      </div>
+      <div class="right-admin">
+        <ul>
+          <li class="dropdown hidd">
+            <a href="#" class="dropdown-toggle admin-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img class="img-circle admin-img" src="img/profile1.jpg" alt="">
+            </a>
+            <ul class="dropdown-menu admin" role="menu">
+              <li role="presentation" class="dropdown-header">Admin name</li>
+              <li><a href="profile.html"><i class="fa fa-info"></i> Profile</a></li>
+              <li><a href="auth/login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right top-nav">
+
+
+          <li>
+            <a href="#" id="boxed-layout"><i class="fa fa-expand-toggle fa-tp"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle notoggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <span class="notification"><i class="fa fa-bell-o"></i></span>
+              <b class="badge nobadge">5</b>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg ddown" role="menu">
+              <li role="presentation" class="dropdown-header">Notification</li>
+              <li>
+                <a href="#" class="notification-wrap">
+                  <div class="notification-media">
+<span class="fa-stack fa-lg">
+<i class="fa fa-circle fa-stack-2x text-warning"></i>
+<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+</span>
+                    <div><span class="label label-danger">Urgent</span></div>
+                  </div>
+                  <div class="notification-info">
+                    <div class="time-info text-muted pull-right">
+                      <small><i class="fa fa-comments"></i> 2 hours ago</small>
+                    </div>
+                    <h5>Heading </h5>
+                    <p>Hey Anna! Sorry for delayed response. I've just finished reading the mail you sent couple
+                      of...</p>
+                  </div>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#" class="notification-wrap">
+                  <div class="pull-left notification-media">
+<span class="fa-stack fa-lg">
+<i class="fa fa-circle fa-stack-2x text-primary"></i>
+<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+</span>
+                    <div><span class="label label-info">New</span></div>
+                  </div>
+                  <div class="notification-info">
+                    <div class="time-info text-muted pull-right">
+                      <small><i class="fa fa-comments"></i> 23rd Dec 2014</small>
+                    </div>
+                    <h5>Heading </h5>
+                    <p>Hey Anna! Sorry for delayed response. I've just finished reading the mail you sent couple
+                      of...</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle admin-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img class="img-circle admin-img" src="img/profile1.jpg" alt="">&nbsp;&nbsp;&nbsp;<span class="add">Admin&nbsp;
+<i class="fa fa-angle-down"></i></span>
+            </a>
+            <ul class="dropdown-menu admin" role="menu">
+              <li role="presentation" class="dropdown-header">Admin name</li>
+              <li><a href="profile.html"><i class="fa fa-info"></i> Profile</a></li>
+              <li><a href="auth/login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="striped-bg" id="sidenav">
+    <div role="tabpanel" id="navTabs">
+      <div class="sidebar-controllers">
+        <ul class="nav nav-tabs nav-justified sidebar-top-nav" role="tablist">
+          <li role="presentation" class="active"><a href="#menu"><i class="fa fa-bars"></i></a></li>
+          <li role="presentation"><a href="#comments"><i class="fa fa-comments-o"></i></a></li>
+          <li role="presentation"><a href="#charts"><i class="fa fa-line-chart"></i></a></li>
+          <li role="presentation"><a href="#calendar"><i class="fa fa-calendar"></i></a></li>
+          <li role="presentation"><a href="#notification"><i class="fa fa-bell-o"></i></a></li>
+        </ul>
+        <div class="">
+          <div class="tab-content-scroller tab-content sidebar-section-wrap">
+            <div role="tabpanel" class="tab-pane active" id="menu">
+              <div class="photo-container text-center">
+                <a href="profile.html">
+                  <img src="img/profile1.jpg" alt="" class="img-circle dash-profile"/>
+                </a>
+                <div class="t-p">
+                  <a href="profile.html">Kumar Sanket</a>
+                </div>
+              </div>
+              <div class="section-heading">Menus</div>
+              <ul class="nav sidebar-nav ">
+                <li><a href="http://dashy.strapui.com/laravel"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="sidenav-dropdown ">
+                  <a class="subnav-toggle" href="#"><i class="fa fa-toggle-off"></i> UI Elements <i
+                      class="fa fa-angle-down  pull-right"></i></a>
+                  <ul class="nav sidenav-sub-menu">
+                    <li><a href="ui-element/buttons.html"><i class="fa fa-circle-o"></i> Button</a></li>
+                    <li><a href="ui-element/dropdown.html"><i class="fa fa-arrows-v"></i> Dropdown</a></li>
+                    <li><a href="ui-element/other-elements.html"><i class="fa fa-flag-o"></i> Other Elements</a></li>
+                    <li><a href="ui-element/breadcrumbs.html"><i class="fa fa-exchange"></i> Breadcrumbs &
+                      Pagination</a></li>
+                    <li><a href="ui-element/progressbars.html"><i class="fa fa-angle-double-right"></i> Progressbars</a>
+                    </li>
+                    <li><a href="ui-element/alerts.html"><i class="fa fa-warning"></i> Alerts</a></li>
+                    <li><a href="ui-element/modal.html"><i class="fa fa-square-o"></i> Modal</a></li>
+                    <li><a href="ui-element/collapse.html"><i class="fa fa-align-justify"></i> Collapse</a></li>
+                    <li><a href="ui-element/typography.html"><i class="fa fa-pencil"></i> Typography</a></li>
+                    <li><a href="ui-element/icons.html"><i class="fa fa-cc-visa"></i> Icons</a></li>
+                  </ul>
+                </li>
+                <li><a href="panel.html"><i class="fa fa-bookmark-o"></i> Panel</a></li>
+                <li><a href="table.html"><i class="fa fa-table"></i> Table</a></li>
+                <li><a href="grid.html"><i class="fa fa-th-large"></i> Grid</a></li>
+                <li class="sidenav-dropdown ">
+                  <a class="subnav-toggle" href="#"><i class="fa fa-pencil"></i> Mail <i
+                      class="fa fa-angle-down fa-angle-down  pull-right"></i></a>
+                  <ul class="nav sidenav-sub-menu">
+                    <li><a href="messages/inbox.html"><i class="fa fa-inbox"></i> Inbox</a></li>
+                    <li><a href="messages/compose.html"><i class="fa fa-pencil-square-o"></i> Compose</a></li>
+                  </ul>
+                </li>
+                <li class="sidenav-dropdown ">
+                  <a class="subnav-toggle" href="#"><i class="fa fa-file-text-o"></i> Forms <i
+                      class="fa fa-angle-down fa-angle-down  pull-right"></i></a>
+                  <ul class="nav sidenav-sub-menu">
+                    <li><a href="form/elements.html"><i class="fa fa-edit"></i> Elememts</a></li>
+                    <li><a href="form/components.html"><i class="fa fa-keyboard-o"></i> Components</a></li>
+                  </ul>
+                </li>
+                <li class="sidenav-dropdown ">
+                  <a class="subnav-toggle" href="#"><i class="fa fa-area-chart"></i> Charts <i
+                      class="fa fa-angle-down fa-angle-down  pull-right"></i></a>
+                  <ul class="nav sidenav-sub-menu">
+                    <li><a href="chart/chartjs.html"><i class="fa fa-line-chart"></i> Chart.js</a></li>
+                    <li><a href="chart/c3charts.html"><i class="fa fa-bar-chart"></i> C3.js</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="messages/invoice.html"><i class="fa fa-newspaper-o"></i> Invoice</a>
+                </li>
+                <li><a href="calendar.html"><i class="fa fa-calendar"></i> Calendar</a>
+                </li>
+                <li><a href="auth/login.html"><i class="fa fa-sign-in"></i> Log In</a>
+                </li>
+                <li><a href="auth/register.html"><i class="fa fa-user-plus"></i> Sign Up</a>
+                </li>
+                <li><a href="404.html"><i class="fa fa-exclamation-circle"></i> 404 Page</a>
+                </li>
+                <li><a href="blank.html"><i class="fa fa-file-o"></i> Blank Page</a>
+                </li>
+                <li><a href="docs.html"><i class="fa fa-file-o"></i> Docs</a>
+                </li>
+              </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="comments">
+              <div class="section-heading">Members</div>
+              <ul class="online-members">
+                <li><a href="#"><img class="img-circle chat-image" src="img/profile1.jpg" alt="">Kumar Sanket <i
+                    class="fa fa-circle pull-right text-success"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Kumar Pratik <i
+                    class="fa fa-circle pull-right text-success"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Megha Kumari <i
+                    class="fa fa-circle pull-right text-success"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Sankhadeep Roy <i
+                    class="fa fa-circle pull-right text-success"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/profile.jpg" alt="">Suraj Ahmad Choudhury <i
+                    class="fa fa-circle pull-right text-success"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/profile1.jpg" alt="">Kumar Sanket <i
+                    class="fa fa-circle pull-right text-warning"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Megha Kumari <i
+                    class="fa fa-circle pull-right text-warning"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Kumar Pratik <i
+                    class="fa fa-circle pull-right text-warning"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Mrigank Mridul <i
+                    class="fa fa-circle pull-right text-muted"></i></a>
+                </li>
+                <li><a href="#"><img class="img-circle chat-image" src="img/user-icon.png" alt="">Amith M S <i
+                    class="fa fa-circle pull-right text-muted"></i></a>
+                </li>
+              </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="charts">
+              <div class="section-heading">Charts</div>
+              <div class="section-content text-center">
+                <h4>Today's View</h4>
+                <div class="chart-container">
+                  <div id="sidebar-piechart"></div>
+                </div>
+                <h4>Today's Signups</h4>
+                <div class="chart-container2">
+                  <div id="sidebar-barchart"></div>
+                </div>
+                <hr class="lighter">
+                <div class="transaction">
+                  <h4 class="eft">Today's Signups</h4>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-  " role="progressbar" aria-valuenow="67.34%"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 67.34%%;">67.34%
+                    </div>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success  " role="progressbar" aria-valuenow="87.95%"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 87.95%%;">87.95%
+                    </div>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-warning  " role="progressbar" aria-valuenow="27.64%"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 27.64%%;">27.64%
+                    </div>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-danger  " role="progressbar" aria-valuenow="12"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 12%;">12
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="calendar">
+              <div class="section-heading">Today</div>
+              <ul class="today-ul">
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">7:00 AM</span>
+                    </div>
+                    <div class="happened">something happened</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">8:00 AM</span>
+                    </div>
+                    <div class="happened">something more happenned</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">9:00 AM</span>
+                    </div>
+                    <div class="happened">lorem ipsum happened</div>
+                  </a>
+                </li>
+              </ul>
+              <div class="section-heading">7th April 2015</div>
+              <ul class="today-ul dead">
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">7:00 AM</span>
+                    </div>
+                    <div class="happened">something happened</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">8:00 AM</span>
+                    </div>
+                    <div class="happened">something more happenned</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">9:00 AM</span>
+                    </div>
+                    <div class="happened">lorem ipsum happened</div>
+                  </a>
+                </li>
+              </ul>
+              <div class="section-heading">9th April 2015</div>
+              <ul class="today-ul dead">
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">7:00 AM</span>
+                    </div>
+                    <div class="happened">something happened</div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="panel-here"><span class="label label-primary">8:00 AM</span>
+                    </div>
+                    <div class="happened">something more happenned</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="notification">
+              <div class="section-heading">Notifications</div>
+              <div class="notification-info">
+                <ul class="notif-ul">
+                  <li>
+                    <a href="#" class="notification-wrap">
+                      <div class="notification-media">
+<span class="fa-stack fa-lg">
+<i class="fa fa-circle fa-stack-2x text-warning"></i>
+<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+</span>
+                        <div><span class="label label-danger">Urgent</span></div>
+                      </div>
+                      <div class="notification-info">
+                        <div class="time-info">
+                          <small><i class="fa fa-comments"></i> 2 hours ago</small>
+                        </div>
+                        <h5>Heading </h5>
+                        <p>Hey Anna! Sorry for delayed response. I've just finished reading the mail you sent couple
+                          of...</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li><a href="#" class="notification-wrap">
+                    <div class="pull-left notification-media">
+<span class="fa-stack fa-lg">
+<i class="fa fa-circle fa-stack-2x text-primary"></i>
+<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+</span>
+                      <div><span class="label label-info">New</span></div>
+                    </div>
+                    <div class="notification-info">
+                      <div class="time-info">
+                        <small><i class="fa fa-comments"></i> 23rd Dec 2014</small>
+                      </div>
+                      <h5>Heading </h5>
+                      <p>Hey Anna! Sorry for delayed response. I've just finished reading the mail you sent couple
+                        of...</p>
+                    </div>
+                  </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="body-container">
+    <div class="page-title clearfix">
+      <div class="pull-left">
+        <h1> Documentation </h1>
+        <small class="subtitle"> Dashy Theme Documentation</small>
+      </div>
+      <ol class="breadcrumb pull-right">
+        <li class="active"> Documentation</li>
+        <li><a href="http://dashy.strapui.com/laravel"><i class="fa fa-tachometer"></i></a></li>
+      </ol>
+    </div>
+
+    <div class="conter-wrapper">
+      <div class="row">
+        <div class="container">
+          <div class="docs-content">
+            <div id="installation">
+              <h3>Installation</h3>
+              <div class="subject-content">
+                To use the Dashy Laravel 5 theme, you need to make sure you have <code>bower</code>, <code>npm</code>,
+                <code>gulp</code> and <code>composer</code> globally installed. Now navigate to your app directory
+                (<code>$ cd myLaravelApp/</code>) and run the following terminal commands :
+                <ul>
+                  <li>
+                    <code>$ bower install</code>
+                  </li>
+                  <li>
+                    <code>$ npm install</code>
+                  </li>
+                  <li>
+                    <code>$ composer install</code>
+                  </li>
+                  <li>
+                    <code>$ gulp watch</code>
+                  </li>
+                </ul>
+                You have now succesfully set up Dashy Laravel 5 theme!
+              </div>
+            </div>
+            <div id="basics">
+              <h3>Features</h3>
+              <div class="subject-content">
+                <div class="subject-content">
+                  Dashy is a lightweight and feature rich admin template which is clean and easy to use.
+                  Current release comes with the following features:
+                  <ul class="features-list">
+                    <li>
+                      4 Different theme colors
+                    </li>
+                    <li>
+                      Responsive design based on Bootstrap 3.3.2
+                    </li>
+                    <li>
+                      Custom elements and plugins including:
+                      <ul class="features-list-extended">
+                        <li>
+                          Pure CSS3 checkbox, radio and On/Off switch elements
+                        </li>
+                        <li>
+                          Wysiwig editor
+                        </li>
+                        <li>
+                          User Profile
+                        </li>
+                        <li>
+                          Email-template
+                        </li>
+                        <li>
+                          Customizable widgets in different colors and styles
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      Boostrap, jQuery UI and third party plugins and elements including:
+                      <ul class="features-list-extended">
+                        <li>
+                          Dynamic Charts
+                        </li>
+                        <li>
+                          Tables
+                        </li>
+                        <li>
+                          Form validation
+                        </li>
+                        <li>
+                          Date Picker
+                        </li>
+                        <li>
+                          DateRange Picker
+                        </li>
+                        <li>
+                          Time Picker
+                        </li>
+                        <li>
+                          Carousel for Gallery
+                        </li>
+                        <li>
+                          Full Calendar
+                        </li>
+                        <li>
+                          Progress Bars
+                        </li>
+                        <li>
+                          Labels and Badges
+                        </li>
+                        <li>
+                          Collapse
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div id="widgets">
+              <h3>Widgets</h3>
+              <div class="subject-content">
+                The following widgets have been used in Dashy Laravel 5 theme :
+                <div class="widget-docs">
+                  <div class="well">
+                    <h4>Panels</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="panel panel-primary">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Primary Panel
+                          </h3>
+                        </div>
+                        <div class="panel-body">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@section (&#039;panel5_panel_title&#039;, &#039;Primary Well&#039;)
+@section (&#039;panel5_panel_body&#039;)
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation.
+@endsection
+@include(&#039;widgets.panel&#039;, array(&#039;controls&#039;=&gt;true, &#039;class&#039;=&gt;&#039;primary&#039;, &#039;header&#039;=&gt;true, &#039;as&#039;=&gt;&#039;panel5&#039;))
+</pre>
+                    </div>
+                    <code>Available array arguments : 'class'=> 'string', 'controls'=> boolean, 'header'=> boolean,
+                      'footer'=> boolean</code>
+                  </div>
+                  <div class="well">
+                    <h4>Buttons</h4>
+                    <div class="widget-docs-elements">
+                      <button type="button" class="btn btn-success btn-rounded">Success Button</button>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.button&#039;, array(&#039;class&#039;=&gt;&#039;success&#039;, &#039;value&#039;=&gt;&#039;Success Button&#039;, &#039;rounded&#039;=&gt;true))
+</pre>
+                    </div>
+                    <code>Available array arguments : 'class'=> 'string', 'value'=> 'string', 'size'=> 'string',
+                      'rounded'=>boolean, 'bordered'=>boolean</code>
+                  </div>
+                  <div class="well">
+                    <h4>Dropdowns</h4>
+                    <div class="widget-docs-elements">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-bordered">Action</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle haha btn-bordered"
+                                data-toggle="dropdown" aria-expanded="false">
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.dropdown-button&#039;, array(&#039;split&#039;=&gt;true, &#039;class&#039;=&gt;&#039;danger&#039;, &#039;value&#039;=&gt;&#039;Actions&#039;))
+</pre>
+                    </div>
+                    <code>Available array arguments : 'class'=> 'string', 'value'=> 'string', 'size'=> 'string',
+                      'rounded'=>boolean, 'bordered'=>boolean, 'split'=> boolean (for multi button dropdown)</code>
+                  </div>
+                  <div class="well">
+                    <h4>Labels</h4>
+                    <div class="widget-docs-elements">
+                      <span class="label label-info">Label</span>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.labels&#039;, array(&#039;class&#039;=&gt;&#039;info&#039;, &#039;value&#039;=&gt; &#039;Label&#039;))
+</pre>
+                    </div>
+                    <code>Available array arguments : 'class'=> 'string', 'value'=> 'string'</code>
+                  </div>
+                  <div class="well">
+                    <h4>Progress Bars</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                          <span class="sr-only"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.progress&#039;, array(&#039;animated&#039;=&gt; true, &#039;value&#039;=&gt;&#039;65&#039;))
+</pre>
+                    </div>
+                    <code>Available array arguments : 'class'=> 'string', 'value'=> 'string', 'animated'=> boolean,
+                      'striped'=> boolean</code>
+                  </div>
+                  <div class="well">
+                    <h4>Alerts</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="alert alert-warning  alert-dismissable " role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My alert message.
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.alert&#039;, array(&#039;class&#039;=&gt;&#039;warning&#039;, &#039;dismissable&#039;=&gt;true, &#039;message&#039;=&gt; &#039;My message&#039;))
+</pre>
+                    </div>
+                    <code>Available array arguments : 'class'=> 'string', 'message'=> 'string', 'link'=>'string',
+                      'dismissable'=> boolean</code>
+                  </div>
+                  <div class="well">
+                    <h4>Loader</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="panel panel-success">
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Horizontal Form
+                            <div class="panel-control pull-right">
+                              <a class="panelButton"><i class="fa fa-refresh"></i></a>
+                              <a class="panelButton"><i class="fa fa-minus"></i></a>
+                              <a class="panelButton"><i class="fa fa-remove"></i></a>
+                            </div>
+                          </h3>
+                        </div>
+                        <div class="panel-body">
+                          <div class="loader-block">
+<span class="loader-inner line-scale">
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</span>
+                          </div>
+                          <form class="form-horizontal">
+                            <div class="form-group">
+                              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                              <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                              <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                  <label>
+                                    <input type="checkbox"> Remember me
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Sign in</button>
+                                &nbsp;
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.loader-block&#039;)
+</pre>
+                    </div>
+                    <code>Make sure to set position: relative; of the parent div for the block loader.</code>
+                  </div>
+                  <div class="well">
+                    <h4>Tooltip & Popover</h4>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title=""
+                              data-original-title="Tooltip on left">Left Tooltip
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left"&gt;Left Tooltip&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title=""
+                              data-original-title="Tooltip on top">Top Tooltip
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top"&gt;Top Tooltip&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom"
+                              title="" data-original-title="Tooltip on bottom">Bottom Tooltip
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom"&gt;Bottom Tooltip&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right"
+                              title="" data-original-title="Tooltip on right">Right Tooltip
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right"&gt;Right Tooltip&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover"
+                              data-placement="left"
+                              data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                              data-original-title="" title="">
+                        Left Popover
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title=""&gt;Left Popover&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover"
+                              data-placement="top"
+                              data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                              data-original-title="" title="">
+                        Top Popover
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title=""&gt;Top Popover&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover"
+                              data-placement="bottom"
+                              data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                              data-original-title="" title="">
+                        Bottom Popover
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title=""&gt;Bottom Popover&lt;/button&gt;</pre>
+                    </div>
+                    <div class="widgets-docs-elements">
+                      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover"
+                              data-placement="right"
+                              data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                              data-original-title="" title="">
+                        Right Popover
+                      </button>
+                    </div>
+                    <div class="widget-docs-code">
+                      <pre>&lt;button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="" title=""&gt;Right Popover&lt;/button&gt;</pre>
+                    </div>
+                  </div>
+                  <div class="well">
+                    <h4>Pagination</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="clearfix">
+                        <ul class="pagination no-m-t">
+                          <li>
+                            <a href="#" aria-label="Previous">
+                              <span aria-hidden="true">«</span>
+                            </a>
+                          </li>
+                          <li><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                          <li><a href="#">4</a></li>
+                          <li><a href="#">5</a></li>
+                          <li>
+                            <a href="#" aria-label="Next">
+                              <span aria-hidden="true">»</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>&lt;div class="clearfix"&gt;
+&lt;ul class="pagination no-m-t"&gt;
+	&lt;li&gt;
+    	&lt;a href="#" aria-label="Previous"&gt;
+        	&lt;span aria-hidden="true"&gt;«&lt;/span&gt;
+      	&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="#"&gt;2&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="#"&gt;4&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="#"&gt;5&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;
+      &lt;a href="#" aria-label="Next"&gt;
+        &lt;span aria-hidden="true"&gt;»&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</pre>
+                    </div>
+                  </div>
+                  <div class="well">
+                    <h4>Collapse</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="panel-group" id="accordion">
+                        <div class="panel panel-primary">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                Click here for Collapse
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapse4" class="panel-collapse collapse ">
+                            <div class="panel-body">
+                              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                              proident. Ad vegan excepteur butcher vice lomo.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-primary">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                                Click here for Collapse
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapse5" class="panel-collapse collapse ">
+                            <div class="panel-body">
+                              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                              proident. Ad vegan excepteur butcher vice lomo.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-primary">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+                                Click here for Collapse
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapse6" class="panel-collapse collapse ">
+                            <div class="panel-body">
+                              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                              proident. Ad vegan excepteur butcher vice lomo.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>&lt;div class="panel-group" id="accordion"&gt;
+&lt;div class="panel panel-primary"&gt;
+&lt;div class="panel-heading"&gt;
+&lt;h4 class="panel-title"&gt;
+&lt;a data-toggle="collapse" data-parent="#accordion" href="#collapse4"&gt;
+Click here for Collapse
+&lt;/a&gt;
+&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div id="collapse4" class="panel-collapse collapse "&gt;
+&lt;div class="panel-body"&gt;
+Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;					
+&lt;div class="panel panel-primary"&gt;
+&lt;div class="panel-heading"&gt;
+&lt;h4 class="panel-title"&gt;
+&lt;a data-toggle="collapse" data-parent="#accordion" href="#collapse5"&gt;
+Click here for Collapse
+&lt;/a&gt;
+&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div id="collapse5" class="panel-collapse collapse "&gt;
+&lt;div class="panel-body"&gt;
+Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;					
+&lt;div class="panel panel-primary"&gt;
+&lt;div class="panel-heading"&gt;
+&lt;h4 class="panel-title"&gt;
+&lt;a data-toggle="collapse" data-parent="#accordion" href="#collapse6"&gt;
+Click here for Collapse
+&lt;/a&gt;
+&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div id="collapse6" class="panel-collapse collapse "&gt;
+&lt;div class="panel-body"&gt;
+Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;				
+&lt;/div&gt;</pre>
+                    </div>
+                    <code>The collapse group class can be changed by using panel-info/panel-warning/panel-danger instead
+                      of panel-primary</code>
+                  </div>
+                  <div class="well">
+                    <h4>Tabs</h4>
+                    <div class="widgets-docs-elements">
+                      <div role="tabpanel">
+                        <ul class="nav nav-tabs tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                                    data-toggle="tab">&nbsp;Home</a></li>
+                          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                                     data-toggle="tab">&nbsp;Profile</a></li>
+                          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab"
+                                                     data-toggle="tab">&nbsp;Messages</a></li>
+                          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab"
+                                                     data-toggle="tab">&nbsp;Settings</a></li>
+                        </ul>
+                        <div class="tab-content panel-body">
+                          <div role="tabpanel" class="tab-pane active" id="home">loremLorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Nobis laborum commodi, placeat voluptates quisquam accusantium
+                            corporis ipsa, distinctio.
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="profile">Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit. Culpa et, suscipit non nihil .
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="messages">Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit. Iure dignissimos earum aut consectetur amet consequuntur libero sint
+                            consequatur tempora perferendis hic.
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="settings">Random settings
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>&lt;div role="tabpanel"&gt;
+&lt;ul class="nav nav-tabs tabs" role="tablist"&gt;
+&lt;li role="presentation" class="active"&gt;&lt;a href="#home" aria-controls="home" role="tab" data-toggle="tab"&gt;&nbsp;Home&lt;/a&gt;&lt;/li&gt;
+&lt;li role="presentation"&gt;&lt;a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"&gt;&nbsp;Profile&lt;/a&gt;&lt;/li&gt;
+&lt;li role="presentation"&gt;&lt;a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"&gt;&nbsp;Messages&lt;/a&gt;&lt;/li&gt;
+&lt;li role="presentation"&gt;&lt;a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"&gt;&nbsp;Settings&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="tab-content panel-body"&gt;
+&lt;div role="tabpanel" class="tab-pane active" id="home"&gt;loremLorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis laborum commodi, placeat voluptates quisquam accusantium corporis ipsa, distinctio.
+&lt;/div&gt;
+&lt;div role="tabpanel" class="tab-pane" id="profile"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa et, suscipit non nihil .
+&lt;/div&gt;
+&lt;div role="tabpanel" class="tab-pane" id="messages"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure dignissimos earum aut consectetur amet consequuntur libero sint consequatur tempora perferendis hic.
+&lt;/div&gt;
+&lt;div role="tabpanel" class="tab-pane" id="settings"&gt;Random settings
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre>
+                    </div>
+                  </div>
+                  <div class="well">
+                    <h4>Icons</h4>
+                    <div class="widgets-docs-elements">
+                      <i class="fa fa-glass"></i> &nbsp;&nbsp; <i class="fa fa-bar-chart-o"></i>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>&lt;i class="fa fa-glass">&lt;/i&gt;
+&lt;i class="fa fa-bar-chart-o"&gt;&lt;/i&gt;</pre>
+                    </div>
+                  </div>
+                  <div class="well">
+                    <div class="widgets-docs-elements">
+                      <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td>John</td>
+                          <td><a class="__cf_email__" href="http://dashy.strapui.com/cdn-cgi/l/email-protection"
+                                 data-cfemail="dbb1b4b3b59bbcb6bab2b7f5b8b4b6">[email&#160;protected]</a>
+                            <script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */
+                            !function (t, e, r, n, c, a, p) {
+                              try {
+                                t = document.currentScript || function () {
+                                      for (t = document.getElementsByTagName('script'), e = t.length; e--;)if (t[e].getAttribute('data-cfhash'))return t[e]
+                                    }();
+                                if (t && (c = t.previousSibling)) {
+                                  p = t.parentNode;
+                                  if (a = c.getAttribute('data-cfemail')) {
+                                    for (e = '', r = '0x' + a.substr(0, 2) | 0, n = 2; a.length - n; n += 2)e += '%' + ('0' + ('0x' + a.substr(n, 2) ^ r).toString(16)).slice(-2);
+                                    p.replaceChild(document.createTextNode(decodeURIComponent(e)), c)
+                                  }
+                                  p.removeChild(t)
+                                }
+                              } catch (u) {
+                              }
+                            }()
+                            /* ]]> */</script>
+                          </td>
+                          <td>London, UK</td>
+                        </tr>
+                        <tr>
+                          <td>Andy</td>
+                          <td>andygmail.com</td>
+                          <td>Merseyside, UK</td>
+                        </tr>
+                        <tr>
+                          <td>Frank</td>
+                          <td><a class="__cf_email__" href="http://dashy.strapui.com/cdn-cgi/l/email-protection"
+                                 data-cfemail="f09682919e9bb0979d91999cde939f9d">[email&#160;protected]</a>
+                            <script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */
+                            !function (t, e, r, n, c, a, p) {
+                              try {
+                                t = document.currentScript || function () {
+                                      for (t = document.getElementsByTagName('script'), e = t.length; e--;)if (t[e].getAttribute('data-cfhash'))return t[e]
+                                    }();
+                                if (t && (c = t.previousSibling)) {
+                                  p = t.parentNode;
+                                  if (a = c.getAttribute('data-cfemail')) {
+                                    for (e = '', r = '0x' + a.substr(0, 2) | 0, n = 2; a.length - n; n += 2)e += '%' + ('0' + ('0x' + a.substr(n, 2) ^ r).toString(16)).slice(-2);
+                                    p.replaceChild(document.createTextNode(decodeURIComponent(e)), c)
+                                  }
+                                  p.removeChild(t)
+                                }
+                              } catch (u) {
+                              }
+                            }()
+                            /* ]]> */</script>
+                          </td>
+                          <td>Southampton, UK</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>&lt;table class="table table-bordered"&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;Name&lt;/th&gt;
+			&lt;th&gt;Email&lt;/th&gt;
+			&lt;th&gt;Address&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;John&lt;/td&gt;
+			&lt;td&gt;<a class="__cf_email__" href="http://dashy.strapui.com/cdn-cgi/l/email-protection"
+                   data-cfemail="cda7a2a5a38daaa0aca4a1e3aea2a0">[email&#160;protected]</a><script data-cfhash='f9e31'
+                                                                                                   type="text/javascript">/* <![CDATA[ */
+  !function (t, e, r, n, c, a, p) {
+    try {
+      t = document.currentScript || function () {
+            for (t = document.getElementsByTagName('script'), e = t.length; e--;)if (t[e].getAttribute('data-cfhash'))return t[e]
+          }();
+      if (t && (c = t.previousSibling)) {
+        p = t.parentNode;
+        if (a = c.getAttribute('data-cfemail')) {
+          for (e = '', r = '0x' + a.substr(0, 2) | 0, n = 2; a.length - n; n += 2)e += '%' + ('0' + ('0x' + a.substr(n, 2) ^ r).toString(16)).slice(-2);
+          p.replaceChild(document.createTextNode(decodeURIComponent(e)), c)
+        }
+        p.removeChild(t)
+      }
+    } catch (u) {
+    }
+  }()
+  /* ]]> */</script>&lt;/td&gt;
+			&lt;td&gt;London, UK&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;Andy&lt;/td&gt;
+			&lt;td&gt;andygmail.com&lt;/td&gt;
+			&lt;td&gt;Merseyside, UK&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;Frank&lt;/td&gt;
+			&lt;td&gt;<a class="__cf_email__" href="http://dashy.strapui.com/cdn-cgi/l/email-protection"
+                   data-cfemail="3a5c485b54517a5d575b535614595557">[email&#160;protected]</a><script data-cfhash='f9e31'
+                                                                                                     type="text/javascript">/* <![CDATA[ */
+  !function (t, e, r, n, c, a, p) {
+    try {
+      t = document.currentScript || function () {
+            for (t = document.getElementsByTagName('script'), e = t.length; e--;)if (t[e].getAttribute('data-cfhash'))return t[e]
+          }();
+      if (t && (c = t.previousSibling)) {
+        p = t.parentNode;
+        if (a = c.getAttribute('data-cfemail')) {
+          for (e = '', r = '0x' + a.substr(0, 2) | 0, n = 2; a.length - n; n += 2)e += '%' + ('0' + ('0x' + a.substr(n, 2) ^ r).toString(16)).slice(-2);
+          p.replaceChild(document.createTextNode(decodeURIComponent(e)), c)
+        }
+        p.removeChild(t)
+      }
+    } catch (u) {
+    }
+  }()
+  /* ]]> */</script>&lt;/td&gt;
+			&lt;td&gt;Southampton, UK&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</pre>
+                    </div>
+                    <code>The table classes can be changed using table-bordered/table-hover/table-condensed
+                      classes. </code>
+                  </div>
+                  <div class="well">
+                    <h4>Switch</h4>
+                    <div class="widgets-docs-elements">
+                      <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch3" checked="">
+                        <label class="onoffswitch-label" for="switch3">
+                          <span class="onoffswitch-inner"></span>
+                          <span class="onoffswitch-switch"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>
+@include(&#039;widgets.switch&#039;, array(&#039;id&#039;=&gt; &#039;switch&#039;))
+</pre>
+                    </div>
+                  </div>
+                  <div class="well">
+                    <h4>Form Elements</h4>
+                    <div class="widgets-docs-elements">
+                      <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control underline" id="exampleInputEmail1"
+                                 placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control underline" id="exampleInputPassword1"
+                                 placeholder="Password">
+                        </div>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox"> Remember me
+                          </label>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                      </form>
+                    </div>
+                    <div class="widget-docs-code">
+<pre>&lt;form&gt;
+&lt;div class="form-group"&gt;
+&lt;label for="exampleInputEmail1"&gt;Email address&lt;/label&gt;
+&lt;input type="email" class="form-control underline" id="exampleInputEmail1" placeholder="Enter email"&gt;
+&lt;/div&gt;
+&lt;div class="form-group"&gt;
+&lt;label for="exampleInputPassword1"&gt;Password&lt;/label&gt;
+&lt;input type="password" class="form-control underline" id="exampleInputPassword1" placeholder="Password"&gt;
+&lt;/div&gt;
+&lt;div class="checkbox"&gt;
+&lt;label&gt;
+&lt;input type="checkbox"&gt; Remember me
+&lt;/label&gt;
+&lt;/div&gt;
+&lt;button type="submit" class="btn btn-default"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="add-widgets">
+              <h3>Plugins</h3>
+              <div class="subject-content">
+                <div class="well">
+                  <h4>Calendar</h4>
+                  <div class="widgets-docs-elements">
+                    <div id="calendar2"></div>
+                  </div>
+                  <div class="widget-docs-code">
+<pre>&lt;div id="calendar2"&gt;&lt;/div&gt;
+&lt;script&gt;
+$('#calendar2').fullCalendar({ 
+	});
+&lt;/script&gt;</pre>
+                  </div>
+                </div>
+                <div class="well">
+                  <h4>Charts</h4>
+                  <div class="widgets-docs-elements">
+                    <div id="piechart"></div>
+                  </div>
+                  <div class="widget-docs-code">
+<pre>&lt;div id="piechart"&gt;&lt;/div&gt;
+&lt;script&gt;var chart2 = c3.generate({
+	   bindto: '#piechart',
+	    data: {
+	         
+	        // iris data from R
+	        columns: [
+	            ['data1', 30],
+	            ['data2', 120],
+	        ],
+	        type : 'pie',
+	        onclick: function (d, i) { console.log("onclick", d, i); },
+	        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+	        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+	    },
+	    color: {
+	        pattern: ['#06c5ac','#3faae3','#ee634c','#6bbd95','#f4cc0b','#9b59b6','#16a085','#c0392b']
+	    }
+	});
+&lt;/script&gt;</pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer-wrap" class="footer">
+      Copyright © 2014 Dashy Theme
+<span class="pull-right">
+<a href="#"><i class="fa fa-facebook-square"></i></a>
+<a href="#">&nbsp;<i class="fa fa-twitter-square"></i></a>
+</span>
+    </div>
+  </div>
+</div>
+<script src="js/vendor.js" type="text/javascript"></script>
+<script src="js/app.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+  $(function () {
+
+    // Sidebar Charts
+
+    // Pie Chart
+    var chart3 = c3.generate({
+      bindto: '#sidebar-piechart',
+      data: {
+
+        // iris data from R
+        columns: [
+          ['1', 36],
+          ['2', 54],
+          ['3', 12],
+        ],
+        type: 'pie',
+        onclick: function (d, i) {
+          console.log("onclick", d, i);
+        },
+        onmouseover: function (d, i) {
+          console.log("onmouseover", d, i);
+        },
+        onmouseout: function (d, i) {
+          console.log("onmouseout", d, i);
+        }
+      },
+      color: {
+        pattern: ['#06c5ac', '#3faae3', '#ee634c', '#6bbd95', '#f4cc0b', '#9b59b6', '#16a085', '#c0392b']
+      },
+      pie: {
+        expand: true
+      },
+      size: {
+        width: 140,
+        height: 140
+      },
+      tooltip: {
+        show: false
+      }
+
+    });
+
+
+    // Bar Chart
+    var chart6 = c3.generate({
+      bindto: '#sidebar-barchart',
+      data: {
+        columns: [
+          ['data1', 30, 200, 100, 400, 250, 310, 90, 125, 50]
+        ],
+        type: 'bar'
+      },
+      bar: {
+        width: {
+          ratio: 0.8
+        }
+      },
+      size: {
+        width: 200,
+        height: 120
+      },
+      tooltip: {
+        show: false
+      },
+      color: {
+        pattern: ['#06c5ac', '#3faae3', '#ee634c', '#6bbd95', '#f4cc0b', '#9b59b6', '#16a085', '#c0392b']
+      },
+      axis: {
+        y: {
+          show: false,
+          color: '#ffffff'
+        }
+      }
+    });
+
+
+    // Sidebar Tabs
+    $('#navTabs .sidebar-top-nav a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show');
+
+      setTimeout(function () {
+        $('.tab-content-scroller').perfectScrollbar('update');
+      }, 10);
+
+    });
+
+
+    $('.subnav-toggle').click(function () {
+      $(this).parent('.sidenav-dropdown').toggleClass('show-subnav');
+      $(this).find('.fa-angle-down').toggleClass('fa-flip-vertical');
+
+      setTimeout(function () {
+        $('.tab-content-scroller').perfectScrollbar('update');
+      }, 500);
+
+    });
+
+    $('.sidenav-toggle').click(function () {
+      $('#app-container').toggleClass('push-right');
+
+      setTimeout(function () {
+        $('.tab-content-scroller').perfectScrollbar('update');
+      }, 500);
+
+    });
+
+
+    // Boxed Layout Toggle
+    $('#boxed-layout').click(function () {
+
+      $('body').toggleClass('box-section');
+
+      var hasClass = $('body').hasClass('box-section');
+
+      $.get('/api/change-layout?layout=' + (hasClass ? 'boxed' : 'fluid'));
+
+    });
+
+
+    $('.tab-content-scroller').perfectScrollbar();
+
+    $('.theme-picker').click(function () {
+      changeTheme($(this).attr('data-theme'));
+    });
+
+
+  });
+
+  function changeTheme(theme) {
+
+    $('<link>')
+        .appendTo('head')
+        .attr({type: 'text/css', rel: 'stylesheet'})
+        .attr('href', '/css/app-' + theme + '.css');
+
+    $.get('api/change-theme?theme=' + theme);
+
+  }
+
+
+</script>
+<script type="text/javascript">
+
+  $(function () {
+    $('#calendar2').fullCalendar({});
+
+    var chart2 = c3.generate({
+      bindto: '#piechart',
+      data: {
+
+        // iris data from R
+        columns: [
+          ['data1', 30],
+          ['data2', 120],
+        ],
+        type: 'pie',
+        onclick: function (d, i) {
+          console.log("onclick", d, i);
+        },
+        onmouseover: function (d, i) {
+          console.log("onmouseover", d, i);
+        },
+        onmouseout: function (d, i) {
+          console.log("onmouseout", d, i);
+        }
+      },
+      color: {
+        pattern: ['#06c5ac', '#3faae3', '#ee634c', '#6bbd95', '#f4cc0b', '#9b59b6', '#16a085', '#c0392b']
+      }
+    });
+  });
+
+
+</script>
+</body>
+
+<!-- Mirrored from dashy.strapui.com/laravel/docs by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 May 2016 12:40:19 GMT -->
+</html>
