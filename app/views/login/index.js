@@ -12,14 +12,14 @@ var getReturnUrl = function(req) {
 exports.init = function(req, res){
   if (req.isAuthenticated()) {
     res.redirect(getReturnUrl(req));
-  }
-  else {
-    res.render('login/index', {
-      oauthFacebook: !!req.app.config.oauth.facebook.key,
-      oauthGoogle: !!req.app.config.oauth.google.key,
-      oauthVkontakte: !!req.app.config.oauth.vkontakte.key,
-      username: ''
-    });
+  } else {
+    res.sendFile(req.app.locals.rootPath+'views/login/index.html');
+    // res.render('login/index', {
+    //   oauthFacebook: !!req.app.config.oauth.facebook.key,
+    //   oauthGoogle: !!req.app.config.oauth.google.key,
+    //   oauthVkontakte: !!req.app.config.oauth.vkontakte.key,
+    //   username: ''
+    // });
   }
 };
 

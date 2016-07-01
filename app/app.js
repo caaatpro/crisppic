@@ -70,9 +70,8 @@ app.locals.projectName = app.config.projectName;
 app.locals.copyrightYear = new Date().getFullYear();
 app.locals.copyrightName = app.config.projectName;
 app.locals.cacheBreaker = '1';
-app.locals.hostUrl = 'http://127.0.0.1:3020/';
-// app.locals.rootPath = '/home/app/';
-app.locals.rootPath = 'C:\\caaat\\git\\crisppic\\app\\';
+app.locals.hostUrl = app.config.hostUrl;
+app.locals.rootPath = app.config.rootPath;
 
 //setup passport
 require('./passport')(app, passport);

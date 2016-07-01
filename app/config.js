@@ -1,6 +1,8 @@
 'use strict';
 
-exports.port = process.env.PORT || 3020;
+exports.port = 80;
+exports.rootPath = 'C:\\caaat\\git\\crisppic\\app\\'; //'/home/app/'
+exports.hostUrl = 'http://crisppic.com/';
 exports.mongodb = {
   uri: 'mongodb://85.143.209.198:28345/movies'
 };
@@ -15,27 +17,27 @@ exports.loginAttempts = {
 exports.requireAccountVerification = true;
 exports.smtp = {
   from: {
-    name: process.env.SMTP_FROM_NAME || exports.projectName,
-    address: process.env.SMTP_FROM_ADDRESS || 'noreply@crisppic.com'
+    name: exports.projectName,
+    address: 'noreply@crisppic.com'
   },
   credentials: {
-    user: process.env.SMTP_USERNAME || 'noreply@crisppic.com',
-    password: process.env.SMTP_PASSWORD || 'GCu&ea/q.QE"y#4FHerg',
-    host: process.env.SMTP_HOST || 'smtp.yandex.ru',
+    user: 'noreply@crisppic.com',
+    password: 'GCu&ea/q.QE"y#4FHerg',
+    host: 'smtp.yandex.ru',
     ssl: true
   }
 };
 exports.oauth = {
   facebook: {
-    key: process.env.FACEBOOK_OAUTH_KEY || '1515012572125322',
-    secret: process.env.FACEBOOK_OAUTH_SECRET || '97487b28cee723f7a04dee219bca2d55'
+    key: '1515012572125322',
+    secret: '97487b28cee723f7a04dee219bca2d55'
   },
   google: {
-    key: process.env.GOOGLE_OAUTH_KEY || '673575507802-h1p3s5gugi31g4s2mf5mjtsgmn2h12r1.apps.googleusercontent.com',
-    secret: process.env.GOOGLE_OAUTH_SECRET || 'pXQkWP6WHz9bPuwjQ0kD-BnA'
+    key: '673575507802-h1p3s5gugi31g4s2mf5mjtsgmn2h12r1.apps.googleusercontent.com',
+    secret: 'pXQkWP6WHz9bPuwjQ0kD-BnA'
   },
   vkontakte: {
-    key: process.env.VKONTAKTE_OAUTH_KEY || '5245120',
-    secret: process.env.VKONTAKTE_OAUTH_SECRET || 'ApOJ1e9PH9REXHQeQRJM'
+    key: '5245120',
+    secret: 'ApOJ1e9PH9REXHQeQRJM'
   }
 };

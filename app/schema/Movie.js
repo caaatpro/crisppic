@@ -22,7 +22,7 @@ exports = module.exports = function(app, mongoose) {
         poster: { type: String, default: '' },
         search: String
     });
-    movieSchema.index({ 'title.original': 'text', 'title.russian': 'text', 'plot': 'text'});
+    // movieSchema.index({ 'title.original': 'text', 'title.russian': 'text', 'plot': 'text'});
     app.db.model('Movie', movieSchema);
 
     app.db.models.Index.findOne({ 'name': 'Movie' }).exec(function(err, r) {
