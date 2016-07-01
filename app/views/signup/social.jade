@@ -1,0 +1,21 @@
+extends ../../layouts/default
+
+block head
+  title Sign Up
+
+block body
+  div.row
+    div.col-sm-6
+      div.page-header
+        h1 Complete Sign Up
+      div#signup
+
+      div.alerts
+        div.alert.alert-danger.alert-dismissable
+          button.close(type='button', data-dismiss='alert') &times;
+      div.form-group(class='has-error')
+        label Введите ваш Email:
+        input.form-control(type='text', name='email', value='email')
+        span.help-block email
+      div.form-group
+        button.btn.btn-primary.btn-signup(type='button') Create My Account

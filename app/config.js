@@ -1,6 +1,6 @@
 'use strict';
 
-exports.port = process.env.PORT || 80;
+exports.port = process.env.PORT || 3020;
 exports.mongodb = {
   uri: 'mongodb://85.143.209.198:28345/movies'
 };
