@@ -30,7 +30,7 @@ exports = module.exports = function(app, passport) {
   app.all('/movie*', ensureAuthenticated);
   app.get('/movie/*', require('./views/movie/index').init);
   app.post('/movie/*', require('./views/movie/index').AddView);
-  app.get('/movies/', require('./views/movies/index').init);
+  app.get('/api/movies/', require('./views/movies/index').init);
 
   app.get('/contact/', require('./views/contact/index').init);
   app.post('/contact/', require('./views/contact/index').sendMessage);

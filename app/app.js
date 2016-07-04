@@ -36,11 +36,8 @@ require('./models')(app, mongoose);
 //settings
 app.disable('x-powered-by');
 app.set('port', config.port);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 //middleware
-app.use(require('serve-static')(path.join(__dirname, 'public')));
 app.use(require('method-override')());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

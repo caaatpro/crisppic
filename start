@@ -1,0 +1,2 @@
+sudo cp nginx.conf /etc/nginx/sites-enabled/crisppic.com
+sudo systemctl restart nginx.service

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Заголовок</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/vendor.css" />
+    <link rel="stylesheet" href="css/app-green.css?1" />
+</head>
+
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+    <div id="app-container">
+        <nav class="navbar navbar-inverse navbar-fixed-top striped-bg" id="top-navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="sidenav-toggle" href="#"><span class="brandbar"><i class="fa fa-bars hidd"></i></span></a>
+                    <a class="navbar-brand" href="http://dashy.strapui.com/laravel"><i class="fa fa-paper-plane"></i>&nbsp;Crisppic</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right top-nav">
+                        <li>
+                          <input type="text" name="s" value="">
+                          <button type="button" name="sb">s</button>
+                        </li>
+                        <li>
+                            <a href="#" role="button">
+                                <span class="fa fa-power-off"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="striped-bg" id="sidenav">
+            <div role="tabpanel" id="navTabs">
+                <div class="sidebar-controllers">
+                    <ul class="nav nav-tabs nav-justified sidebar-top-nav" role="tablist">
+                        <li role="presentation" class="active"><a href="#menu"><i class="fa fa-bars"></i></a></li>
+                        <li role="presentation"><a href="#comments"><i class="fa fa-comments-o"></i></a></li>
+                        <li role="presentation"><a href="#calendar"><i class="fa fa-calendar"></i></a></li>
+                    </ul>
+                    <div class="tab-content-scroller tab-content sidebar-section-wrap">
+                        <div role="tabpanel" class="tab-pane active" id="menu">
+                            <div class="photo-container text-center">
+                                <a href="#">
+                                    <img src="images/profile1.jpg" alt="" class="img-circle dash-profile" />
+                                </a>
+                                <div class="t-p">
+                                    <a href="#">Kumar Sanket</a>
+                                </div>
+                            </div>
+                            <ul class="nav sidebar-nav ">
+                                <li>
+                                    <a href="/"><i class="fa fa-home"></i> Профиль</a>
+                                </li>
+                                <li class="sidenav-dropdown ">
+                                    <a class="subnav-toggle" href="#">
+                                        <i class="fa fa-toggle-off"></i> Мои фильмы<i class="fa fa-angle-down pull-right"></i>
+                                    </a>
+                                    <ul class="nav sidenav-sub-menu">
+                                        <li><a href="#"><i class="fa fa-circle-o"></i> Хочу</a></li>
+                                        <li><a href="#"><i class="fa fa-arrows-v"></i> Посмотрел</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/"><i class="fa fa-home"></i> Друзья</a>
+                                </li>
+                                <li>
+                                    <a href="/"><i class="fa fa-home"></i> Новости</a>
+                                </li>
+                                <li class="sidenav-dropdown ">
+                                    <a class="subnav-toggle" href="#">
+                                        <i class="fa fa-toggle-off"></i> Статистика<i class="fa fa-angle-down pull-right"></i>
+                                    </a>
+                                    <ul class="nav sidenav-sub-menu">
+                                        <li><a href="#"><i class="fa fa-circle-o"></i> Вся</a></li>
+                                        <li><a href="#"><i class="fa fa-circle-o"></i> Актёры</a></li>
+                                        <li><a href="#"><i class="fa fa-arrows-v"></i> Режисёры</a></li>
+                                        <li><a href="#"><i class="fa fa-arrows-v"></i> Жанры</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/"><i class="fa fa-home"></i>Все фильмы</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="comments">
+                            <div class="section-heading">Человеки</div>
+                            <ul class="online-members">
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/profile1.jpg" alt="">Kumar Sanket <i class="fa fa-circle pull-right text-success"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Kumar Pratik <i class="fa fa-circle pull-right text-success"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Megha Kumari <i class="fa fa-circle pull-right text-success"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Sankhadeep Roy <i class="fa fa-circle pull-right text-success"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/profile.jpg" alt="">Suraj Ahmad Choudhury <i class="fa fa-circle pull-right text-success"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/profile1.jpg" alt="">Kumar Sanket <i class="fa fa-circle pull-right text-warning"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Megha Kumari <i class="fa fa-circle pull-right text-warning"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Kumar Pratik <i class="fa fa-circle pull-right text-warning"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Mrigank Mridul <i class="fa fa-circle pull-right text-muted"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img class="img-circle chat-image" src="images/user-icon.png" alt="">Amith M S <i class="fa fa-circle pull-right text-muted"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="calendar">
+                            <div class="section-heading">Today</div>
+                            <ul class="today-ul">
+                                <li>
+                                    <a href="#">
+                                        <div class="happened">Матрица 5</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="happened">Выживший</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="section-heading">7th April 2016</div>
+                            <ul class="today-ul dead">
+                                <li>
+                                    <a href="#">
+                                        <div class="happened">Пух в кино</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="section-heading">9th April 2017</div>
+                            <ul class="today-ul dead">
+                                <li>
+                                    <a href="#">
+                                        <div class="happened">Марсианин</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="body-container">
+            <div class="page-title clearfix">
+                <div class="pull-left">
+                    <h1>Заголовок</h1>
+                    <small class="subtitle">Под заголовок</small>
+                </div>
+            </div>
+
+            <div class="conter-wrapper">

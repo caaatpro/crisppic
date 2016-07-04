@@ -38,14 +38,27 @@ exports.init = function(req, res){
   });
 
   workflow.on('moviesInit', function() {
-    req.app.db.models['Movie'].find({'search': regexQuery}).skip((page-1)*per_page).limit(per_page).exec(function(err, result) {
+    req.app.db.models['Movie'].find(/*{'search': regexQuery}*/).skip((page-1)*per_page).limit(per_page).exec(function(err, result) {
+      sigma['items'] = [];
+      for (var i = 0; i < result.length; i++) {
+        var item = {};
+        item.sID = result[i].sID;
+        item.genre = result[i].genre;
+        item.titles = result[i].titles; // только русское и английское
+        item.views = result[i].views;
+        item.country = result[i].country;
+        item.poster = result[i].poster; // если есть русский, иначи английский или пусто
+        item.year = result[i].year;
 
-      sigma['items'] = result;
+        sigma['items'].push(item);
+      }
+
+      // sigma['items'] = result;
       sigma['page'] = page;
       sigma['pages'] = pages;
       sigma['query'] = query;
 
-      res.render('movies/index', sigma);
+      res.send(sigma);
     });
   });
 
