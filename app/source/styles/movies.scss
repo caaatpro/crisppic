@@ -1,0 +1,21 @@
+.movies {
+  .movie {
+    img {
+      width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000000;
+      font-size: 20px;
+    }
+    a:hover {
+      text-decoration: none;
+      color: #ff8f00;
+    }
+
+    .movie_title {
+      padding: 0;
+    }
+  }
+}

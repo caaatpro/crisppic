@@ -4,39 +4,49 @@ var fileinclude = require('gulp-file-include'),
   w3cjs = require('gulp-w3cjs'),
   sass = require('gulp-sass'),
   del = require('del'),
-  runSequence = require('run-sequence');
+  runSequence = require('run-sequence'),
+  autoprefixer = require('gulp-autoprefixer'),
+  sourcemaps = require('gulp-sourcemaps'),
+  cleanCSS = require('gulp-clean-css'),
+  rename = require('gulp-rename');
 
 
 gulp.task('html', function() {
-  return gulp.src(['public/**/*.html', '!public/include/*.html'])
+  return gulp.src(['source/**/*.html', '!source/include/*.html'])
     .pipe(fileinclude({
       prefix: '@@',
       basepath: '@file'
     }))
     .pipe(w3cjs())
 		.pipe(w3cjs.reporter())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('public'));
 });
 
 gulp.task('sass', function () {
-  return gulp.src('public/styles/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist/css'));
+  return gulp.src('source/styles/**/*.scss')
+    .pipe(sass.sync().on('error', sass.logError))
+    .pipe(autoprefixer('last 2 version', '> 5%'))
+    .pipe(gulp.dest('public/css'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(cleanCSS({debug: true}, function(details) {
+            console.log(details.name + ': ' + details.stats.minifiedSize + ' / ' + details.stats.originalSize) ;
+        }))
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('images', function() {
-  return gulp.src('public/images/*.*')
+  return gulp.src('source/images/*.*')
     // .pipe(imagemin())
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('public/images'))
 });
 
 gulp.task('fonts', function() {
-  return gulp.src('public/fonts/**/*.*')
-    .pipe(gulp.dest('dist/fonts'))
+  return gulp.src('source/fonts/**/*.*')
+    .pipe(gulp.dest('public/fonts'))
 });
 gulp.task('js', function() {
-  return gulp.src('public/js/**/*.*')
-    .pipe(gulp.dest('dist/js'))
+  return gulp.src('source/js/**/*.*')
+    .pipe(gulp.dest('public/js'))
 });
 
 gulp.task('clean', function (callback) {
