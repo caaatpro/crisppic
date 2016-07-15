@@ -1,6 +1,7 @@
 'use strict';
 
 function ensureAuthenticated(req, res, next) {
+  console.log(2);
   if (req.isAuthenticated()) {
     return next();
   }
@@ -10,6 +11,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function ensureAccount(req, res, next) {
+  console.log(3);
   if (req.app.config.requireAccountVerification) {
     if (req.user.roles.account.isVerified !== 'yes' && !/^\/account\/verification\//.test(req.url)) {
       return res.redirect('/account/verification/');
@@ -30,7 +32,7 @@ exports = module.exports = function(app, passport) {
   app.all('/movie*', ensureAuthenticated);
   app.get('/movie/*', require('./views/movie/index').init);
   app.post('/movie/*', require('./views/movie/index').AddView);
-  app.get('/api/movies/', require('./views/movies/index').init);
+  app.all('/api/movies/', require('./views/movies/index').init);
 
   app.get('/contact/', require('./views/contact/index').init);
   app.post('/contact/', require('./views/contact/index').sendMessage);

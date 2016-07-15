@@ -1,6 +1,7 @@
 'use strict';
 
 exports.init = function(req, res){
+  console.log(1);
   var workflow = req.app.utility.workflow(req, res);
   var sigma = {};
   var re_imdb = /https?:\/\/(www.)?imdb.com\/title\/(tt\d{7})(.*)/i;
@@ -16,6 +17,7 @@ exports.init = function(req, res){
   var regexQuery = new RegExp('^.*?'+ query +'.*$', 'i');
   var per_page = 20;
   var pages = [];
+
 
   workflow.on('moviesPagination', function() {
     req.app.db.models['Movie'].count({'search': regexQuery}, function(err, total) {

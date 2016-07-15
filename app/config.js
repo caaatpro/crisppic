@@ -1,10 +1,10 @@
 'use strict';
 
-exports.port = 3030;
+exports.port = 80;
 exports.rootPath = 'C:\\caaat\\git\\crisppic\\app\\'; //'/home/app/'
 exports.hostUrl = 'http://crisppic.com/';
 exports.mongodb = {
-  uri: 'mongodb://127.0.0.1:27017/movies'
+  uri: 'mongodb://85.143.222.142:28345/movies'
 };
 exports.projectName = 'Crisppic.com';
 exports.systemEmail = 'noreply@crisppic.com';

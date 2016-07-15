@@ -8,7 +8,6 @@ var config = require('./config'),
     session = require('express-session'),
     mongoStore = require('connect-mongo')(session),
     http = require('http'),
-    path = require('path'),
     passport = require('passport'),
     mongoose = require('mongoose'),
     helmet = require('helmet'),
@@ -28,6 +27,7 @@ app.db = mongoose.createConnection(config.mongodb.uri);
 app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
 app.db.once('open', function () {
   //and... we have a data store
+  console.log("and... we have a data store");
 });
 
 //config data models
